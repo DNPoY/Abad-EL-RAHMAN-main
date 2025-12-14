@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Rotated Square 1 -->
+    <item>
+        <rotate
+            android:fromDegrees="45"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="45">
+            <shape android:shape="rectangle">
+                <solid android:color="#10B981" /> <!-- Emerald 500 -->
+                <corners android:radius="4dp" />
+            </shape>
+        </rotate>
+    </item>
+    <!-- Rotated Square 2 (Offset to make an 8-point star effect) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#059669" /> <!-- Emerald 600 -->
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <!-- Inner Circle for Text -->
+    <item
+        android:bottom="4dp"
+        android:left="4dp"
+        android:right="4dp"
+        android:top="4dp">
+        <shape android:shape="oval">
+            <solid android:color="#064E3B" /> <!-- Emerald 900 -->
+        </shape>
+    </item>
+</layer-list>

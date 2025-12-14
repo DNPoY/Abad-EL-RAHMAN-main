@@ -1,0 +1,16 @@
+export const CALCULATION_METHODS = [
+    { id: 0, name: "Shia Ithna-Ansari" },
+    { id: 1, name: "University of Islamic Sciences, Karachi" },
+    { id: 2, name: "Islamic Society of North America (ISNA)" },
+    { id: 3, name: "Muslim World League" },
+    { id: 4, name: "Umm al-Qura University, Makkah" },
+    { id: 5, name: "Egyptian General Authority of Survey" },
+    { id: 7, name: "Institute of Geophysics, University of Tehran" },
+    { id: 8, name: "Gulf Region" },
+    { id: 9, name: "Kuwait" },
+    { id: 10, name: "Qatar" },
+    { id: 11, name: "Majlis Ugama Islam Singapura, Singapore" },
+    { id: 12, name: "Union Organization islamic de France" },
+    { id: 13, name: "Diyanet Isleri Baskanligi, Turkey" },
+    { id: 14, name: "Spiritual Administration of Muslims of Russia" },
+];

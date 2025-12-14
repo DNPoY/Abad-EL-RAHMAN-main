@@ -1,0 +1,2487 @@
+﻿{
+    "data":  [
+                 {
+                     "id":  200,
+                     "version":  7,
+                     "slug":  "arabic_mokhtasar",
+                     "order":  1,
+                     "title":  "المختصر (آية وتفسير)-عربي",
+                     "short_title":  "المختصر (آية وتفسير)-عربي",
+                     "language_title":  "العربية",
+                     "language_id":  1,
+                     "description":  "\u003cp\u003eالمختصر في تفسير القرآن الكريم (آية وتفسير) باللغة العربية\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/arabic_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/arabic_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/arabic_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  502343,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  1,
+                                      "code":  "ar",
+                                      "local_name":  "العربية",
+                                      "latin_name":  "Arabic",
+                                      "is_rtl":  1,
+                                      "order":  99,
+                                      "status":  1,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2024-09-14T12:38:30.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  104,
+                                              "book_id":  200,
+                                              "language_id":  1,
+                                              "title":  "المختصر (آية وتفسير)-عربي",
+                                              "short_title":  "المختصر (آية وتفسير)-عربي",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالمختصر في تفسير القرآن الكريم (آية وتفسير) باللغة العربية\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/arabic_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+                                       {
+                                           "id":  2,
+                                           "book_id":  200,
+                                           "slug":  "algzaa-alaol2",
+                                           "title":  "الجزء الأول",
+                                           "url":  "https://mokhtasr.com/wp-content/uploads/2023/05/AyahTfser-v1-1.pdf"
+                                       },
+                                       {
+                                           "id":  3,
+                                           "book_id":  200,
+                                           "slug":  "algzaa-althany3",
+                                           "title":  "الجزء الثاني",
+                                           "url":  "https://mokhtasr.com/wp-content/uploads/2023/05/AyahTfser-v1-2.pdf"
+                                       },
+                                       {
+                                           "id":  4,
+                                           "book_id":  200,
+                                           "slug":  "algzaa-althalth4",
+                                           "title":  "الجزء الثالث",
+                                           "url":  "https://mokhtasr.com/wp-content/uploads/2022/09/AyahTfser-v1-3.pdf"
+                                       }
+                                   ]
+                 },
+                 {
+                     "id":  319,
+                     "version":  7,
+                     "slug":  "english_mokhtasar",
+                     "order":  3,
+                     "title":  "الإنجليزية | English",
+                     "short_title":  "الإنجليزية | English",
+                     "language_title":  "English",
+                     "language_id":  4,
+                     "description":  "\u003cp\u003eالترجمة الإنجليزية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/english_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/english_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/english_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  17574,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  4,
+                                      "code":  "en",
+                                      "local_name":  "English",
+                                      "latin_name":  "English",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  1,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  227,
+                                              "book_id":  319,
+                                              "language_id":  1,
+                                              "title":  "الإنجليزية | English",
+                                              "short_title":  "الإنجليزية | English",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالترجمة الإنجليزية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/english_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  219,
+                     "version":  6,
+                     "slug":  "indonesian_mokhtasar",
+                     "order":  5,
+                     "title":  "الإندونيسية | Indonesia",
+                     "short_title":  "الإندونيسية | Indonesia",
+                     "language_title":  "Bahasa Indonesia",
+                     "language_id":  10,
+                     "description":  "\u003cp\u003eTerjemahan Al-Mukhtaṣar fī Tafsīr Al-Qur`ān Al-Karīm ke bahasa Indonesia. Diterbitkan oleh Markaz Tafsīr Li Ad-Dirasāt Al-Qur`āniyyah\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/indonesian_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/indonesian_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/indonesian_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  11148,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  10,
+                                      "code":  "id",
+                                      "local_name":  "Bahasa Indonesia",
+                                      "latin_name":  "Bahasa Indonesia",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2025-03-09T15:20:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  138,
+                                              "book_id":  219,
+                                              "language_id":  1,
+                                              "title":  "الإندونيسية | Indonesia",
+                                              "short_title":  "الإندونيسية | Indonesia",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eTerjemahan Al-Mukhtaṣar fī Tafsīr Al-Qur`ān Al-Karīm ke bahasa Indonesia. Diterbitkan oleh Markaz Tafsīr Li Ad-Dirasāt Al-Qur`āniyyah\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/indonesian_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  314,
+                     "version":  6,
+                     "slug":  "chinese_mokhtasar",
+                     "order":  7,
+                     "title":  "الصينية | 中文",
+                     "short_title":  "الصينية | 中文",
+                     "language_title":  "中文",
+                     "language_id":  7,
+                     "description":  "الترجمة الصينية للمختصر في تفسير القرآن الكريم",
+                     "pdf_url":  "http://pub.quran.digital/text_books/chinese_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/chinese_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/chinese_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  321,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  7,
+                                      "code":  "zh",
+                                      "local_name":  "中文",
+                                      "latin_name":  "صيني",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  222,
+                                              "book_id":  314,
+                                              "language_id":  1,
+                                              "title":  "الصينية | 中文",
+                                              "short_title":  "الصينية | 中文",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "الترجمة الصينية للمختصر في تفسير القرآن الكريم",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/chinese_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  312,
+                     "version":  6,
+                     "slug":  "spanish_mokhtasar",
+                     "order":  9,
+                     "title":  "الإسبانية | Español",
+                     "short_title":  "الإسبانية | Español",
+                     "language_title":  "Español",
+                     "language_id":  6,
+                     "description":  "\u003cp\u003eالترجمة الإسبانية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/spanish_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/spanish_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/spanish_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  308,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  6,
+                                      "code":  "es",
+                                      "local_name":  "Español",
+                                      "latin_name":  "إسباني",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  220,
+                                              "book_id":  312,
+                                              "language_id":  1,
+                                              "title":  "الإسبانية | Español",
+                                              "short_title":  "الإسبانية | Español",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالترجمة الإسبانية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/spanish_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  331,
+                     "version":  6,
+                     "slug":  "hindi_mokhtasar",
+                     "order":  11,
+                     "title":  "الهندية | हिन्दी",
+                     "short_title":  "الهندية | हिन्दी",
+                     "language_title":  "हिन्दी",
+                     "language_id":  52,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/hindi_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/hindi_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/hindi_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  1548,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  52,
+                                      "code":  "hi",
+                                      "local_name":  "हिन्दी",
+                                      "latin_name":  "هندي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  275,
+                                              "book_id":  331,
+                                              "language_id":  1,
+                                              "title":  "الهندية | हिन्दी",
+                                              "short_title":  "الهندية | हिन्दी",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/hindi_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  338,
+                     "version":  6,
+                     "slug":  "portuguese_mokhtasar",
+                     "order":  13,
+                     "title":  "البرتغالية | português",
+                     "short_title":  "البرتغالية | português",
+                     "language_title":  "Português",
+                     "language_id":  36,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/portuguese_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/portuguese_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/portuguese_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  340,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  36,
+                                      "code":  "pt",
+                                      "local_name":  "Português",
+                                      "latin_name":  "برتغالي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  285,
+                                              "book_id":  338,
+                                              "language_id":  1,
+                                              "title":  "البرتغالية | português",
+                                              "short_title":  "البرتغالية | português",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/portuguese_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  313,
+                     "version":  6,
+                     "slug":  "bengali_mokhtasar",
+                     "order":  15,
+                     "title":  "البنغالية | বাংলা",
+                     "short_title":  "البنغالية | বাংলা",
+                     "language_title":  "বাংলা",
+                     "language_id":  20,
+                     "description":  "\u003cp\u003eالترجمة البنغالية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/bengali_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/bengali_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/bengali_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  69,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  20,
+                                      "code":  "bn",
+                                      "local_name":  "বাংলা",
+                                      "latin_name":  "بنگالی",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2023-11-05T22:16:13.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  221,
+                                              "book_id":  313,
+                                              "language_id":  1,
+                                              "title":  "البنغالية | বাংলা",
+                                              "short_title":  "البنغالية | বাংলা",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالترجمة البنغالية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/bengali_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  310,
+                     "version":  6,
+                     "slug":  "french_mokhtasar",
+                     "order":  17,
+                     "title":  "الفرنسية | français",
+                     "short_title":  "الفرنسية | français",
+                     "language_title":  "Français",
+                     "language_id":  5,
+                     "description":  "\u003cp\u003eTraduction en français du résumé de l\u0027exégèse du Noble Coran, émanant du centre de l\u0027exégèse pour les études coraniques \u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/french_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/french_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/french_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  5690,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  5,
+                                      "code":  "fr",
+                                      "local_name":  "Français",
+                                      "latin_name":  "French",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2025-10-19T11:33:54.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  218,
+                                              "book_id":  310,
+                                              "language_id":  1,
+                                              "title":  "الفرنسية | français",
+                                              "short_title":  "الفرنسية | français",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eTraduction en français du résumé de l\u0027exégèse du Noble Coran, émanant du centre de l\u0027exégèse pour les études coraniques \u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/french_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  321,
+                     "version":  6,
+                     "slug":  "russian_mokhtasar",
+                     "order":  19,
+                     "title":  "الروسية | Русский",
+                     "short_title":  "الروسية | Русский",
+                     "language_title":  "Русский",
+                     "language_id":  24,
+                     "description":  "الترجمة الروسية للمختصر في تفسير القرآن الكريم",
+                     "pdf_url":  "http://pub.quran.digital/text_books/russian_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/russian_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/russian_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  9327,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  24,
+                                      "code":  "ru",
+                                      "local_name":  "Русский",
+                                      "latin_name":  "الروسي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  228,
+                                              "book_id":  321,
+                                              "language_id":  1,
+                                              "title":  "الروسية | Русский",
+                                              "short_title":  "الروسية | Русский",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "الترجمة الروسية للمختصر في تفسير القرآن الكريم",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/russian_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  336,
+                     "version":  6,
+                     "slug":  "german_mokhtasar",
+                     "order":  21,
+                     "title":  "الألمانية | Deutsch",
+                     "short_title":  "الألمانية | Deutsch",
+                     "language_title":  "Deutsch",
+                     "language_id":  17,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/german_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/german_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/german_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  534,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  17,
+                                      "code":  "de",
+                                      "local_name":  "Deutsch",
+                                      "latin_name":  "الألماني",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2025-03-09T15:20:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  283,
+                                              "book_id":  336,
+                                              "language_id":  1,
+                                              "title":  "الألمانية | Deutsch",
+                                              "short_title":  "الألمانية | Deutsch",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/german_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  333,
+                     "version":  6,
+                     "slug":  "urdu_mokhtasar",
+                     "order":  23,
+                     "title":  "الأردية | اردو",
+                     "short_title":  "الأردية | اردو",
+                     "language_title":  "اردو",
+                     "language_id":  11,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/urdu_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/urdu_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/urdu_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  1321,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  11,
+                                      "code":  "ur",
+                                      "local_name":  "اردو",
+                                      "latin_name":  "Urdu",
+                                      "is_rtl":  1,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2024-07-27T02:16:14.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  278,
+                                              "book_id":  333,
+                                              "language_id":  1,
+                                              "title":  "الأردية | اردو",
+                                              "short_title":  "الأردية | اردو",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/urdu_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  322,
+                     "version":  6,
+                     "slug":  "pashto_mokhtasar",
+                     "order":  25,
+                     "title":  "البشتوية | پښتو",
+                     "short_title":  "البشتوية | پښتو",
+                     "language_title":  "پښتو",
+                     "language_id":  15,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/pashto_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/pashto_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/pashto_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  3941,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  15,
+                                      "code":  "pa",
+                                      "local_name":  "پښتو",
+                                      "latin_name":  "Pashto",
+                                      "is_rtl":  1,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2024-07-27T02:16:18.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  266,
+                                              "book_id":  322,
+                                              "language_id":  1,
+                                              "title":  "البشتوية | پښتو",
+                                              "short_title":  "البشتوية | پښتو",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/pashto_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  315,
+                     "version":  7,
+                     "slug":  "japanese_mokhtasar",
+                     "order":  27,
+                     "title":  "اليابانية | 日本語",
+                     "short_title":  "اليابانية | 日本語",
+                     "language_title":  "日本語",
+                     "language_id":  13,
+                     "description":  "الترجمة اليابانية للمختصر في تفسير القرآن الكريم",
+                     "pdf_url":  "http://pub.quran.digital/text_books/japanese_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/japanese_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/japanese_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  189,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  13,
+                                      "code":  "ja",
+                                      "local_name":  "日本語",
+                                      "latin_name":  "ياباني",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  223,
+                                              "book_id":  315,
+                                              "language_id":  1,
+                                              "title":  "اليابانية | 日本語",
+                                              "short_title":  "اليابانية | 日本語",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "الترجمة اليابانية للمختصر في تفسير القرآن الكريم",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/japanese_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  328,
+                     "version":  6,
+                     "slug":  "swahili_mokhtasar",
+                     "order":  29,
+                     "title":  "السواحيلية | \tKiswahili",
+                     "short_title":  "السواحيلية | \tKiswahili",
+                     "language_title":  "Kiswahili",
+                     "language_id":  8,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/swahili_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/swahili_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/swahili_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  1780,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  8,
+                                      "code":  "sw",
+                                      "local_name":  "Kiswahili",
+                                      "latin_name":  "سواحيلي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  272,
+                                              "book_id":  328,
+                                              "language_id":  1,
+                                              "title":  "السواحيلية | \tKiswahili",
+                                              "short_title":  "السواحيلية | \tKiswahili",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/swahili_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  260,
+                     "version":  6,
+                     "slug":  "turkish_mokhtasar",
+                     "order":  31,
+                     "title":  "التركية |\tTürkçe",
+                     "short_title":  "التركية |\tTürkçe",
+                     "language_title":  "Türkçe",
+                     "language_id":  12,
+                     "description":  "\u003cp\u003eMuhtasar Kur\u0027an-ı Kerim Tefsiri Türkçe Meali- Tefsir Merkezi tarafından Hazırlanmıştır. \u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/turkish_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/turkish_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/turkish_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  9281,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  12,
+                                      "code":  "tr",
+                                      "local_name":  "Türkçe",
+                                      "latin_name":  "التركي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  161,
+                                              "book_id":  260,
+                                              "language_id":  1,
+                                              "title":  "التركية |\tTürkçe",
+                                              "short_title":  "التركية |\tTürkçe",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eMuhtasar Kur\u0027an-ı Kerim Tefsiri Türkçe Meali- Tefsir Merkezi tarafından Hazırlanmıştır. \u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/turkish_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  210,
+                     "version":  6,
+                     "slug":  "italian_mokhtasar",
+                     "order":  33,
+                     "title":  "الإيطالية | Italiano",
+                     "short_title":  "الإيطالية | Italiano",
+                     "language_title":  "Italiano",
+                     "language_id":  3,
+                     "description":  "الترجمة الإيطالية للمختصر في تفسير القرآن الكريم",
+                     "pdf_url":  "http://pub.quran.digital/text_books/italian_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/italian_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/italian_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  319,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  3,
+                                      "code":  "it",
+                                      "local_name":  "Italiano",
+                                      "latin_name":  "Italiano",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  114,
+                                              "book_id":  210,
+                                              "language_id":  1,
+                                              "title":  "الإيطالية | Italiano",
+                                              "short_title":  "الإيطالية | Italiano",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "الترجمة الإيطالية للمختصر في تفسير القرآن الكريم",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/italian_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  326,
+                     "version":  6,
+                     "slug":  "tamili_mokhtasar",
+                     "order":  35,
+                     "title":  "التاميلية | தமிழ்",
+                     "short_title":  "التاميلية | தமிழ்",
+                     "language_title":  "தமிழ்",
+                     "language_id":  39,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/tamili_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/tamili_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/tamili_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  17499,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  39,
+                                      "code":  "ta",
+                                      "local_name":  "தமிழ்",
+                                      "latin_name":  "تاميلي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  270,
+                                              "book_id":  326,
+                                              "language_id":  1,
+                                              "title":  "التاميلية | தமிழ்",
+                                              "short_title":  "التاميلية | தமிழ்",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/tamili_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  209,
+                     "version":  7,
+                     "slug":  "persian_mokhtasar",
+                     "order":  37,
+                     "title":  "الفارسية | فارسی",
+                     "short_title":  "الفارسية | فارسی",
+                     "language_title":  "فارسی",
+                     "language_id":  2,
+                     "description":  "\u003cp\u003eترجمه المختصر في التفسیر به زبان فارسی\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/persian_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/persian_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/persian_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  12595,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  2,
+                                      "code":  "fa",
+                                      "local_name":  "فارسی",
+                                      "latin_name":  "Persian",
+                                      "is_rtl":  1,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2024-09-14T12:39:57.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  111,
+                                              "book_id":  209,
+                                              "language_id":  1,
+                                              "title":  "الفارسية | فارسی",
+                                              "short_title":  "الفارسية | فارسی",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eترجمه المختصر في التفسیر به زبان فارسی\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/persian_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  316,
+                     "version":  6,
+                     "slug":  "assamese_mokhtasar",
+                     "order":  39,
+                     "title":  "الأسامية | অসমীয়া",
+                     "short_title":  "الأسامية | অসমীয়া",
+                     "language_title":  "অসমীয়া ",
+                     "language_id":  19,
+                     "description":  "الترجمة الأسامية للمختصر في تفسير القرآن الكريم",
+                     "pdf_url":  "http://pub.quran.digital/text_books/assamese_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/assamese_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/assamese_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  288,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  19,
+                                      "code":  "as",
+                                      "local_name":  "অসমীয়া ",
+                                      "latin_name":  "Assamese الأسامية",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  224,
+                                              "book_id":  316,
+                                              "language_id":  1,
+                                              "title":  "الأسامية | অসমীয়া",
+                                              "short_title":  "الأسامية | অসমীয়া",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "الترجمة الأسامية للمختصر في تفسير القرآن الكريم",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/assamese_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  332,
+                     "version":  6,
+                     "slug":  "hausa_mokhtasar",
+                     "order":  41,
+                     "title":  "الهوساوية | Hausa",
+                     "short_title":  "الهوساوية | Hausa",
+                     "language_title":  "Hausa",
+                     "language_id":  53,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/language_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/language_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/hausa_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  1778,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  53,
+                                      "code":  "ha",
+                                      "local_name":  "Hausa",
+                                      "latin_name":  "هوسا",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  276,
+                                              "book_id":  332,
+                                              "language_id":  1,
+                                              "title":  "الهوساوية | Hausa",
+                                              "short_title":  "الهوساوية | Hausa",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/hausa_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  339,
+                     "version":  6,
+                     "slug":  "thai_mokhtasar",
+                     "order":  43,
+                     "title":  "التايلندية | ภาษาไทย",
+                     "short_title":  "التايلندية | ภาษาไทย",
+                     "language_title":  "ไทย",
+                     "language_id":  23,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/thai_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/thai_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/thai_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  297,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  23,
+                                      "code":  "th",
+                                      "local_name":  "ไทย",
+                                      "latin_name":  "تايلندي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  286,
+                                              "book_id":  339,
+                                              "language_id":  1,
+                                              "title":  "التايلندية | ภาษาไทย",
+                                              "short_title":  "التايلندية | ภาษาไทย",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/thai_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  224,
+                     "version":  6,
+                     "slug":  "vietnamese_mokhtasar",
+                     "order":  45,
+                     "title":  "الفيتنامية | Việt Nam",
+                     "short_title":  "الفيتنامية | Việt Nam",
+                     "language_title":  "Việt Nam",
+                     "language_id":  22,
+                     "description":  "\u003cp\u003eالترجمة الفيتنامية للمختصر في تفسير القرآن الكريم، صادر عن مركز تفسير.\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/vietnamese_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/vietnamese_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/vietnamese_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  1033,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  22,
+                                      "code":  "vi",
+                                      "local_name":  "Việt Nam",
+                                      "latin_name":  "فيتنامي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  153,
+                                              "book_id":  224,
+                                              "language_id":  1,
+                                              "title":  "الفيتنامية | Việt Nam",
+                                              "short_title":  "الفيتنامية | Việt Nam",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالترجمة الفيتنامية للمختصر في تفسير القرآن الكريم، صادر عن مركز تفسير.\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/vietnamese_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  325,
+                     "version":  6,
+                     "slug":  "uzbeki_mokhtasar",
+                     "order":  47,
+                     "title":  "الأوزبكية | Ўзбек тили",
+                     "short_title":  "الأوزبكية | Ўзбек тили",
+                     "language_title":  "Ўзбек тили",
+                     "language_id":  21,
+                     "description":  "\u003cp\u003e\u003cbr\u003e\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/uzbeki_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/uzbeki_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/uzbeki_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  2876,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  21,
+                                      "code":  "uz",
+                                      "local_name":  "Ўзбек тили",
+                                      "latin_name":  "Uzbek",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  269,
+                                              "book_id":  325,
+                                              "language_id":  1,
+                                              "title":  "الأوزبكية | Ўзбек тили",
+                                              "short_title":  "الأوزبكية | Ўзбек тили",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003e\u003cbr\u003e\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/uzbeki_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  335,
+                     "version":  6,
+                     "slug":  "azeri_mokhtasar",
+                     "order":  49,
+                     "title":  "الآذرية | Azeri",
+                     "short_title":  "الآذرية | Azeri",
+                     "language_title":  "Azərbaycanlı",
+                     "language_id":  29,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/azeri_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/azeri_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/azeri_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  270,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  29,
+                                      "code":  "az",
+                                      "local_name":  "Azərbaycanlı",
+                                      "latin_name":  "أذري",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  282,
+                                              "book_id":  335,
+                                              "language_id":  1,
+                                              "title":  "الآذرية | Azeri",
+                                              "short_title":  "الآذرية | Azeri",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/azeri_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  340,
+                     "version":  6,
+                     "slug":  "kurdish_mokhtasar",
+                     "order":  51,
+                     "title":  "الكوردية | كوردی",
+                     "short_title":  "الكوردية | كوردی",
+                     "language_title":  "كوردی سۆرانی",
+                     "language_id":  49,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/kurdish_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/kurdish_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/kurdish_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  628,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  49,
+                                      "code":  "ku",
+                                      "local_name":  "كوردی سۆرانی",
+                                      "latin_name":  "كوردی",
+                                      "is_rtl":  1,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  287,
+                                              "book_id":  340,
+                                              "language_id":  1,
+                                              "title":  "الكوردية | كوردی",
+                                              "short_title":  "الكوردية | كوردی",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/kurdish_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  323,
+                     "version":  6,
+                     "slug":  "albanian_mokhtasar",
+                     "order":  53,
+                     "title":  "الألبانية | Shqip",
+                     "short_title":  "الألبانية | Shqip",
+                     "language_title":  "Shqip",
+                     "language_id":  30,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/albanian_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/albanian_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/albanian_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  3593,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  30,
+                                      "code":  "sq",
+                                      "local_name":  "Shqip",
+                                      "latin_name":  "ألباني",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  267,
+                                              "book_id":  323,
+                                              "language_id":  1,
+                                              "title":  "الألبانية | Shqip",
+                                              "short_title":  "الألبانية | Shqip",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/albanian_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  261,
+                     "version":  6,
+                     "slug":  "tagalog_mokhtasar",
+                     "order":  55,
+                     "title":  "الفلبينية | Tagalog",
+                     "short_title":  "الفلبينية | Tagalog",
+                     "language_title":  "Tagalog",
+                     "language_id":  40,
+                     "description":  "\u003cp\u003eالترجمة الفلبينية (تجالوج) للمختصر في تفسير القرآن الكريم، صادر عن مركز تفسير.\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/tagalog_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/tagalog_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/tagalog_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  2343,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  40,
+                                      "code":  "tl",
+                                      "local_name":  "Tagalog",
+                                      "latin_name":  "تجالوج",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  163,
+                                              "book_id":  261,
+                                              "language_id":  1,
+                                              "title":  "الفلبينية | Tagalog",
+                                              "short_title":  "الفلبينية | Tagalog",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالترجمة الفلبينية (تجالوج) للمختصر في تفسير القرآن الكريم، صادر عن مركز تفسير.\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/tagalog_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  311,
+                     "version":  6,
+                     "slug":  "bosnian_mokhtasar",
+                     "order":  57,
+                     "title":  "البوسنية | Bosanski",
+                     "short_title":  "البوسنية | Bosanski",
+                     "language_title":  "Bosanski",
+                     "language_id":  38,
+                     "description":  "\u003cp\u003eالترجمة البوسنية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/bosnian_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/bosnian_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/bosnian_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  2042,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  38,
+                                      "code":  "bs",
+                                      "local_name":  "Bosanski",
+                                      "latin_name":  "بوسني",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  219,
+                                              "book_id":  311,
+                                              "language_id":  1,
+                                              "title":  "البوسنية | Bosanski",
+                                              "short_title":  "البوسنية | Bosanski",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالترجمة البوسنية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/bosnian_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  337,
+                     "version":  6,
+                     "slug":  "amharic_mokhtasar",
+                     "order":  59,
+                     "title":  "الأمهرية | አማርኛ",
+                     "short_title":  "الأمهرية | አማርኛ",
+                     "language_title":  "አማርኛ",
+                     "language_id":  31,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/amharic_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/amharic_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/amharic_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  755,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  31,
+                                      "code":  "am",
+                                      "local_name":  "አማርኛ",
+                                      "latin_name":  "أمهري",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  284,
+                                              "book_id":  337,
+                                              "language_id":  1,
+                                              "title":  "الأمهرية | አማርኛ",
+                                              "short_title":  "الأمهرية | አማርኛ",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/amharic_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  324,
+                     "version":  6,
+                     "slug":  "oromo_mokhtasar",
+                     "order":  61,
+                     "title":  "الأورومية | afaan oromoo",
+                     "short_title":  "الأورومية | afaan oromoo",
+                     "language_title":  "afaan oromoo",
+                     "language_id":  33,
+                     "description":  "\u003cp\u003e\u003cbr\u003e\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/oromo_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/oromo_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/oromo_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  3222,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  33,
+                                      "code":  "or",
+                                      "local_name":  "afaan oromoo",
+                                      "latin_name":  "أورومي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  268,
+                                              "book_id":  324,
+                                              "language_id":  1,
+                                              "title":  "الأورومية | afaan oromoo",
+                                              "short_title":  "الأورومية | afaan oromoo",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003e\u003cbr\u003e\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/oromo_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  342,
+                     "version":  6,
+                     "slug":  "nepali_mokhtasar",
+                     "order":  63,
+                     "title":  "النيبالية | Gorkhali",
+                     "short_title":  "النيبالية | Gorkhali",
+                     "language_title":  "नेपाली",
+                     "language_id":  25,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/nepali_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/nepali_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/nepali_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  262,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  25,
+                                      "code":  "ne",
+                                      "local_name":  "नेपाली",
+                                      "latin_name":  "نیبالی",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  289,
+                                              "book_id":  342,
+                                              "language_id":  1,
+                                              "title":  "النيبالية | Gorkhali",
+                                              "short_title":  "النيبالية | Gorkhali",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/nepali_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  329,
+                     "version":  6,
+                     "slug":  "tajiki_mokhtasar",
+                     "order":  65,
+                     "title":  "الطاجيكية | Тоҷикӣ",
+                     "short_title":  "الطاجيكية | Тоҷикӣ",
+                     "language_title":  "Тоҷикӣ",
+                     "language_id":  14,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/tajiki_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/tajiki_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/tajiki_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  1611,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  14,
+                                      "code":  "tg",
+                                      "local_name":  "Тоҷикӣ",
+                                      "latin_name":  "Tajik",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  273,
+                                              "book_id":  329,
+                                              "language_id":  1,
+                                              "title":  "الطاجيكية | Тоҷикӣ",
+                                              "short_title":  "الطاجيكية | Тоҷикӣ",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/tajiki_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  317,
+                     "version":  6,
+                     "slug":  "malayalam_mokhtasar",
+                     "order":  67,
+                     "title":  "المليبارية | മലയാളം",
+                     "short_title":  "المليبارية | മലയാളം",
+                     "language_title":  "മലയാളം",
+                     "language_id":  51,
+                     "description":  "\u003cp\u003eالترجمة المليبارية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                     "pdf_url":  "http://pub.quran.digital/text_books/malayalam_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/malayalam_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/malayalam_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  2268,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  51,
+                                      "code":  "ml",
+                                      "local_name":  "മലയാളം",
+                                      "latin_name":  "مليالم-المليباري",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  225,
+                                              "book_id":  317,
+                                              "language_id":  1,
+                                              "title":  "المليبارية | മലയാളം",
+                                              "short_title":  "المليبارية | മലയാളം",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "\u003cp\u003eالترجمة المليبارية للمختصر في تفسير القرآن الكريم\u003c/p\u003e",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/malayalam_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  343,
+                     "version":  6,
+                     "slug":  "uyghur_mokhtasar",
+                     "order":  69,
+                     "title":  "الأيغورية | ئۇيغۇرچە",
+                     "short_title":  "الأيغورية | ئۇيغۇرچە",
+                     "language_title":  "ئۇيغۇرچە",
+                     "language_id":  60,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/uyghur_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/uyghur_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/uyghur_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  292,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  60,
+                                      "code":  "ug",
+                                      "local_name":  "ئۇيغۇرچە",
+                                      "latin_name":  "Uyghur",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  290,
+                                              "book_id":  343,
+                                              "language_id":  1,
+                                              "title":  "الأيغورية | ئۇيغۇرچە",
+                                              "short_title":  "الأيغورية | ئۇيغۇرچە",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/uyghur_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  327,
+                     "version":  6,
+                     "slug":  "sinhala_mokhtasar",
+                     "order":  71,
+                     "title":  "السنهالية | සිංහල",
+                     "short_title":  "السنهالية | සිංහල",
+                     "language_title":  "සිංහල",
+                     "language_id":  45,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/sinhala_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/sinhala_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/sinhala_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  2253,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  45,
+                                      "code":  "sl",
+                                      "local_name":  "සිංහල",
+                                      "latin_name":  "سنهالي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  271,
+                                              "book_id":  327,
+                                              "language_id":  1,
+                                              "title":  "السنهالية | සිංහල",
+                                              "short_title":  "السنهالية | සිංහල",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/sinhala_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  330,
+                     "version":  6,
+                     "slug":  "kyrgyz_mokhtasar",
+                     "order":  73,
+                     "title":  "القرغيزية | кыргызча",
+                     "short_title":  "القرغيزية | кыргызча",
+                     "language_title":  "Кыргызча",
+                     "language_id":  47,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/kyrgyz_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/kyrgyz_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/kyrgyz_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  2206,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  47,
+                                      "code":  "ky",
+                                      "local_name":  "Кыргызча",
+                                      "latin_name":  "قرغيزي",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  274,
+                                              "book_id":  330,
+                                              "language_id":  1,
+                                              "title":  "القرغيزية | кыргызча",
+                                              "short_title":  "القرغيزية | кыргызча",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/kyrgyz_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  341,
+                     "version":  6,
+                     "slug":  "malagasy_mokhtasar",
+                     "order":  75,
+                     "title":  "المدغشقرية | malagasy",
+                     "short_title":  "المدغشقرية | malagasy",
+                     "language_title":  "malagasy",
+                     "language_id":  67,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/malagasy_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/malagasy_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/malagasy_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  256,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  67,
+                                      "code":  "mg",
+                                      "local_name":  "malagasy",
+                                      "latin_name":  "Malagasy",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2021-03-05T12:35:31.000000Z",
+                                      "updated_at":  "2021-03-05T11:35:31.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  288,
+                                              "book_id":  341,
+                                              "language_id":  1,
+                                              "title":  "المدغشقرية | malagasy",
+                                              "short_title":  "المدغشقرية | malagasy",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/malagasy_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  334,
+                     "version":  6,
+                     "slug":  "akan_mokhtasar",
+                     "order":  77,
+                     "title":  "الآكانية | Ákán",
+                     "short_title":  "الآكانية | Ákán",
+                     "language_title":  "Ákán",
+                     "language_id":  66,
+                     "description":  null,
+                     "pdf_url":  "http://pub.quran.digital/text_books/akan_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/akan_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/akan_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  235,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  66,
+                                      "code":  "ak",
+                                      "local_name":  "Ákán",
+                                      "latin_name":  "Akan",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2021-03-05T12:35:31.000000Z",
+                                      "updated_at":  "2021-03-05T11:35:31.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  281,
+                                              "book_id":  334,
+                                              "language_id":  1,
+                                              "title":  "الآكانية | Ákán",
+                                              "short_title":  "الآكانية | Ákán",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/akan_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  318,
+                     "version":  6,
+                     "slug":  "khmer_mokhtasar",
+                     "order":  79,
+                     "title":  "الخميرية | ភាសាខ្មែរ",
+                     "short_title":  "الخميرية | ភាសាខ្មែរ",
+                     "language_title":  "ភាសាខ្មែរ",
+                     "language_id":  64,
+                     "description":  "الترجمة الخميرية للمختصر في تفسير القرآن الكريم",
+                     "pdf_url":  "http://pub.quran.digital/text_books/khmer_mokhtasar.pdf",
+                     "pdf_print_url":  "http://pub.quran.digital/text_books/khmer_mokhtasar_pdf.zip",
+                     "image":  "http://pub.quran.digital/text_books/khmer_mokhtasar_cover.jpg",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  252,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  64,
+                                      "code":  "km",
+                                      "local_name":  "ភាសាខ្មែរ",
+                                      "latin_name":  "الخميرية - الكمبودية",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  [
+                                     {
+                                         "id":  1,
+                                         "title":  "Dar al Mukhtasar",
+                                         "description":  "\u003cp\u003eHere is some details\u003c/p\u003e",
+                                         "dod":  "2022-10-27"
+                                     }
+                                 ],
+                     "translations":  [
+                                          {
+                                              "id":  226,
+                                              "book_id":  318,
+                                              "language_id":  1,
+                                              "title":  "الخميرية | ភាសាខ្មែរ",
+                                              "short_title":  "الخميرية | ភាសាខ្មែរ",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  "الترجمة الخميرية للمختصر في تفسير القرآن الكريم",
+                                              "percent_completion":  null,
+                                              "image":  "http://pub.quran.digital/text_books/khmer_mokhtasar_cover.jpg"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  344,
+                     "version":  6,
+                     "slug":  "alkory",
+                     "order":  99,
+                     "title":  "الكورية | 한국어",
+                     "short_title":  "الكورية | 한국어",
+                     "language_title":  "کوری",
+                     "language_id":  26,
+                     "description":  null,
+                     "pdf_url":  null,
+                     "pdf_print_url":  null,
+                     "image":  "https://admin.mokhtasr.com/images/book-cover.webp",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  10,
+                     "downloads_from_site":  0,
+                     "type":  null,
+                     "language":  {
+                                      "id":  26,
+                                      "code":  "ko",
+                                      "local_name":  "کوری",
+                                      "latin_name":  "korean",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2025-10-19T11:33:33.000000Z"
+                                  },
+                     "type_trans":  [
+
+                                    ],
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  291,
+                                              "book_id":  344,
+                                              "language_id":  1,
+                                              "title":  "الكورية | 한국어",
+                                              "short_title":  "الكورية | 한국어",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "https://admin.mokhtasr.com/images/book-cover.webp"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 },
+                 {
+                     "id":  345,
+                     "version":  7,
+                     "slug":  "alaafry-qafar-afa",
+                     "order":  99,
+                     "title":  "العفرية | Qafár afa",
+                     "short_title":  "العفرية | Qafár afa",
+                     "language_title":  "Qafár afa",
+                     "language_id":  18,
+                     "description":  null,
+                     "pdf_url":  null,
+                     "pdf_print_url":  null,
+                     "image":  "https://admin.mokhtasr.com/images/book-cover.webp",
+                     "status":  1,
+                     "percent_completion":  null,
+                     "is_completed":  1,
+                     "is_favorited":  false,
+                     "views_from_app":  0,
+                     "views_from_site":  0,
+                     "downloads_from_app":  53,
+                     "downloads_from_site":  0,
+                     "type":  1,
+                     "language":  {
+                                      "id":  18,
+                                      "code":  "aa",
+                                      "local_name":  "Qafár afa",
+                                      "latin_name":  "عفري",
+                                      "is_rtl":  0,
+                                      "order":  99,
+                                      "status":  0,
+                                      "created_at":  "2019-04-01T14:00:00.000000Z",
+                                      "updated_at":  "2019-04-01T12:00:00.000000Z"
+                                  },
+                     "type_trans":  {
+                                        "id":  1,
+                                        "title":  "enterpretation"
+                                    },
+                     "authors":  null,
+                     "translations":  [
+                                          {
+                                              "id":  292,
+                                              "book_id":  345,
+                                              "language_id":  1,
+                                              "title":  "العفرية | Qafár afa",
+                                              "short_title":  "العفرية | Qafár afa",
+                                              "language_title":  "العربية",
+                                              "language_iso":  "ar",
+                                              "description":  null,
+                                              "percent_completion":  null,
+                                              "image":  "https://admin.mokhtasr.com/images/book-cover.webp"
+                                          }
+                                      ],
+                     "pdf_files":  [
+
+                                   ]
+                 }
+             ]
+}
