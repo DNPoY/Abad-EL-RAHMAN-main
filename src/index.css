@@ -6,70 +6,88 @@
 
 @layer base {
   :root {
-    /* Premium Psychological Palette */
-    /* Primary: User's Specific Green */
-    --primary: 162 76% 15%;
+    /* Modern 60-30-10 Palette */
+
+    /* 60% - Main Background (Off-White/Cream) */
+    --cream-bg: 40 20% 97%;
+    /* #FAF9F6 */
+    --background: var(--cream-bg);
+    --foreground: 162 76% 15%;
+    /* Deep Emerald Text */
+
+    /* 30% - Primary/Secondary (Deep Emerald) */
+    --deep-emerald: 162 76% 15%;
     /* #094231 */
-    --primary-foreground: 0 0% 100%;
+    --emerald-light: 158 55% 22%;
+    /* #1a5d48 - Lighter for hover/gradients */
+    --primary: var(--deep-emerald);
+    --primary-foreground: 40 20% 97%;
+    /* Cream text on Emerald */
 
-    /* Background: User's Specific Green */
-    --background: 162 76% 15%;
-    /* #094231 */
-    --foreground: 0 0% 100%;
-    /* Pure White */
+    /* 10% - Accents (Matte Gold) */
+    --matte-gold: 40 48% 56%;
+    /* #C5A059 */
+    --gold-light: 42 63% 66%;
+    /* #D4B06A */
+    --accent: var(--matte-gold);
+    --accent-foreground: 162 76% 15%;
 
-    --card: 162 50% 18%;
-    --card-foreground: 0 0% 100%;
+    /* Reading Mode Specifics */
+    --warm-paper: 45 35% 92%;
+    /* #F5F0E1 */
+    --text-reading: 0 0% 10%;
+    /* #1A1A1A - Dark Black */
 
-    --popover: 162 50% 18%;
-    --popover-foreground: 0 0% 100%;
+    /* UI Components */
+    --card: 0 0% 100%;
+    /* Pure White cards for contrast on Cream */
+    --card-foreground: 162 76% 15%;
 
-    --secondary: 0 0% 100%;
-    /* White */
+    --popover: 0 0% 100%;
+    --popover-foreground: 162 76% 15%;
+
+    --secondary: 162 30% 95%;
+    /* Very light Green tint for secondary backgrounds */
     --secondary-foreground: 162 76% 15%;
 
-    --muted: 162 30% 25%;
-    --muted-foreground: 162 20% 80%;
-
-    --accent: 0 0% 100%;
-    /* White */
-    --accent-foreground: 162 76% 15%;
+    --muted: 162 10% 90%;
+    --muted-foreground: 162 20% 50%;
+    /* #666666 */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 100%;
-    /* White border */
-    --input: 162 30% 25%;
-    --ring: 0 0% 100%;
+    --border: 162 20% 90%;
+    --input: 162 20% 90%;
+    --ring: var(--deep-emerald);
 
-    --radius: 1rem;
-
-    /* Islamic Design Colors */
-    --islamic-green: 162 76% 15%;
-    /* #094231 */
-    --islamic-gold: 0 0% 100%;
-    /* Changed to White */
-
-    /* Premium White/Silver Gradient */
-    --gold-gradient: linear-gradient(180deg, #FFFFFF 0%, #E0E0E0 100%);
-
-    /* Header Background Match */
-    --header-bg: #094231;
+    --radius: 1.5rem;
+    /* 24px - Modern rounded look */
   }
 
-  * {
-    @apply border-border;
+  html {
+    @apply scroll-smooth;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Poppins', 'Amiri', sans-serif;
-    /* Ensure full height */
+    font-family: 'Tajawal', 'Poppins', sans-serif;
+    /* Primary UI Font */
     min-height: 100vh;
     padding-bottom: env(safe-area-inset-bottom);
-    /* Subtle texture or gradient for premium feel */
-    background-image: radial-gradient(circle at top right, rgba(22, 78, 63, 0.03), transparent 40%);
+    /* Subtle Grain Texture Overlay can be added here if needed via pseudo-element */
+  }
+
+  /* Typography Overrides */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Tajawal', sans-serif;
+    letter-spacing: -0.02em;
+    /* Tight tracking for modern feel */
   }
 
   /* Safe Area Utilities */
@@ -85,28 +103,55 @@
     margin-top: env(safe-area-inset-top);
   }
 
+  /* Modern Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* Utility Classes */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-panel-dark {
+    background: rgba(9, 66, 49, 0.85);
+    /* Deep Emerald Glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
   /* Arabic Typography */
   [lang="ar"],
   .rtl {
     direction: rtl;
-    font-family: 'Amiri', 'Poppins', serif;
-    line-height: 1.8;
-    /* Improve readability */
+    font-family: 'Tajawal', serif;
   }
 
-  /* Islamic Pattern Background */
-  .islamic-pattern {
-    background-image:
-      radial-gradient(circle at 25% 25%, rgba(22, 78, 63, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+  /* Quran Specific Font */
+  .font-quran {
+    font-family: 'original-hafs', serif;
   }
 
-  /* Smooth Animations */
-  .animate-fade-in {
-    animation: fadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  @keyframes fadeIn {
+  /* Animations */
+  @keyframes fadeInUp {
     from {
       opacity: 0;
       transform: translateY(20px);
@@ -118,8 +163,38 @@
     }
   }
 
-  .animate-pulse-soft {
-    animation: pulseSoft 3s ease-in-out infinite;
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-down {
+    animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
   }
 
   @keyframes pulseSoft {
@@ -130,58 +205,12 @@
     }
 
     50% {
-      opacity: 0.6;
+      opacity: 0.7;
     }
   }
 
-  /* Global Font Size Classes */
-  html.font-size-small {
-    font-size: 14px;
-  }
-
-  html.font-size-medium {
-    font-size: 16px;
-  }
-
-  html.font-size-large {
-    font-size: 20px;
-  }
-
-  /* Adjust specific elements for better scaling */
-  .font-size-small h1 {
-    font-size: 1.75rem;
-  }
-
-  .font-size-medium h1 {
-    font-size: 2.25rem;
-  }
-
-  .font-size-large h1 {
-    font-size: 2.75rem;
-  }
-
-  .font-size-small h2 {
-    font-size: 1.5rem;
-  }
-
-  .font-size-medium h2 {
-    font-size: 1.875rem;
-  }
-
-  .font-size-large h2 {
-    font-size: 2.25rem;
-  }
-
-  .font-size-small h3 {
-    font-size: 1.25rem;
-  }
-
-  .font-size-medium h3 {
-    font-size: 1.5rem;
-  }
-
-  .font-size-large h3 {
-    font-size: 1.875rem;
+  .animate-pulse-soft {
+    animation: pulseSoft 3s ease-in-out infinite;
   }
 }
 
@@ -204,6 +233,17 @@
   font-family: 'Tajawal', sans-serif;
 }
 
+@font-face {
+  font-family: 'indopak';
+  src: url('/fonts/indopak.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-indopak {
+  font-family: 'indopak', serif;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -219,10 +259,13 @@
 
 /* Custom Qibla Glow Animation */
 @keyframes pulseGlowGreen {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: drop-shadow(0 0 10px #047857) drop-shadow(0 0 20px #047857);
     transform: scale(1.15);
   }
+
   50% {
     filter: drop-shadow(0 0 20px #10B981) drop-shadow(0 0 30px #10B981);
     transform: scale(1.2);

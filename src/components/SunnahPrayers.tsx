@@ -32,7 +32,7 @@ export const SunnahPrayers = () => {
     const prayerOrder = ["الفجر", "الظهر", "العصر", "المغرب", "العشاء"];
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 pb-20">
             {prayerOrder.map((prayerName, index) => {
                 const prayers = groupedPrayers[prayerName];
                 if (!prayers) return null;
@@ -40,10 +40,10 @@ export const SunnahPrayers = () => {
                 return (
                     <Card
                         key={prayerName}
-                        className="p-6 animate-fade-in hover:shadow-lg transition-all"
+                        className="p-6 animate-fade-in hover:shadow-lg transition-all bg-white border-emerald-deep/10"
                         style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                        <h3 className="text-3xl font-bold font-amiri text-white mb-4 text-center">
+                        <h3 className="text-3xl font-bold font-tajawal text-emerald-deep mb-4 text-center drop-shadow-sm">
                             {prayerName}
                         </h3>
 
@@ -51,22 +51,24 @@ export const SunnahPrayers = () => {
                             {prayers.map((prayer) => (
                                 <div
                                     key={prayer.id}
-                                    className="flex items-center justify-between p-4 bg-muted/30 rounded-lg"
+                                    className="flex items-center justify-between p-4 bg-emerald-50/50 rounded-xl border border-emerald-deep/5"
                                 >
                                     <div className="flex items-center gap-3">
-                                        <Badge variant={prayer.confirmed ? "default" : "secondary"}>
+                                        <Badge
+                                            className={`${prayer.confirmed ? "bg-emerald-deep hover:bg-emerald-deep/90" : "bg-gold-matte hover:bg-gold-matte/90"} text-white border-none`}
+                                        >
                                             {prayer.confirmed
                                                 ? (language === "ar" ? "مؤكدة" : "Confirmed")
                                                 : (language === "ar" ? "غير مؤكدة" : "Non-Confirmed")}
                                         </Badge>
-                                        <span className="text-lg font-amiri">
+                                        <span className="text-lg font-tajawal text-emerald-deep/80">
                                             {language === "ar"
                                                 ? `${prayer.timing === "before" ? "قبل" : "بعد"} الصلاة`
                                                 : `${prayer.timing === "before" ? "Before" : "After"} Prayer`}
                                         </span>
                                     </div>
-                                    <span className="text-2xl font-bold text-white">
-                                        {prayer.rakaat} {language === "ar" ? "ركعة" : "Rakaat"}
+                                    <span className="text-2xl font-bold text-emerald-deep font-tajawal">
+                                        {prayer.rakaat} <span className="text-sm font-normal text-emerald-deep/60">{language === "ar" ? "ركعة" : "Rakaat"}</span>
                                     </span>
                                 </div>
                             ))}

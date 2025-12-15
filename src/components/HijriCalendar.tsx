@@ -166,37 +166,37 @@ export const HijriCalendar = () => {
                     className={cn(
                         "h-10 md:h-14 flex flex-col items-center justify-center rounded-lg relative border transition-all text-white cursor-pointer select-none active:scale-95",
                         isToday
-                            ? "bg-[#FFD700] text-[#094231] font-extrabold border-[#FFD700] shadow-[0_0_10px_rgba(255,215,0,0.5)] z-10 scale-105"
-                            : "border-white/5 hover:bg-white/10",
-                        !isToday && isWhiteDay && "bg-white/10 border-white/20",
-                        !isToday && holidayName && "bg-emerald-600/40 border-emerald-400",
-                        !isToday && isFriday && !holidayName && "text-emerald-400",
-                        hasNote && !isToday && "ring-1 ring-blue-400/50"
+                            ? "bg-gold-matte text-white font-bold shadow-lg shadow-gold-matte/20 z-10 scale-105"
+                            : "border-emerald-deep/5 hover:bg-emerald-deep/5 text-emerald-deep",
+                        !isToday && isWhiteDay && "bg-sky-200 border-sky-400 text-emerald-900",
+                        !isToday && holidayName && "bg-emerald-100/50 border-emerald-200 text-emerald-800",
+                        !isToday && isFriday && !holidayName && "text-emerald-600 font-medium",
+                        hasNote && !isToday && "ring-1 ring-gold-matte/50"
                     )}
                 >
                     {/* Gregorian Day */}
                     <span className={cn(
-                        "text-[8px] md:text-[10px] absolute top-1 left-2 opacity-90 font-sans",
-                        isToday ? "text-[#094231]" : "text-white/80"
+                        "text-[9px] md:text-[11px] absolute top-1 left-2 font-sans font-medium",
+                        isToday ? "text-white" : "text-slate-500"
                     )}>
                         {language === 'ar' ? toArabic(d) : d}
                     </span>
 
                     {/* Hijri Day */}
-                    <span className="text-sm md:text-lg font-amiri font-bold">
+                    <span className="text-sm md:text-lg font-tajawal font-bold mt-1">
                         {language === 'ar' ? toArabic(hijriDay) : hijriDay}
                     </span>
 
                     {/* Holiday Dot */}
                     {holidayName && (
-                        <span className="absolute -bottom-1 md:bottom-0.5 text-[8px] md:text-[9px] truncate w-full text-center px-1 font-amiri text-emerald-200">
+                        <span className="absolute -bottom-1 md:bottom-0.5 text-[8px] md:text-[9px] truncate w-full text-center px-1 font-tajawal text-emerald-600/80">
                             {holidayName}
                         </span>
                     )}
 
                     {/* Note Indicator */}
                     {hasNote && !holidayName && (
-                        <StickyNote className={cn("absolute bottom-1 right-1 w-2 h-2 opacity-70", isToday ? "text-[#094231]" : "text-blue-300")} />
+                        <StickyNote className={cn("absolute bottom-1 right-1 w-2 h-2 opacity-70", isToday ? "text-white" : "text-gold-matte")} />
                     )}
                 </div>
             );
@@ -211,8 +211,8 @@ export const HijriCalendar = () => {
 
     return (
         <div className="space-y-4 animate-in fade-in pb-20">
-            {/* Header Card */}
-            <Card className="p-4 bg-white/5 border-white/10 backdrop-blur-sm">
+            {/* Header Card - Using Deep Emerald for Contrast */}
+            <Card className="p-4 bg-emerald-deep text-white shadow-lg shadow-emerald-deep/20 border-none">
                 <div className="flex items-center justify-between">
                     <Button variant="ghost" size="icon" onClick={prevMonth} className="hover:bg-white/10 text-white">
                         <ChevronRight className="w-5 h-5 rtl:hidden" />
@@ -220,10 +220,10 @@ export const HijriCalendar = () => {
                     </Button>
 
                     <div className="text-center">
-                        <h2 className="text-xl font-bold font-amiri text-[#FFD700]">
+                        <h2 className="text-xl font-bold font-tajawal text-gold-matte">
                             {getHijriMonthName(currentDate)} {getHijriYear(currentDate)}
                         </h2>
-                        <div className="flex items-center justify-center gap-2 text-xs text-white/60 mt-1 font-sans">
+                        <div className="flex items-center justify-center gap-2 text-xs text-white/70 mt-1 font-sans">
                             <CalendarIcon className="w-3 h-3" />
                             <span>
                                 {currentDate.toLocaleDateString(language === 'ar' ? 'ar-EG' : 'en-US', { month: 'long', year: 'numeric' })}
@@ -238,32 +238,32 @@ export const HijriCalendar = () => {
                 </div>
             </Card>
 
-            {/* Calendar Grid */}
-            <Card className="p-2 md:p-4 bg-black/20 border-white/10">
-                <div className="grid grid-cols-7 gap-1 md:gap-2 text-center mb-2">
+            {/* Calendar Grid - Clean White Card */}
+            <Card className="p-3 md:p-5 bg-white border-emerald-deep/5 shadow-sm">
+                <div className="grid grid-cols-7 gap-1 md:gap-2 text-center mb-4 border-b border-emerald-deep/5 pb-2">
                     {weekDays.map((day) => (
-                        <div key={day} className="text-xs font-bold text-white/90 py-2 font-amiri">
+                        <div key={day} className="text-xs font-bold text-emerald-deep/50 py-1 font-tajawal">
                             {day}
                         </div>
                     ))}
                 </div>
-                <div className="grid grid-cols-7 gap-1 md:gap-2">
+                <div className="grid grid-cols-7 gap-1 md:gap-3">
                     {renderCalendarDays()}
                 </div>
             </Card>
 
             {/* Legend */}
-            <div className="flex justify-center gap-4 text-xs text-white/60 pt-2 font-amiri">
+            <div className="flex justify-center gap-4 text-xs text-emerald-deep/60 pt-2 font-tajawal">
                 <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded bg-[#FFD700]"></div>
+                    <div className="w-3 h-3 rounded bg-gold-matte"></div>
                     <span>{language === 'ar' ? 'اليوم' : 'Today'}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded bg-white/10 border border-white/20"></div>
+                    <div className="w-3 h-3 rounded bg-sky-200 border border-sky-400"></div>
                     <span>{language === 'ar' ? 'الأيام البيض' : 'White Days'}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                    <StickyNote className="w-3 h-3 text-blue-300" />
+                    <StickyNote className="w-3 h-3 text-gold-matte" />
                     <span>{language === 'ar' ? 'ملاحظة' : 'Note'}</span>
                 </div>
             </div>

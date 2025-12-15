@@ -10,6 +10,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { TasbihCounter } from "@/components/TasbihCounter";
+import { useFontSize } from "@/contexts/FontSizeContext";
 import {
     personalDuas,
     duaForDeceasedMale,
@@ -21,9 +22,19 @@ import {
 
 export const DuaList = () => {
     const { t, language } = useLanguage();
+    const { fontSize } = useFontSize();
     const { favorites, toggleFavorite, isFavorite } = useFavorites();
     const [searchQuery, setSearchQuery] = useState("");
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
+
+    const getFontSizeClass = () => {
+        switch (fontSize) {
+            case 'small': return 'text-xl leading-loose';
+            case 'medium': return 'text-2xl leading-loose';
+            case 'large': return 'text-3xl leading-[2.5]';
+            default: return 'text-2xl leading-loose';
+        }
+    };
 
     const allDuas = [
         ...quranicDuas,
@@ -86,14 +97,14 @@ export const DuaList = () => {
                 {filteredList.map((dua, index) => (
                     <Card
                         key={dua.id}
-                        className="p-6 animate-fade-in hover:shadow-lg transition-all relative group"
+                        className="p-6 animate-fade-in hover:shadow-lg transition-all relative group bg-white border-emerald-deep/5 hover:-translate-y-1"
                         style={{ animationDelay: `${index * 0.05}s` }}
                     >
                         <div className="absolute top-4 left-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                className="h-8 w-8 text-emerald-deep/40 hover:text-emerald-deep hover:bg-emerald-deep/5"
                                 onClick={() => handleCopy(dua)}
                                 title={t.copy}
                             >
@@ -102,7 +113,7 @@ export const DuaList = () => {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                className="h-8 w-8 text-emerald-deep/40 hover:text-emerald-deep hover:bg-emerald-deep/5"
                                 onClick={() => handleShare(dua)}
                                 title={t.share}
                             >
@@ -111,7 +122,7 @@ export const DuaList = () => {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-muted-foreground hover:text-red-500 hover:bg-red-50"
+                                className="h-8 w-8 text-emerald-deep/40 hover:text-red-500 hover:bg-red-50"
                                 onClick={() => toggleFavorite(dua.id)}
                                 title={t.favorites}
                             >
@@ -124,19 +135,12 @@ export const DuaList = () => {
                             </Button>
                         </div>
 
-                        {/* Mobile visible actions (always visible on touch devices mainly, but we use opacity for cleaner desktop UI. 
-                            For mobile we might want them always visible or rely on tap. 
-                            Let's make them always visible on mobile by default or handling hover. 
-                            Since 'group-hover' can be tricky on mobile, let's make them visible always if typical mobile? 
-                            Actually, 'group-hover' often works on tap on mobile. 
-                            To be safe, let's remove opacity-0 for now or conditionally apply it.
-                            Let's keep it simple: always visible for now to ensure usability, or low opacity faded in.
-                        */}
+                        {/* Mobile visible actions */}
                         <div className="absolute top-4 left-4 flex gap-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                className="h-8 w-8 text-emerald-deep/40 hover:text-emerald-deep hover:bg-emerald-deep/5"
                                 onClick={() => handleCopy(dua)}
                             >
                                 <Copy className="w-4 h-4" />
@@ -144,7 +148,7 @@ export const DuaList = () => {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                className="h-8 w-8 text-emerald-deep/40 hover:text-emerald-deep hover:bg-emerald-deep/5"
                                 onClick={() => handleShare(dua)}
                             >
                                 <Share2 className="w-4 h-4" />
@@ -152,7 +156,7 @@ export const DuaList = () => {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-muted-foreground hover:text-red-500 hover:bg-red-50"
+                                className="h-8 w-8 text-emerald-deep/40 hover:text-red-500 hover:bg-red-50"
                                 onClick={() => toggleFavorite(dua.id)}
                             >
                                 <Heart
@@ -164,12 +168,12 @@ export const DuaList = () => {
                             </Button>
                         </div>
 
-                        <p className="text-2xl font-amiri leading-loose mb-4 text-right pt-8 md:pt-2" lang="ar">
+                        <p className={`${getFontSizeClass()} font-amiri mb-4 text-right pt-8 md:pt-2 text-emerald-deep break-words`} lang="ar">
                             {dua.arabic}
                         </p>
 
                         {dua.source && (
-                            <p className="text-sm text-primary/80 font-amiri text-right mb-2" dir="rtl">
+                            <p className="text-sm text-emerald-deep/60 font-amiri text-right mb-2" dir="rtl">
                                 {dua.source}
                             </p>
                         )}
@@ -177,12 +181,12 @@ export const DuaList = () => {
                         {language === "en" && (dua.transliteration || dua.translation) && (
                             <>
                                 {dua.transliteration && (
-                                    <p className="text-sm text-muted-foreground italic mb-2">
+                                    <p className="text-sm text-emerald-deep/60 italic mb-2">
                                         {dua.transliteration}
                                     </p>
                                 )}
                                 {dua.translation && (
-                                    <p className="text-sm text-foreground">
+                                    <p className="text-sm text-emerald-deep/80">
                                         {dua.translation}
                                     </p>
                                 )}
@@ -198,13 +202,13 @@ export const DuaList = () => {
         <Tabs defaultValue="personal" className="w-full" dir={language === "ar" ? "rtl" : "ltr"}>
             <div className="mb-6 relative">
                 <Search className={cn(
-                    "absolute top-1/2 -translate-y-1/2 w-4 h-4 text-white/70 pointer-events-none", // Improved visibility & pointer-events
+                    "absolute top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-deep/40 pointer-events-none", // Improved visibility & pointer-events
                     language === "ar" ? "right-3" : "left-3"
                 )} />
                 <Input
                     placeholder={t.searchPlaceholder}
                     className={cn(
-                        "bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-md focus:bg-white/15 transition-all text-base", // Enhanced styling
+                        "bg-white border-emerald-deep/10 text-emerald-deep placeholder:text-emerald-deep/30 focus:bg-white focus:ring-1 focus:ring-emerald-deep/20 transition-all text-base shadow-sm", // Enhanced styling
                         language === "ar" ? "pr-10" : "pl-10"
                     )}
                     value={searchQuery}

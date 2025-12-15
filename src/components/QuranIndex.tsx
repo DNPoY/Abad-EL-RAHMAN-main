@@ -109,127 +109,135 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
     );
 
     return (
-        <div className="min-h-screen relative overflow-hidden">
-            {/* Background Image */}
-            {/* Background Image - Warm Paper Theme (Trial) */}
+        <div className="min-h-screen relative overflow-hidden bg-cream">
+            {/* Texture Overlay */}
             <div
-                className="absolute inset-0 z-0 bg-[#f5f0e1]"
-                style={{
-                    backgroundImage: 'url("/images/quran-bg-warm.png")',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: 1
-                }}
+                className="absolute inset-0 z-0 opacity-30 pointer-events-none mix-blend-multiply"
+                style={{ backgroundImage: 'url("/textures/cream-paper.png")', backgroundSize: 'cover' }}
             />
-            {/* Dark Overlay for Text Contrast */}
-            <div className="absolute inset-0 bg-black/40 z-0" />
 
-            {/* Overlay for readability if background is too busy */}
-            <div className="absolute inset-0 bg-[#004B23]/80 z-0 mix-blend-multiply" />
-
-            <div className="relative z-10 p-4 space-y-6 animate-fade-in pb-24">
-                <div className="flex flex-col items-center justify-center gap-2 mb-8 text-[#FFD700] pt-4">
+            <div className="relative z-10 px-4 pt-safe pb-32 animate-fade-in">
+                {/* Header */}
+                <div className="flex flex-col items-center justify-center pt-8 mb-8 relative">
                     {!isEmbedded && (
-                        <div className="absolute top-4 left-4">
+                        <div className="absolute top-8 left-0">
                             <Link to="/">
-                                <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-full">
+                                <Button variant="ghost" size="icon" className="text-emerald-deep hover:bg-emerald-deep/5 rounded-full">
                                     <ArrowRight className={language === "ar" ? "rotate-180" : ""} />
                                 </Button>
                             </Link>
                         </div>
                     )}
-                    <div className="flex items-center gap-3 animate-fade-in-up">
-                        <BookOpen className="w-8 h-8 text-[#FFD700]" />
-                        <h2 className="text-4xl font-bold font-amiri drop-shadow-lg text-white">
+
+                    <div className="flex flex-col items-center animate-fade-in-up">
+                        <BookOpen className="w-10 h-10 text-emerald-deep mb-2 drop-shadow-sm" />
+                        <h2 className="text-3xl font-bold font-tajawal text-emerald-deep">
                             {language === "ar" ? "القرآن الكريم" : "The Holy Quran"}
                         </h2>
+                        <span className="text-sm font-tajawal text-emerald-deep/60 mt-1">
+                            {language === "ar" ? "اقرأ وارتق" : "Read and Rise"}
+                        </span>
                     </div>
                 </div>
 
-                <div className="space-y-4 max-w-2xl mx-auto px-4 relative z-20 -mt-2">
-                    <div className="relative flex gap-2 group">
-                        <div className="relative flex-1">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 w-5 h-5 z-20 transition-colors group-hover:text-[#FFD700]" />
+                {/* Search Bar */}
+                <div className="max-w-xl mx-auto mb-8 relative z-20">
+                    <div className="relative group">
+                        <div className="absolute inset-0 bg-emerald-deep/5 blur-xl rounded-full transform scale-90 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative flex shadow-[0_8px_30px_rgba(0,0,0,0.04)] rounded-2xl bg-white border border-emerald-deep/5 overflow-hidden">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-deep/40 w-5 h-5 z-20" />
                             <Input
-                                placeholder={language === "ar" ? "بحث عن سورة أو آية..." : "Search Surah or Ayah..."}
+                                placeholder={language === "ar" ? "ابحث عن سورة أو آية..." : "Search Surah or Ayah..."}
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                                className="pl-12 py-6 bg-white/5 border-2 border-white/10 text-white placeholder:text-white/30 focus:border-[#FFD700] focus:ring-[#FFD700] shadow-lg backdrop-blur-sm rounded-2xl text-lg font-amiri transition-all hover:bg-white/10 hover:border-white/20"
+                                className="pl-12 py-7 border-none bg-transparent text-emerald-deep placeholder:text-emerald-deep/30 focus:ring-0 text-lg font-tajawal w-full"
                             />
+                            <Button
+                                onClick={handleSearch}
+                                disabled={isSearching}
+                                className="h-auto px-6 bg-gold-matte text-white hover:bg-gold-light font-bold rounded-none"
+                            >
+                                {isSearching ? (
+                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                ) : (
+                                    language === "ar" ? "بحث" : "Search"
+                                )}
+                            </Button>
                         </div>
-                        <Button onClick={handleSearch} disabled={isSearching} className="h-auto px-8 bg-[#FFD700] text-[#0c3f2d] hover:bg-[#FFD700]/90 font-bold rounded-2xl shadow-lg transition-transform hover:scale-105">
-                            {isSearching ? (
-                                <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                            ) : (
-                                language === "ar" ? "بحث" : "Search"
-                            )}
-                        </Button>
                     </div>
                 </div>
 
-                <div className="space-y-8">
-                    {/* Surah Results */}
+                <div className="max-w-xl mx-auto space-y-4">
+                    {/* Surah Results - Vertical List */}
                     {filteredSurahs.length > 0 && (
-                        <div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {filteredSurahs.map((surah) => (
-                                    <Link to={`/quran/${surah.number}`} key={surah.number}>
-                                        <div className="relative group overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#146c4d] to-[#0c3f2d] hover:border-[#FFD700]/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(12,63,45,0.4)]">
-                                            {/* Decorative Corner */}
-                                            <div
-                                                className="absolute top-0 right-0 w-16 h-16 opacity-5 rotate-90"
-                                                style={{ backgroundImage: `url(${patternBg})` }}
-                                            />
+                        <div className="space-y-3">
+                            {filteredSurahs.map((surah) => (
+                                <Link to={`/quran/${surah.number}`} key={surah.number}>
+                                    <div className="group relative bg-white rounded-2xl p-5 border border-emerald-deep/5 transition-all duration-300 hover:shadow-[0_10px_40px_-10px_rgba(9,66,49,0.1)] hover:-translate-y-1 overflow-hidden">
+                                        {/* Hover Accent */}
+                                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-emerald-deep opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                            <div className="p-4 flex items-center justify-between relative z-10">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 relative flex items-center justify-center">
-                                                        {/* Star/Octagon Shape for Number */}
-                                                        <div className="absolute inset-0 border-2 border-white/30 rotate-45 rounded-sm group-hover:rotate-90 transition-transform duration-500" />
-                                                        <span className="text-white font-bold font-amiri text-lg relative z-10">
-                                                            {surah.number}
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <h3 className="font-bold font-amiri text-xl text-white group-hover:text-white/90 transition-colors">
-                                                            {surah.name}
-                                                        </h3>
-                                                        <p className="text-xs text-white/60">{surah.englishName}</p>
-                                                    </div>
+                                        <div className="flex items-center justify-between relative z-10">
+                                            <div className="flex items-center gap-5">
+                                                {/* Number Badge */}
+                                                <div className="w-12 h-12 flex items-center justify-center relative">
+                                                    <div className="absolute inset-0 bg-emerald-50 rounded-xl rotate-45 group-hover:rotate-90 transition-transform duration-500" />
+                                                    <span className="font-tajawal font-bold text-lg text-emerald-deep relative z-10">
+                                                        {surah.number}
+                                                    </span>
                                                 </div>
-                                                <div className="text-right">
-                                                    <p className="text-xs text-white/60">
-                                                        {language === "ar" ? `${surah.numberOfAyahs} آية` : `${surah.numberOfAyahs} Ayahs`}
-                                                    </p>
-                                                    <p className="text-[10px] text-white/40 uppercase tracking-wider mt-1">
-                                                        {surah.revelationType}
-                                                    </p>
+
+                                                <div className="flex flex-col">
+                                                    <h3 className="font-bold font-tajawal text-xl text-emerald-deep group-hover:text-emerald-deep/80 transition-colors">
+                                                        {surah.name}
+                                                    </h3>
+                                                    <span className="text-xs text-emerald-deep/40 font-medium tracking-wider uppercase">
+                                                        {surah.englishName}
+                                                    </span>
                                                 </div>
                                             </div>
+
+                                            <div className="flex flex-col items-end gap-1">
+                                                <div className="flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-full">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-gold-matte" />
+                                                    <span className="text-[10px] font-bold text-emerald-deep/70">
+                                                        {language === "ar" ? `${surah.numberOfAyahs} آية` : `${surah.numberOfAyahs} Ayahs`}
+                                                    </span>
+                                                </div>
+                                                <span className="text-[10px] text-emerald-deep/30 pr-1">
+                                                    {surah.revelationType}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </Link>
-                                ))}
-                            </div>
+                                    </div>
+                                </Link>
+                            ))}
                         </div>
                     )}
 
                     {/* Ayah Results */}
                     {ayahResults.length > 0 && (
                         <div>
-                            <h3 className="text-xl font-bold mb-4 font-amiri text-[#FFD700] text-center">
+                            <h3 className="text-lg font-bold mb-4 font-tajawal text-emerald-deep px-2">
                                 {language === "ar" ? "نتائج البحث في الآيات" : "Ayah Search Results"}
                             </h3>
                             <div className="space-y-4">
                                 {ayahResults.map((match, index) => (
                                     <Link to={`/quran/${match.surah.number}?ayah=${match.numberInSurah}`} key={index}>
-                                        <div className="p-6 rounded-xl border border-[#FFD700]/30 bg-black/20 hover:bg-black/30 transition-all cursor-pointer mb-4 backdrop-blur-sm">
-                                            <div className="flex justify-between items-start mb-4 border-b border-white/10 pb-2">
-                                                <div className="text-sm font-bold text-[#FFD700]">
-                                                    {match.surah.name} <span className="text-white/60 mx-2">|</span> {language === "ar" ? "آية" : "Ayah"} {match.numberInSurah}
+                                        <div className="p-6 rounded-2xl bg-white border border-emerald-deep/5 hover:border-gold-matte/30 hover:shadow-lg transition-all group">
+                                            <div className="flex justify-between items-center mb-4 border-b border-emerald-deep/5 pb-3">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="bg-emerald-deep text-white text-xs px-2 py-0.5 rounded-md font-bold">
+                                                        {match.surah.name}
+                                                    </span>
+                                                    <span className="text-emerald-deep/40 text-xs">
+                                                        {language === "ar" ? "آية" : "Ayah"} {match.numberInSurah}
+                                                    </span>
                                                 </div>
+                                                <ArrowRight className="w-4 h-4 text-gold-matte -rotate-45 group-hover:rotate-0 transition-transform" />
                                             </div>
-                                            <p className="font-amiri text-2xl text-center leading-loose text-white drop-shadow-sm">
+                                            <p className="font-quran text-2xl text-center leading-[2.5] text-emerald-deep">
                                                 {match.text}
                                             </p>
                                         </div>
@@ -240,11 +248,13 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
                     )}
 
                     {filteredSurahs.length === 0 && ayahResults.length === 0 && searchQuery && !isSearching && (
-                        <div className="text-center text-white/50 py-12">
-                            <div className="w-16 h-16 border-2 border-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Search className="w-8 h-8" />
+                        <div className="text-center py-12">
+                            <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-soft">
+                                <Search className="w-8 h-8 text-emerald-deep/30" />
                             </div>
-                            {language === "ar" ? "لا توجد نتائج" : "No results found"}
+                            <p className="text-emerald-deep/50 font-tajawal">
+                                {language === "ar" ? "لا توجد نتائج" : "No results found"}
+                            </p>
                         </div>
                     )}
                 </div>

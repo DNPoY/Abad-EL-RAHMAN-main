@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle2, RotateCcw } from "lucide-react";
 import { useAzkarProgress } from "@/hooks/useAzkarProgress";
 import { toast } from "sonner";
+import { useFontSize } from "@/contexts/FontSizeContext";
 
 const AzkarCategory = ({
   data,
@@ -17,22 +18,32 @@ const AzkarCategory = ({
   type: "morning" | "evening" | "afterPrayer" | "sleep" | "nightAnxiety" | "badDreams"
 }) => {
   const { t, language } = useLanguage();
+  const { fontSize } = useFontSize();
   const { progress, incrementCount, resetProgress, resetItem } = useAzkarProgress(type);
 
   const allComplete = data.every(item => (progress[item.id] || 0) >= item.count);
 
+  const getFontSizeClass = () => {
+    switch (fontSize) {
+      case 'small': return 'text-xl leading-loose';
+      case 'medium': return 'text-2xl leading-loose';
+      case 'large': return 'text-3xl leading-[2.5]';
+      default: return 'text-2xl leading-loose';
+    }
+  };
+
   return (
     <div className="space-y-4">
       {allComplete && (
-        <div className="bg-primary/10 p-4 rounded-lg text-center mb-6 animate-fade-in border border-primary/20">
-          <p className="text-white font-amiri text-lg font-bold">
+        <div className="bg-emerald-deep/5 p-4 rounded-xl text-center mb-6 animate-fade-in border border-emerald-deep/10">
+          <p className="text-emerald-deep font-amiri text-lg font-bold">
             {language === "ar" ? "✨ أحسنت! أتممت الأذكار" : "✨ Mashallah! All completed"}
           </p>
           <Button
             variant="ghost"
             size="sm"
             onClick={resetProgress}
-            className="mt-2 text-[#FFD700] hover:text-[#FFD700]/80 hover:bg-white/10"
+            className="mt-2 text-gold-matte hover:text-gold-matte/80 hover:bg-emerald-deep/5"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
             {language === "ar" ? "إعادة" : "Reset"}
@@ -47,13 +58,13 @@ const AzkarCategory = ({
         return (
           <Card
             key={dhikr.id}
-            className={`p-6 transition-all duration-300 ${isComplete ? "opacity-75 bg-muted/50" : "hover:shadow-lg"
+            className={`p-6 transition-all duration-300 border-emerald-deep/5 ${isComplete ? "opacity-60 bg-emerald-50/50" : "bg-white hover:shadow-lg hover:-translate-y-1"
               }`}
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Badge
-                  className={`gap-1 ${isComplete ? "bg-[#094231] hover:bg-[#073628] text-white" : "bg-gray-100 text-[#094231] border border-[#094231]/20"}`}
+                  className={`gap-1 ${isComplete ? "bg-emerald-deep/10 text-emerald-deep hover:bg-emerald-deep/20" : "bg-emerald-deep text-white hover:bg-emerald-deep/90"}`}
                 >
                   {isComplete && <CheckCircle2 className="w-3 h-3" />}
                   {currentCount} / {dhikr.count}
@@ -62,7 +73,7 @@ const AzkarCategory = ({
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-6 w-6 text-muted-foreground hover:text-[#094231]"
+                    className="h-6 w-6 text-emerald-deep/40 hover:text-red-500"
                     onClick={() => resetItem(dhikr.id)}
                   >
                     <RotateCcw className="w-3 h-3" />
@@ -71,16 +82,16 @@ const AzkarCategory = ({
               </div>
             </div>
 
-            <p className="text-2xl font-amiri leading-loose mb-4 text-right text-white break-words" lang="ar">
+            <p className={`${getFontSizeClass()} font-amiri mb-4 text-right text-emerald-deep break-words`} lang="ar">
               {dhikr.arabic}
             </p>
 
             {language === "en" && (
               <>
-                <p className="text-sm text-muted-foreground italic mb-2">
+                <p className="text-sm text-emerald-deep/60 italic mb-2">
                   {dhikr.transliteration}
                 </p>
-                <p className="text-sm text-foreground">
+                <p className="text-sm text-emerald-deep/80">
                   {dhikr.translation}
                 </p>
               </>
@@ -89,9 +100,9 @@ const AzkarCategory = ({
             <Button
               onClick={() => incrementCount(dhikr.id, dhikr.count)}
               disabled={isComplete}
-              className={`w-full mt-4 active:scale-95 transition-transform border-2 border-white ${isComplete
-                ? "bg-gray-100 text-muted-foreground hover:bg-gray-200"
-                : "bg-[#094231] text-white hover:bg-[#073628] shadow-md"
+              className={`w-full mt-4 active:scale-95 transition-transform border border-emerald-deep/10 ${isComplete
+                ? "bg-transparent text-emerald-deep/40 shadow-none"
+                : "bg-emerald-deep text-white hover:bg-emerald-light shadow-md"
                 }`}
             >
               {isComplete
@@ -136,7 +147,7 @@ export const AzkarList = () => {
           variant="outline"
           size="sm"
           onClick={handleResetAll}
-          className="text-blue-400 border-blue-400/50 hover:text-blue-300 hover:bg-blue-400/10 hover:border-blue-300"
+          className="text-emerald-deep/60 border-emerald-deep/20 hover:text-emerald-deep hover:bg-emerald-deep/5 hover:border-emerald-deep/30"
         >
           <RotateCcw className="w-4 h-4 mr-2" />
           {language === "ar" ? "بدء من جديد" : "Start Over"}

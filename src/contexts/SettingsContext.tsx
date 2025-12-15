@@ -7,6 +7,7 @@ export interface SettingsState {
     manualLatitude: number;
     manualLongitude: number;
     fontFamily: "amiri" | "cairo" | "tajawal";
+    quranFont: "uthmani" | "indopak" | "amiri_quran";
     preAzanReminder: boolean;
 }
 
@@ -16,6 +17,7 @@ interface SettingsContextType extends SettingsState {
     setLocationMode: (mode: "auto" | "manual") => void;
     setManualLocation: (lat: number, lng: number) => void;
     setFontFamily: (font: "amiri" | "cairo" | "tajawal") => void;
+    setQuranFont: (font: "uthmani" | "indopak" | "amiri_quran") => void;
     setPreAzanReminder: (enabled: boolean) => void;
 }
 
@@ -62,6 +64,11 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         return (saved as "amiri" | "cairo" | "tajawal") || "amiri";
     });
 
+    const [quranFont, setQuranFontState] = useState<"uthmani" | "indopak" | "amiri_quran">(() => {
+        const saved = localStorage.getItem("quranFont");
+        return (saved as "uthmani" | "indopak" | "amiri_quran") || "uthmani";
+    });
+
     const [preAzanReminder, setPreAzanReminderState] = useState<boolean>(() => {
         const saved = localStorage.getItem("preAzanReminder");
         return saved ? saved === "true" : false;
@@ -101,6 +108,11 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         localStorage.setItem("fontFamily", font);
     };
 
+    const setQuranFont = (font: "uthmani" | "indopak" | "amiri_quran") => {
+        setQuranFontState(font);
+        localStorage.setItem("quranFont", font);
+    };
+
     const setPreAzanReminder = (enabled: boolean) => {
         setPreAzanReminderState(enabled);
         localStorage.setItem("preAzanReminder", enabled.toString());
@@ -114,13 +126,15 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                 locationMode,
                 manualLatitude,
                 manualLongitude,
+                fontFamily,
+                quranFont,
+                preAzanReminder,
                 setCalculationMethod,
                 setMadhab,
                 setLocationMode,
                 setManualLocation,
-                fontFamily,
                 setFontFamily,
-                preAzanReminder,
+                setQuranFont,
                 setPreAzanReminder,
             }}
         >

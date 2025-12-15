@@ -186,23 +186,57 @@ export const PrayerTimesCard = () => {
         { name: t.isha, time: prayerTimes.isha },
       ];
 
+      let foundNext = false;
+
       for (const prayer of prayers) {
-        const [hours, minutes] = prayer.time.split(":").map(Number);
+        // Robust time parsing: handles "HH:mm" (24h)
+        const [hoursStr, minutesStr] = prayer.time.split(":");
+        if (!hoursStr || !minutesStr) continue;
+
+        const hours = parseInt(hoursStr, 10);
+        const minutes = parseInt(minutesStr, 10);
+
         const prayerTime = new Date();
         prayerTime.setHours(hours, minutes, 0, 0);
-        if (prayerTime > now) {
-          const diff = prayerTime.getTime() - now.getTime();
-          const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
-          const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-          setNextPrayer({ name: prayer.name, timeLeft: `${hoursLeft}:${minutesLeft.toString().padStart(2, "0")}` });
-          return;
-        }
+
+        // If today's prayer time is in the past, continue
+        if (prayerTime <= now) continue;
+
+        const diff = prayerTime.getTime() - now.getTime();
+        const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+        setNextPrayer({
+          name: prayer.name,
+          timeLeft: `${hoursLeft}:${minutesLeft.toString().padStart(2, "0")}:${secondsLeft.toString().padStart(2, "0")}`
+        });
+        foundNext = true;
+        break;
       }
-      // Fallback for next day Fajr
-      setNextPrayer({ name: t.fajr, timeLeft: "--:--" });
+
+      if (!foundNext) {
+        // If no prayers left today, show countdown to tomorrow's Fajr
+        // Assuming Fajr time is same for tomorrow for simplicity (or should trigger refreshed calculation)
+        const [fajrHours, fajrMinutes] = prayerTimes.fajr.split(":").map(Number);
+        const tomorrowFajr = new Date();
+        tomorrowFajr.setDate(tomorrowFajr.getDate() + 1);
+        tomorrowFajr.setHours(fajrHours, fajrMinutes, 0, 0);
+
+        const diff = tomorrowFajr.getTime() - now.getTime();
+        const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+        setNextPrayer({
+          name: t.fajr,
+          timeLeft: `${hoursLeft}:${minutesLeft.toString().padStart(2, "0")}:${secondsLeft.toString().padStart(2, "0")}`
+        });
+      }
     };
+
     calculateNextPrayer();
-    const interval = setInterval(calculateNextPrayer, 60000);
+    const interval = setInterval(calculateNextPrayer, 1000); // Verify every second for smoother countdown
     return () => clearInterval(interval);
   }, [prayerTimes, t]);
 
@@ -255,79 +289,99 @@ export const PrayerTimesCard = () => {
   const bigClock = formatBigClock(currentTime);
 
   return (
-    <div className="space-y-6">
-      {/* Big Clock Section */}
-      <div className="text-center py-4 relative">
-        <div className="flex items-baseline justify-center gap-2 text-white" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.3)' }}>
-          <span className="text-2xl font-bold">{bigClock.period}</span>
-          <span className="text-8xl font-bold tracking-tighter font-sans">{bigClock.time}</span>
-        </div>
-        <h2 className="text-3xl font-bold text-white mt-[-10px] font-amiri" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>
-          {nextPrayer ? nextPrayer.name : t.dhuhr}
-        </h2>
+    <div className="space-y-6 animate-fade-in-up">
+      {/* Main Widget Card */}
+      <div className="relative overflow-hidden rounded-[2rem] bg-emerald-deep text-white shadow-[0_20px_40px_-10px_rgba(9,66,49,0.5)]">
+        {/* Internal texture/gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent pointer-events-none" />
 
-        {/* Location Indicator & Edit */}
-        <div className="flex items-center justify-center gap-2 mt-2 text-white/80 text-sm">
-          <MapPin className="w-4 h-4" />
-          <span>{prayerTimes.city}</span>
-          <SettingsDialog trigger={
-            <button className="text-white underline text-xs hover:text-white/80 transition-colors">
-              {t.settings}
-            </button>
-          } />
+        <div className="relative z-10 p-6 flex flex-col items-center justify-center text-center">
+          {/* Location Pill */}
+          <div className="bg-emerald-900/40 backdrop-blur-md px-4 py-1.5 rounded-full flex items-center gap-2 mb-6 border border-white/5 cursor-pointer hover:bg-emerald-900/60 transition-colors">
+            <MapPin className="w-3.5 h-3.5 text-gold-matte" />
+            <span className="text-xs font-tajawal tracking-wide text-emerald-100/90">{prayerTimes.city}</span>
+          </div>
+
+          {/* Main Time Display */}
+          <div className="mb-2">
+            <h2 className="text-sm font-tajawal text-emerald-200/80 mb-1 font-medium tracking-wider uppercase">
+              {nextPrayer ? (language === "ar" ? "الصلاة القادمة" : "Next Prayer") : t.dhuhr}
+            </h2>
+            <div className="flex items-baseline justify-center gap-2" dir="ltr">
+              <span className="text-6xl font-bold font-tajawal tracking-tighter text-white drop-shadow-md">
+                {bigClock.time}
+              </span>
+              <span className="text-xl font-medium text-gold-matte">
+                {bigClock.period}
+              </span>
+            </div>
+          </div>
+
+          {/* Next Prayer Info */}
+          <div className="mt-4 flex flex-col items-center">
+            <p className="text-2xl font-tajawal font-bold text-gold-matte mb-1">
+              {nextPrayer ? nextPrayer.name : t.dhuhr}
+            </p>
+            <p className="text-sm text-emerald-200/60 bg-emerald-950/30 px-3 py-1 rounded-lg">
+              {language === "ar" ? "متبقي" : "Remaining"}: <span className="font-mono text-emerald-100">{nextPrayer ? nextPrayer.timeLeft : "--:--"}</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Prayer List - White Bars */}
-      <div className="space-y-3">
-        {prayersList.map((prayer) => (
-          <div
-            key={prayer.key}
-            className="relative min-h-[4rem] w-full isolate transform-gpu"
-            style={{
-              willChange: 'transform',
-              transform: 'translateZ(0)'
-            }}
-          >
-            {/* White Bar Background */}
+      {/* Prayers List - Modern Horizontal Scroll or Stack */}
+      <div className="grid grid-cols-1 gap-3 px-1">
+        {prayersList.map((prayer) => {
+          const isNext = nextPrayer && nextPrayer.name === prayer.name;
+
+          return (
             <div
-              className="absolute inset-0 rounded-full border border-white/80"
-              style={{
-                background: '#F5F5F5', // Solid fallback
-                backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, #E0E0E0 100%)',
-                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden'
-              }}
+              key={prayer.key}
+              className={cn(
+                "group relative flex items-center justify-between p-4 rounded-2xl transition-all duration-300",
+                isNext
+                  ? "bg-emerald-deep text-white shadow-lg shadow-emerald-deep/20 scale-[1.02]"
+                  : "bg-white text-emerald-deep hover:bg-emerald-50 shadow-sm hover:shadow-md border border-emerald-deep/5"
+              )}
             >
-            </div>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => toggleNotification(prayer.key)}
+                  className={cn(
+                    "w-10 h-10 rounded-full flex items-center justify-center transition-all",
+                    isNext
+                      ? "bg-white/10 text-gold-matte hover:bg-white/20"
+                      : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
+                  )}
+                >
+                  {notifications[prayer.key] ? <Bell className="w-5 h-5 fill-current" /> : <BellOff className="w-5 h-5 opacity-50" />}
+                </button>
 
-            {/* Content Container */}
-            <div className="relative h-full flex items-center justify-between px-4 py-2 z-10">
-              {/* Left: Notification Toggle */}
-              <button
-                onClick={() => toggleNotification(prayer.key)}
-                className="flex-shrink-0 w-10 h-10 rounded-full bg-[#094231] flex items-center justify-center text-white border border-white/30 hover:bg-[#073628] transition-colors"
-              >
-                {notifications[prayer.key] ? <Bell className="w-5 h-5 fill-current" /> : <BellOff className="w-5 h-5" />}
-              </button>
-
-              {/* Center: Time & Period */}
-              <div
-                className="flex flex-nowrap items-center justify-end gap-1 text-[#094231] font-bold text-xl ml-auto mr-4 text-right"
-                style={{ textShadow: 'none' }} // Ensure no shadow on text to avoid artifacts
-              >
-                <span className="text-sm sm:text-base pt-1">{getPeriod(prayer.time)}</span>
-                <span className="text-2xl sm:text-3xl font-sans leading-none">{getTimeOnly(prayer.time)}</span>
+                <span className={cn(
+                  "text-lg font-bold font-tajawal",
+                  isNext ? "text-white" : "text-emerald-deep"
+                )}>
+                  {prayer.name}
+                </span>
               </div>
 
-              {/* Right: Prayer Name */}
-              <div className="text-[#094231] font-bold text-xl sm:text-2xl font-amiri min-w-[30%] text-right truncate">
-                {prayer.name}
+              <div className="flex flex-col items-end">
+                <span className={cn(
+                  "text-2xl font-bold font-tajawal tracking-tight",
+                  isNext ? "text-white" : "text-emerald-deep"
+                )}>
+                  {getTimeOnly(prayer.time)}
+                </span>
+                <span className={cn(
+                  "text-xs font-medium",
+                  isNext ? "text-emerald-200" : "text-emerald-deep/60"
+                )}>
+                  {getPeriod(prayer.time)}
+                </span>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

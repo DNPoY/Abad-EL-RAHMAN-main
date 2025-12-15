@@ -29,7 +29,9 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
         manualLongitude,
         setManualLocation,
         fontFamily,
-        setFontFamily
+        setFontFamily,
+        quranFont,
+        setQuranFont
     } = useSettings();
 
     const [activeTab, setActiveTab] = useState("general");
@@ -39,14 +41,14 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
             {/* Header - Only show if not embedded */}
             {!isEmbedded && (
                 <div className="flex items-center gap-3 mb-6 px-2">
-                    <div className="p-3 bg-primary/10 rounded-full">
-                        <Settings className="w-6 h-6 text-primary" />
+                    <div className="p-3 bg-emerald-deep/5 rounded-full">
+                        <Settings className="w-6 h-6 text-emerald-deep" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold font-amiri text-white">
+                        <h2 className="text-2xl font-bold font-amiri text-emerald-deep">
                             {language === "ar" ? "الإعدادات" : "Settings"}
                         </h2>
-                        <p className="text-sm text-white/60">
+                        <p className="text-sm text-emerald-deep/60">
                             {language === "ar" ? "تخصيص التطبيق حسب رغبتك" : "Customize your app experience"}
                         </p>
                     </div>
@@ -54,38 +56,38 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
             )}
 
             <Tabs defaultValue="general" value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="grid w-full grid-cols-3 bg-white/5 p-1 mb-6">
-                    <TabsTrigger value="general" className="font-amiri data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <TabsList className="grid w-full grid-cols-3 bg-emerald-deep/5 p-1 mb-6 rounded-xl">
+                    <TabsTrigger value="general" className="font-amiri data-[state=active]:bg-white data-[state=active]:text-emerald-deep data-[state=active]:shadow-sm text-emerald-deep/60">
                         {language === "ar" ? "عام" : "General"}
                     </TabsTrigger>
-                    <TabsTrigger value="notifications" className="font-amiri data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                    <TabsTrigger value="notifications" className="font-amiri data-[state=active]:bg-white data-[state=active]:text-emerald-deep data-[state=active]:shadow-sm text-emerald-deep/60">
                         {language === "ar" ? "تنبيهات" : "Notif."}
                     </TabsTrigger>
-                    <TabsTrigger value="alarms" className="font-amiri data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                    <TabsTrigger value="alarms" className="font-amiri data-[state=active]:bg-white data-[state=active]:text-emerald-deep data-[state=active]:shadow-sm text-emerald-deep/60">
                         {language === "ar" ? "منبه" : "Alarm"}
                     </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="general" className="space-y-6">
                     {/* Location Settings */}
-                    <Card className="p-6 border-white/10 bg-white/5 backdrop-blur-sm">
+                    <Card className="p-6 border-emerald-deep/5 bg-white/60 backdrop-blur-sm shadow-sm">
                         <div className="flex items-center gap-3 mb-4">
-                            <MapPin className="w-5 h-5 text-primary" />
-                            <h3 className="text-lg font-bold font-amiri text-white">
+                            <MapPin className="w-5 h-5 text-emerald-deep" />
+                            <h3 className="text-lg font-bold font-amiri text-emerald-deep">
                                 {language === "ar" ? "إعدادات الموقع" : "Location Settings"}
                             </h3>
                         </div>
 
                         <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label className="text-white/80 font-amiri">
+                                <Label className="text-emerald-deep/80 font-amiri">
                                     {language === "ar" ? "طريقة تحديد الموقع" : "Location Mode"}
                                 </Label>
                                 <Select
                                     value={locationMode}
                                     onValueChange={(val) => setLocationMode(val as "auto" | "manual")}
                                 >
-                                    <SelectTrigger className="bg-black/20 border-white/10 text-white">
+                                    <SelectTrigger className="bg-white border-emerald-deep/10 text-emerald-deep">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -102,7 +104,7 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                             {locationMode === "manual" && (
                                 <div className="grid grid-cols-2 gap-4 animate-in slide-in-from-top-2">
                                     <div className="space-y-2">
-                                        <Label className="text-white/80 text-xs">
+                                        <Label className="text-emerald-deep/80 text-xs">
                                             {language === "ar" ? "خط العرض" : "Latitude"}
                                         </Label>
                                         <Input
@@ -110,11 +112,11 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                                             value={manualLatitude}
                                             onChange={(e) => setManualLocation(parseFloat(e.target.value), manualLongitude)}
                                             step="0.0001"
-                                            className="bg-black/20 border-white/10 text-white"
+                                            className="bg-white border-emerald-deep/10 text-emerald-deep"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label className="text-white/80 text-xs">
+                                        <Label className="text-emerald-deep/80 text-xs">
                                             {language === "ar" ? "خط الطول" : "Longitude"}
                                         </Label>
                                         <Input
@@ -122,7 +124,7 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                                             value={manualLongitude}
                                             onChange={(e) => setManualLocation(manualLatitude, parseFloat(e.target.value))}
                                             step="0.0001"
-                                            className="bg-black/20 border-white/10 text-white"
+                                            className="bg-white border-emerald-deep/10 text-emerald-deep"
                                         />
                                     </div>
                                 </div>
@@ -131,24 +133,24 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                     </Card>
 
                     {/* Prayer Calculation */}
-                    <Card className="p-6 border-white/10 bg-white/5 backdrop-blur-sm">
+                    <Card className="p-6 border-emerald-deep/5 bg-white/60 backdrop-blur-sm shadow-sm">
                         <div className="flex items-center gap-3 mb-4">
-                            <Globe className="w-5 h-5 text-primary" />
-                            <h3 className="text-lg font-bold font-amiri text-white">
+                            <Globe className="w-5 h-5 text-emerald-deep" />
+                            <h3 className="text-lg font-bold font-amiri text-emerald-deep">
                                 {language === "ar" ? "حساب الصلوات" : "Prayer Calculation"}
                             </h3>
                         </div>
 
                         <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label className="text-white/80 font-amiri">
+                                <Label className="text-emerald-deep/80 font-amiri">
                                     {language === "ar" ? "طريقة الحساب" : "Calculation Method"}
                                 </Label>
                                 <Select
                                     value={calculationMethod.toString()}
                                     onValueChange={(val) => setCalculationMethod(parseInt(val))}
                                 >
-                                    <SelectTrigger className="bg-black/20 border-white/10 text-white">
+                                    <SelectTrigger className="bg-white border-emerald-deep/10 text-emerald-deep">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -162,14 +164,14 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                             </div>
 
                             <div className="space-y-2">
-                                <Label className="text-white/80 font-amiri">
+                                <Label className="text-emerald-deep/80 font-amiri">
                                     {language === "ar" ? "المذهب (للعصر)" : "Madhab (for Asr)"}
                                 </Label>
                                 <Select
                                     value={madhab}
                                     onValueChange={(val) => setMadhab(val as "shafi" | "hanafi")}
                                 >
-                                    <SelectTrigger className="bg-black/20 border-white/10 text-white">
+                                    <SelectTrigger className="bg-white border-emerald-deep/10 text-emerald-deep">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -186,24 +188,24 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                     </Card>
 
                     {/* Appearance */}
-                    <Card className="p-6 border-white/10 bg-white/5 backdrop-blur-sm">
+                    <Card className="p-6 border-emerald-deep/5 bg-white/60 backdrop-blur-sm shadow-sm">
                         <div className="flex items-center gap-3 mb-4">
-                            <Type className="w-5 h-5 text-primary" />
-                            <h3 className="text-lg font-bold font-amiri text-white">
+                            <Type className="w-5 h-5 text-emerald-deep" />
+                            <h3 className="text-lg font-bold font-amiri text-emerald-deep">
                                 {language === "ar" ? "المظهر" : "Appearance"}
                             </h3>
                         </div>
 
                         <div className="space-y-6">
                             <div className="space-y-2">
-                                <Label className="text-white/80 font-amiri">
+                                <Label className="text-emerald-deep/80 font-amiri">
                                     {language === "ar" ? "نوع الخط" : "Font Style"}
                                 </Label>
                                 <Select
                                     value={fontFamily}
                                     onValueChange={(val) => setFontFamily(val as "amiri" | "cairo" | "tajawal")}
                                 >
-                                    <SelectTrigger className="bg-black/20 border-white/10 text-white">
+                                    <SelectTrigger className="bg-white border-emerald-deep/10 text-emerald-deep">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>

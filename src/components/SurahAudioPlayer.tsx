@@ -9,15 +9,26 @@ interface SurahAudioPlayerProps {
     surahNumber: number;
     totalAyahs: number;
     onAyahChange: (ayahNumber: number | null) => void;
+    jumpToAyah?: number | null;
 }
 
-export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange }: SurahAudioPlayerProps) => {
+export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpToAyah }: SurahAudioPlayerProps) => {
     const { language } = useLanguage();
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentAyah, setCurrentAyah] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedReciterId, setSelectedReciterId] = useState<string>(RECITERS[0].id);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    // Handle external jump requests
+    useEffect(() => {
+        if (jumpToAyah && jumpToAyah !== currentAyah) {
+            setCurrentAyah(jumpToAyah);
+            setIsPlaying(true);
+        } else if (jumpToAyah && jumpToAyah === currentAyah && !isPlaying) {
+            setIsPlaying(true);
+        }
+    }, [jumpToAyah]);
 
     // Construct URL for specific Ayah
     const getAyahUrl = (surah: number, ayah: number) => {
@@ -43,6 +54,9 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange }: Sura
             if (isPlaying) {
                 audio.play().catch(e => console.error("Play error", e));
             }
+        } else if (isPlaying && audio.paused) {
+            // ensure it plays if same source but was paused
+            audio.play().catch(e => console.error("Play error", e));
         }
 
         const handleEnded = () => {
