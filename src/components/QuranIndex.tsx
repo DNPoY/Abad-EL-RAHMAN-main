@@ -7,6 +7,7 @@ import { surahs } from "@/lib/quran-data";
 import { Search, BookOpen, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import patternBg from "@/assets/pattern.png";
+import { removeTashkil } from "@/lib/utils";
 
 interface QuranIndexProps {
     isEmbedded?: boolean;
@@ -72,9 +73,10 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
             const matches: SearchResult[] = [];
 
             if (surahsList) {
+                const normalizedQuery = removeTashkil(searchQuery);
                 surahsList.forEach((surah: Surah) => {
                     surah.ayahs.forEach((ayah: Ayah) => {
-                        if (ayah.text.includes(searchQuery)) {
+                        if (removeTashkil(ayah.text).includes(normalizedQuery)) {
                             matches.push({
                                 surah: {
                                     number: surah.number,
@@ -101,11 +103,13 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
         }
     };
 
+    const normalizedSearchQuery = removeTashkil(searchQuery.toLowerCase());
+
     const filteredSurahs = surahs.filter((surah) =>
-        surah.englishName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        surah.name.includes(searchQuery) ||
-        surah.englishNameTranslation.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        surah.number.toString().includes(searchQuery)
+        surah.englishName.toLowerCase().includes(normalizedSearchQuery) ||
+        removeTashkil(surah.name).includes(normalizedSearchQuery) ||
+        surah.englishNameTranslation.toLowerCase().includes(normalizedSearchQuery) ||
+        surah.number.toString().includes(normalizedSearchQuery)
     );
 
     return (

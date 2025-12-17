@@ -73,6 +73,9 @@ export const translations = {
     count: "العدد",
     reset: "تصفير",
     target: "الهدف",
+    mosques: "المساجد",
+    leavingHome: "دعاء الخروج",
+    otherPrayers: "صلوات أخرى",
   },
   en: {
     appName: "Prayer Times",
@@ -148,6 +151,9 @@ export const translations = {
     count: "Count",
     reset: "Reset",
     target: "Target",
+    mosques: "Mosques",
+    leavingHome: "Leaving Home",
+    otherPrayers: "Other Prayers",
   },
 };
 

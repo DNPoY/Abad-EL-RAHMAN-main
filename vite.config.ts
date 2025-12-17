@@ -91,6 +91,7 @@ export default defineConfig(({ mode }) => ({
     setupFiles: './src/test/setup.ts',
   },
   build: {
+    chunkSizeWarningLimit: 1600,
     rollupOptions: {
       output: {
         manualChunks: {

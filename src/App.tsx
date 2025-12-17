@@ -41,7 +41,7 @@ const App = () => {
 
     // Re-sync alarms when app comes to foreground
     const setupResumeListener = async () => {
-      const resumeListener = await CapApp.addListener('appStateChange', async (state: any) => {
+      const resumeListener = await CapApp.addListener('appStateChange', async (state: { isActive: boolean }) => {
         if (state.isActive) {
           console.log("App resumed, resyncing alarms...");
           window.dispatchEvent(new Event('app-resumed'));

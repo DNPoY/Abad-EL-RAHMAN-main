@@ -65,6 +65,20 @@
     /* 24px - Modern rounded look */
   }
 
+  /* Global Font Size Scaling */
+  html.font-size-small {
+    font-size: 14px;
+  }
+
+  html.font-size-medium {
+    font-size: 16px;
+    /* Default */
+  }
+
+  html.font-size-large {
+    font-size: 19px;
+  }
+
   html {
     @apply scroll-smooth;
   }

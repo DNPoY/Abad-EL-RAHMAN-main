@@ -7,7 +7,7 @@ import { Search, Heart, Share2, Copy } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, removeTashkil } from "@/lib/utils";
 import { toast } from "sonner";
 import { TasbihCounter } from "@/components/TasbihCounter";
 import { useFontSize } from "@/contexts/FontSizeContext";
@@ -17,6 +17,7 @@ import {
     duaForDeceasedFemale,
     quranicDuas,
     propheticDuas,
+    leavingHomeDuas,
     DuaItem,
 } from "@/lib/dua-data";
 
@@ -41,17 +42,22 @@ export const DuaList = () => {
         ...propheticDuas,
         ...personalDuas,
         ...duaForDeceasedMale,
+        ...duaForDeceasedMale,
         ...duaForDeceasedFemale,
+        ...leavingHomeDuas,
     ];
 
     const filterDuas = (duas: DuaItem[]) => {
         if (!debouncedSearchQuery) return duas;
-        const query = debouncedSearchQuery.toLowerCase();
-        return duas.filter((dua) =>
-            dua.arabic.includes(query) ||
-            dua.translation?.toLowerCase().includes(query) ||
-            dua.transliteration?.toLowerCase().includes(query)
-        );
+        const query = removeTashkil(debouncedSearchQuery.toLowerCase());
+        return duas.filter((dua) => {
+            const normalizedArabic = removeTashkil(dua.arabic);
+            return (
+                normalizedArabic.includes(query) ||
+                dua.translation?.toLowerCase().includes(query) ||
+                dua.transliteration?.toLowerCase().includes(query)
+            );
+        });
     };
 
     const getFavoriteDuas = () => {
@@ -220,6 +226,9 @@ export const DuaList = () => {
                 <TabsTrigger value="personal" className="min-w-fit px-4 font-amiri text-sm py-2 whitespace-nowrap data-[state=active]:bg-background data-[state=active]:shadow-sm">
                     {t.personalDua}
                 </TabsTrigger>
+                <TabsTrigger value="leaving-home" className="min-w-fit px-4 font-amiri text-sm py-2 whitespace-nowrap data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                    {t.leavingHome}
+                </TabsTrigger>
                 <TabsTrigger value="deceased-male" className="min-w-fit px-4 font-amiri text-sm py-2 whitespace-nowrap data-[state=active]:bg-background data-[state=active]:shadow-sm">
                     {t.duaForDeceasedMale}
                 </TabsTrigger>
@@ -258,6 +267,10 @@ export const DuaList = () => {
                         {renderDuaList(personalDuas)}
                     </div>
                 )}
+            </TabsContent>
+
+            <TabsContent value="leaving-home" className="space-y-4">
+                {renderDuaList(leavingHomeDuas)}
             </TabsContent>
 
             <TabsContent value="deceased-male" className="space-y-4">

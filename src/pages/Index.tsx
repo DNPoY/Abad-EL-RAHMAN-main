@@ -12,12 +12,13 @@ import { AlarmSettings } from "@/components/AlarmSettings";
 import { SettingsPage } from "@/components/SettingsPage";
 import { AlarmChallenge } from "@/components/AlarmChallenge";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import { Clock, Compass, BookOpen, Settings, Calendar, Moon, Heart, ClipboardList, Terminal } from "lucide-react";
+import { Clock, Compass, BookOpen, Settings, Calendar, Moon, Heart, ClipboardList, Terminal, MapPin } from "lucide-react";
 import { HijriDateDisplay } from "@/components/HijriDateDisplay";
 import { HijriCalendar } from "@/components/HijriCalendar";
 import { QuranIndex } from "@/components/QuranIndex";
 import { SunnahPrayers } from "@/components/SunnahPrayers";
 import { MissedPrayersTracker } from "@/components/MissedPrayersTracker";
+import { MasjidFinder } from "@/components/MasjidFinder";
 import { DeveloperPanel } from "@/components/DeveloperPanel";
 import { cn } from "@/lib/utils";
 
@@ -65,6 +66,7 @@ const Index = () => {
     { id: "quran", label: language === "ar" ? "القرآن" : "Quran", icon: BookOpen },
     { id: "azkar", label: t.azkar, icon: Moon },
     { id: "dua", label: t.dua, icon: Heart },
+    { id: "mosques", label: t.mosques, icon: MapPin },
     { id: "qibla", label: t.qibla, icon: Compass },
     { id: "calendar", label: language === "ar" ? "التقويم" : "Calendar", icon: Calendar },
     { id: "sunnah", label: language === "ar" ? "النوافل" : "Nawafil", icon: Heart },
@@ -79,6 +81,8 @@ const Index = () => {
         return <PrayerTimesCard />;
       case "quran":
         return <QuranIndex isEmbedded={true} />;
+      case "mosques":
+        return <MasjidFinder />;
       case "qibla":
         return (
           <div className="flex justify-center h-full items-center">
@@ -116,7 +120,7 @@ const Index = () => {
 
       {/* Modern Header - Deep Emerald */}
       <header
-        className="relative z-10 pt-safe pb-8 px-6 bg-emerald-deep text-white rounded-b-[3rem] shadow-[0_15px_50px_-10px_rgba(9,66,49,0.4)] mb-8 overflow-hidden"
+        className="relative z-10 pt-safe pb-6 px-6 bg-emerald-deep text-white rounded-b-[3rem] shadow-[0_15px_50px_-10px_rgba(9,66,49,0.4)] mb-6 overflow-hidden"
       >
         {/* Abstract Pattern Overlay for Header */}
         <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay"
@@ -131,16 +135,15 @@ const Index = () => {
 
           {/* Dev Mode Trigger - "Hidden" Area (User Request) */}
           {/* Placing it subtly but accessible - maybe user meant it was literally invisible before */}
+          {/* Dev Mode Trigger - Expanded Area */}
           <div
             onClick={handleDevTrigger}
-            className="absolute top-0 left-0 p-4 z-20 opacity-0 hover:opacity-50 cursor-pointer"
+            className="absolute top-0 left-0 w-20 h-20 z-50 opacity-0 hover:opacity-20 bg-red-500/20 cursor-pointer"
             title="Dev Mode"
-          >
-            <div className="w-8 h-8" />
-          </div>
+          />
 
           {/* Centered Greeting & Logo */}
-          <div className="flex flex-col items-center text-center space-y-4 mt-8">
+          <div className="flex flex-col items-center text-center space-y-3 mt-6">
             <span className="text-emerald-100/90 font-tajawal text-lg font-medium tracking-wide animate-fade-in delay-100">
               {language === "ar" ? "السلام عليكم" : "Assalamu Alaikum"}
             </span>
@@ -155,20 +158,27 @@ const Index = () => {
               <img
                 src="/assets/logo_caligraphy.png"
                 alt="Ibad Al-Rahman"
-                className="h-32 md:h-40 w-auto object-contain drop-shadow-lg relative z-10"
+                className="h-28 md:h-36 w-auto object-contain drop-shadow-lg relative z-10"
               />
             </div>
           </div>
         </div>
 
         {/* Date Display - Floating Pill */}
-        <div className="mt-8 mx-auto max-w-sm bg-white/10 backdrop-blur-md rounded-full px-6 py-3 border border-white/20 flex items-center justify-between shadow-lg animate-fade-in-up delay-200">
+        <div className="mt-6 mx-auto max-w-sm bg-white/10 backdrop-blur-md rounded-full px-6 py-2 border border-white/20 flex items-center justify-between shadow-lg animate-fade-in-up delay-200">
           <HijriDateDisplay />
           <div className="w-px h-6 bg-white/20 mx-4" />
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-gold-matte" />
             <span className="text-xs text-white/80 font-tajawal">1445 AH</span>
           </div>
+        </div>
+
+        {/* Contact Note - User Request */}
+        <div className="mt-4 text-center animate-fade-in delay-300">
+          <p className="text-[10px] text-white/70 font-tajawal leading-relaxed max-w-xs mx-auto">
+            نسخة تجربية جارى العمل عليها لاى اقتراح او شكوى عبد الرحمن 01019152314
+          </p>
         </div>
       </header>
 

@@ -30,16 +30,10 @@ export const DeveloperPanel = () => {
             {/* ... (Header remains same) ... */}
             <div className="flex items-center gap-3 mb-6 text-[#FFD700]">
                 <Terminal className="w-8 h-8" />
-                <h2 className="text-2xl font-bold font-amiri">
+                <h2>
                     عبد الرحمن
                 </h2>
             </div>
-
-            <Card className="p-6 bg-primary/20 border-primary/30 backdrop-blur-sm mb-6">
-                <p className="text-2xl md:text-3xl font-bold text-center text-[#FFD700] font-amiri leading-loose">
-                    تذكر فضل و رحمة الله عليك يا احمد
-                </p>
-            </Card>
 
             <Card className="p-6 bg-black/20 border-white/10 backdrop-blur-sm">
                 <h3 className="text-lg font-bold mb-4 text-white">Debug Controls</h3>
@@ -162,25 +156,7 @@ export const DeveloperPanel = () => {
                 </div>
             </Card>
 
-            <Card className="p-6 bg-black/20 border-white/10 backdrop-blur-sm">
-                <h3 className="text-lg font-bold mb-4 text-white">أذكار و أدعية خاصة</h3>
-                <div className="space-y-4 text-right font-amiri text-white/90 leading-loose">
-                    {specialDuas.map((dua, index) => (
-                        <div key={index} className="p-4 bg-white/5 rounded-lg border border-white/10">
-                            {dua.title && (
-                                <p className="mb-2 font-bold text-[#FFD700]">{dua.title}</p>
-                            )}
-                            <p className="whitespace-pre-line">{dua.content}</p>
-                        </div>
-                    ))}
 
-                    <div className="border-t border-white/10 my-4 pt-4"></div>
-
-                    {simpleDuas.map((dua, index) => (
-                        <p key={index}>{dua}</p>
-                    ))}
-                </div>
-            </Card>
 
             <Card className="p-6 bg-black/20 border-white/10 backdrop-blur-sm">
                 <h3 className="text-lg font-bold mb-4 text-white">App Info</h3>

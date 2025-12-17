@@ -5,6 +5,7 @@ import {
     confirmedSunnahPrayers,
     nonConfirmedSunnahPrayers,
     SunnahPrayer,
+    otherPrayers,
 } from "@/lib/sunnah-prayers-data";
 
 export const SunnahPrayers = () => {
@@ -76,6 +77,33 @@ export const SunnahPrayers = () => {
                     </Card>
                 );
             })}
-        </div>
+
+            {/* Other Prayers Section */}
+            <Card className="p-6 animate-fade-in hover:shadow-lg transition-all bg-white border-emerald-deep/10">
+                <h3 className="text-3xl font-bold font-tajawal text-emerald-deep mb-4 text-center drop-shadow-sm">
+                    {t.otherPrayers}
+                </h3>
+                <div className="space-y-3">
+                    {otherPrayers.map((prayer) => (
+                        <div
+                            key={prayer.id}
+                            className="flex flex-col p-4 bg-emerald-50/50 rounded-xl border border-emerald-deep/5 space-y-2"
+                        >
+                            <div className="flex justify-between items-start">
+                                <span className="text-xl font-bold font-tajawal text-emerald-deep">
+                                    {prayer.name}
+                                </span>
+                                <Badge className="bg-emerald-deep/10 text-emerald-deep hover:bg-emerald-deep/20 border-none">
+                                    {prayer.rakaat}
+                                </Badge>
+                            </div>
+                            <p className="text-sm text-emerald-deep/70 font-tajawal leading-relaxed">
+                                {prayer.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </Card>
+        </div >
     );
 };

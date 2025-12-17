@@ -6,6 +6,13 @@ export interface SunnahPrayer {
     confirmed: boolean;
 }
 
+export interface OtherPrayer {
+    id: number;
+    name: string;
+    description: string;
+    rakaat: string;
+}
+
 export const confirmedSunnahPrayers: SunnahPrayer[] = [
     {
         id: 1,
@@ -66,4 +73,37 @@ export const nonConfirmedSunnahPrayers: SunnahPrayer[] = [
         rakaat: 2,
         confirmed: false,
     },
+];
+
+export const otherPrayers: OtherPrayer[] = [
+    {
+        id: 101,
+        name: "صلاة الضحى",
+        description: "تُصلى بعد ارتفاع الشمس",
+        rakaat: "2 - 8 ركعات"
+    },
+    {
+        id: 102,
+        name: "صلاة الوتر",
+        description: "تُختم بها الصلوات، وهي سنة مؤكدة",
+        rakaat: "ركعات فردية (1+)"
+    },
+    {
+        id: 103,
+        name: "صلاة التهجد",
+        description: "تُصلى مثنى مثنى في جوف الليل",
+        rakaat: "مثنى مثنى"
+    },
+    {
+        id: 104,
+        name: "صلاة الاستخارة",
+        description: "عند طلب التيسير في أمر ما",
+        rakaat: "ركعتان"
+    },
+    {
+        id: 105,
+        name: "صلوات أخرى",
+        description: "التراويح، العيدين، الكسوف، الاستسقاء",
+        rakaat: "متفاوتة"
+    }
 ];

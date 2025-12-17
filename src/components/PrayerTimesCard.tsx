@@ -9,6 +9,7 @@ import { Capacitor } from "@capacitor/core";
 import WidgetBridge from "@/lib/widget-bridge";
 import { cn } from "@/lib/utils";
 import { SettingsDialog } from "@/components/SettingsDialog";
+import { useWidgetUpdater } from "@/hooks/useWidgetUpdater";
 
 interface PrayerTime {
   name: string;
@@ -241,24 +242,7 @@ export const PrayerTimesCard = () => {
   }, [prayerTimes, t]);
 
   // Update Widget
-  useEffect(() => {
-    if (prayerTimes && Capacitor.isNativePlatform()) {
-      const formatForWidget = (time24: string) => {
-        const [hours, minutes] = time24.split(":").map(Number);
-        const period = hours >= 12 ? "م" : "ص";
-        const hours12 = hours % 12 || 12;
-        return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
-      };
-
-      WidgetBridge.updateWidgetData({
-        fajr: formatForWidget(prayerTimes.fajr),
-        dhuhr: formatForWidget(prayerTimes.dhuhr),
-        asr: formatForWidget(prayerTimes.asr),
-        maghrib: formatForWidget(prayerTimes.maghrib),
-        isha: formatForWidget(prayerTimes.isha),
-      }).catch(err => console.error("Failed to update widget:", err));
-    }
-  }, [prayerTimes]);
+  useWidgetUpdater(prayerTimes);
 
   const toggleNotification = (key: string) => {
     setNotifications(prev => ({ ...prev, [key]: !prev[key] }));

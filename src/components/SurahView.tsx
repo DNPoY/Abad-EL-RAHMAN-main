@@ -59,16 +59,16 @@ const TafsirModal = ({
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto bg-[#0c3f2d] border border-white/20 text-white">
+            <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto bg-cream border border-emerald-deep/10 text-emerald-deep shadow-2xl">
                 <DialogHeader>
-                    <DialogTitle className="text-center font-amiri text-2xl mb-4 text-[#FFD700] drop-shadow-md">
+                    <DialogTitle className="text-center font-amiri text-2xl mb-4 text-emerald-deep drop-shadow-sm">
                         {language === "ar" ? "المختصر في التفسير" : "Tafsir Al-Mukhtasar"}
                     </DialogTitle>
                 </DialogHeader>
 
                 <div className="space-y-6">
-                    <div className="bg-black/20 p-4 rounded-xl border border-white/10">
-                        <p className="text-center font-quran text-xl leading-[2.5] text-white drop-shadow-sm">
+                    <div className="bg-white/50 p-6 rounded-xl border border-emerald-deep/5 shadow-inner">
+                        <p className="text-center font-quran text-xl leading-[2.5] text-emerald-deep drop-shadow-sm">
                             {ayahText}
                         </p>
                     </div>
@@ -76,27 +76,27 @@ const TafsirModal = ({
                     <div className="space-y-4">
                         {isLoading ? (
                             <div className="flex justify-center py-8">
-                                <Loader2 className="w-8 h-8 animate-spin text-[#FFD700]" />
+                                <Loader2 className="w-8 h-8 animate-spin text-gold-matte" />
                             </div>
                         ) : error ? (
-                            <div className="text-center text-red-300 py-4">
+                            <div className="text-center text-red-500 py-4">
                                 <p>{language === "ar" ? "فشل تحميل التفسير" : "Failed to load Tafsir"}</p>
-                                <p className="text-xs text-white/50 mt-2 mb-4">{error}</p>
-                                <Button variant="outline" size="sm" onClick={() => refetch()} className="border-white/20 text-white hover:bg-white/10">
+                                <p className="text-xs text-emerald-deep/50 mt-2 mb-4">{error}</p>
+                                <Button variant="outline" size="sm" onClick={() => refetch()} className="border-emerald-deep/20 text-emerald-deep hover:bg-emerald-deep/5">
                                     {language === "ar" ? "إعادة المحاولة" : "Retry"}
                                 </Button>
                             </div>
                         ) : data ? (
                             <div className="space-y-4 animate-fade-in">
-                                <div className="prose prose-sm prose-invert max-w-none text-right" dir="rtl">
+                                <div className="prose prose-sm max-w-none text-right" dir="rtl">
                                     <div
-                                        className="text-lg leading-relaxed font-amiri text-white/90"
+                                        className="text-lg leading-relaxed font-tajawal text-emerald-deep/90"
                                         dangerouslySetInnerHTML={{ __html: data.text }}
                                     />
                                 </div>
                                 {data.footnotes && (
-                                    <div className="border-t border-white/10 pt-4 mt-4">
-                                        <p className="text-sm text-white/60 text-right" dir="rtl">
+                                    <div className="border-t border-emerald-deep/10 pt-4 mt-4">
+                                        <p className="text-sm text-emerald-deep/60 text-right font-tajawal" dir="rtl">
                                             {data.footnotes}
                                         </p>
                                     </div>
@@ -125,6 +125,7 @@ export const SurahView = () => {
     const [playingAyahNumber, setPlayingAyahNumber] = useState<number | null>(null);
     const [jumpToAyah, setJumpToAyah] = useState<number | null>(null);
     const ayahRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
+    const { quranFont } = useSettings();
 
     // Add extra padding at bottom for audio player
     const containerClass = "min-h-screen bg-[#0c3f2d] pb-40";
@@ -247,7 +248,7 @@ export const SurahView = () => {
         );
     }
 
-    const { quranFont } = useSettings();
+
 
     // Map font sizes based on selected font for optical consistency
     const getFontSize = (size: FontSize, font: string) => {

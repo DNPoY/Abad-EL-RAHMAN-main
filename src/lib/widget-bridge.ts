@@ -7,6 +7,10 @@ export interface WidgetBridgePlugin {
         asr: string;
         maghrib: string;
         isha: string;
+        nextPrayerName: string;
+        nextPrayerTime: string;
+        hijriDate: string;
+        locationName: string;
     }): Promise<void>;
     openBatterySettings(): Promise<void>;
     scheduleAdhan(options: {

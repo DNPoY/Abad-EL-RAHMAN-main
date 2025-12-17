@@ -87,11 +87,16 @@ public class AdhanService extends Service {
              mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
         }
 
-        // Max Volume enforcement attempt
+        // Max Volume enforcement
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
-            int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
-            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
+            try {
+                int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
+                Log.d(TAG, "Adhan volume set to max: " + maxVolume);
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to set Adhan volume to max", e);
+            }
         }
 
         mediaPlayer.setOnCompletionListener(mp -> stopAdhan());

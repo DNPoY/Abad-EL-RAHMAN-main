@@ -22,20 +22,23 @@ public class WidgetPlugin extends Plugin {
         String asr = call.getString("asr");
         String maghrib = call.getString("maghrib");
         String isha = call.getString("isha");
-
-        if (fajr == null || dhuhr == null || asr == null || maghrib == null || isha == null) {
-            call.reject("Must provide all prayer times");
-            return;
-        }
+        String nextPrayerName = call.getString("nextPrayerName");
+        String hijriDate = call.getString("hijriDate");
+        String locationName = call.getString("locationName");
 
         Context context = getContext();
         SharedPreferences prefs = context.getSharedPreferences("PrayerWidgetPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("fajr", fajr);
-        editor.putString("dhuhr", dhuhr);
-        editor.putString("asr", asr);
-        editor.putString("maghrib", maghrib);
-        editor.putString("isha", isha);
+        
+        if (fajr != null) editor.putString("fajr", fajr);
+        if (dhuhr != null) editor.putString("dhuhr", dhuhr);
+        if (asr != null) editor.putString("asr", asr);
+        if (maghrib != null) editor.putString("maghrib", maghrib);
+        if (isha != null) editor.putString("isha", isha);
+        if (nextPrayerName != null) editor.putString("nextPrayerName", nextPrayerName);
+        if (hijriDate != null) editor.putString("hijriDate", hijriDate);
+        if (locationName != null) editor.putString("locationName", locationName);
+        
         editor.apply();
 
         // Trigger widget update
