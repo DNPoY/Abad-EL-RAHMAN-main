@@ -24,6 +24,9 @@ const defaultCenter = {
 const options = {
     disableDefaultUI: true,
     zoomControl: true,
+    zoomControlOptions: {
+        position: 7, // google.maps.ControlPosition.RIGHT_CENTER = 7 (using literal because enum might not be available in partial context without full types)
+    }
 };
 
 export const MasjidFinder = () => {
@@ -89,7 +92,6 @@ export const MasjidFinder = () => {
         }
     }, [language]);
 
-    // Initial location fetch when map is ready
     // Initial location fetch
     useEffect(() => {
         handleLocateMe();
@@ -208,7 +210,7 @@ export const MasjidFinder = () => {
             <Button
                 onClick={handleLocateMe}
                 disabled={isLoading}
-                className="absolute bottom-6 right-4 z-10 rounded-full w-12 h-12 p-0 shadow-lg bg-white hover:bg-gray-100 text-gray-700 border border-gray-200"
+                className="absolute bottom-24 right-4 z-10 rounded-full w-12 h-12 p-0 shadow-lg bg-white hover:bg-gray-100 text-gray-700 border border-gray-200"
                 title={language === 'ar' ? "موقعي" : "My Location"}
             >
                 <Locate className={`w-6 h-6 ${isLoading ? 'animate-pulse text-blue-500' : ''}`} />
