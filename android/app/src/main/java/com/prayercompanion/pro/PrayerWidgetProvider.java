@@ -47,7 +47,6 @@ public class PrayerWidgetProvider extends AppWidgetProvider {
         views.setTextViewText(R.id.widget_isha_time, isha);
         
         views.setTextViewText(R.id.widget_hijri_date, hijriDate);
-        views.setTextViewText(R.id.widget_location_name, locationName);
 
         // Reset Colors (White default)
         int white = android.graphics.Color.WHITE;
