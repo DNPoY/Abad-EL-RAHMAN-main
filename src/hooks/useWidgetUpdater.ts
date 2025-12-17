@@ -60,13 +60,15 @@ export const useWidgetUpdater = (prayerTimes: PrayerTimesData | null) => {
                 // Name
                 const prayerName = language === 'ar' ? nextPrayer.arabicName : nextPrayer.name;
 
-                // 2. Hijri Date
-                const hijriDate = new Intl.DateTimeFormat(language === 'ar' ? "ar-SA" : "en-US", {
-                    calendar: "islamic-umalqura",
+                // 2. Date (Gregorian)
+                const dateOptions: Intl.DateTimeFormatOptions = {
                     day: "numeric",
-                    month: "long",
+                    month: "short",
                     year: "numeric"
-                }).format(now);
+                };
+                const formattedDate = new Intl.DateTimeFormat(language === 'ar' ? "ar-EG" : "en-US", dateOptions).format(now);
+                // We use the 'hijriDate' field to pass this date to avoid changing native code interface for now.
+                const widgetDisplayDate = formattedDate;
 
                 // 3. Location
                 const locationName = prayerTimes.city;
@@ -92,10 +94,10 @@ export const useWidgetUpdater = (prayerTimes: PrayerTimesData | null) => {
                     isha: formatTime(prayerTimes.isha),
                     nextPrayerName: prayerName, // Used for highlighting
                     nextPrayerTime: formattedTime, // Not used in new layout but good to keep
-                    hijriDate: hijriDate,
+                    hijriDate: widgetDisplayDate,
                     locationName: locationName
                 });
-                console.log("Widget updated:", { prayerName, formattedTime, hijriDate, locationName });
+                console.log("Widget updated:", { prayerName, time: formattedTime, date: widgetDisplayDate, locationName });
 
             } catch (e) {
                 console.error("Failed to update widget:", e);

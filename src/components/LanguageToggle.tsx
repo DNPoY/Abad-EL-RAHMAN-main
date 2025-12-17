@@ -7,10 +7,10 @@ export const LanguageToggle = () => {
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="icon"
       onClick={() => setLanguage(language === "ar" ? "en" : "ar")}
-      className="fixed top-4 right-4 z-50 shadow-lg"
+      className="bg-black/20 hover:bg-black/30 text-gold-matte border border-white/10 shadow-sm backdrop-blur-sm transition-all"
     >
       <Languages className="h-5 w-5" />
     </Button>

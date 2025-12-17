@@ -1,7 +1,10 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">عباد الرحمن</string>
     <string name="title_activity_main">عباد الرحمن</string>
-    <string name="package_name">com.prayercompanion.pro</string>
-    <string name="custom_url_scheme">com.prayercompanion.pro</string>
+    <string name="fajr">الفجر</string>
+    <string name="dhuhr">الظهر</string>
+    <string name="asr">العصر</string>
+    <string name="maghrib">المغرب</string>
+    <string name="isha">العشاء</string>
 </resources>

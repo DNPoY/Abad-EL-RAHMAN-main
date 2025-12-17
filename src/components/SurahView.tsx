@@ -131,15 +131,26 @@ export const SurahView = () => {
     const containerClass = "min-h-screen bg-[#0c3f2d] pb-40";
     const ITEMS_PER_PAGE = 20;
 
-    // Scroll to playing ayah
+    // Scroll to playing ayah and turn page if needed
     useEffect(() => {
-        if (playingAyahNumber && ayahRefs.current[playingAyahNumber]) {
-            ayahRefs.current[playingAyahNumber]?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-            });
+        if (playingAyahNumber) {
+            // Auto turn page if the playing ayah is not on the current page
+            const requiredPage = Math.ceil(playingAyahNumber / ITEMS_PER_PAGE);
+            if (requiredPage !== currentPage) {
+                handlePageChange(requiredPage);
+            }
+
+            // Scroll into view (needs small delay if page just changed)
+            setTimeout(() => {
+                if (ayahRefs.current[playingAyahNumber]) {
+                    ayahRefs.current[playingAyahNumber]?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }, 100);
         }
-    }, [playingAyahNumber]);
+    }, [playingAyahNumber, currentPage]);
 
     // Ensure scroll to top when page changes
     useEffect(() => {
@@ -326,7 +337,8 @@ export const SurahView = () => {
                 {/* Reading Frame */}
                 <div className="relative max-w-4xl mx-auto">
                     {/* Frame Container - Simple & Elegant */}
-                    <div className="relative rounded-[1.5rem] bg-white/40 shadow-sm border border-emerald-deep/5 overflow-hidden backdrop-blur-[2px]">
+                    {/* Frame Container - Simple & Elegant (Optimized) */}
+                    <div className="relative rounded-[1.5rem] bg-white/60 shadow-sm border border-emerald-deep/5 overflow-hidden">
 
                         <div className="p-6 md:p-12 relative z-10">
                             {surahInfo?.number !== 1 && surahInfo?.number !== 9 && currentPage === 1 && (
@@ -339,7 +351,7 @@ export const SurahView = () => {
 
                             <div
                                 className={`space-y-10 leading-[2.5] text-center ${getFontFamilyClass(quranFont || 'uthmani')}`}
-                                style={{ fontSize: `${getFontSize(fontSize, quranFont || 'uthmani')}px`, color: '#1A1A1A' }}
+                                style={{ fontSize: `${getFontSize(fontSize, quranFont || 'uthmani')}px`, color: '#1A1A1A', contain: "content" }}
                             >
                                 {currentAyahs.map((ayah, index) => {
                                     const actualAyahNumber = ayah.numberInSurah;
@@ -351,8 +363,8 @@ export const SurahView = () => {
                                             id={`ayah-${ayah.numberInSurah}`}
                                             ref={(el) => (ayahRefs.current[actualAyahNumber] = el)}
                                             onClick={() => setJumpToAyah(actualAyahNumber)} // Click to play
-                                            className={`relative group inline px-1.5 rounded-lg transition-all duration-300 cursor-pointer ${isPlaying
-                                                ? "bg-gold-matte/20 box-decoration-clone"
+                                            className={`relative group inline px-1.5 rounded-lg transition-colors duration-200 cursor-pointer ${isPlaying
+                                                ? "bg-gold-matte/20"
                                                 : "hover:bg-emerald-deep/5"
                                                 }`}
                                             title={language === "ar" ? "اضغط للاستماع" : "Click to play"}

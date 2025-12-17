@@ -1,7 +1,12 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ibad Al-Rahman</string>
-    <string name="title_activity_main">Ibad Al-Rahman</string>
+    <string name="app_name">Abad El Rahman</string>
+    <string name="title_activity_main">Abad El Rahman</string>
     <string name="package_name">com.prayercompanion.pro</string>
     <string name="custom_url_scheme">com.prayercompanion.pro</string>
+    <string name="fajr">Fajr</string>
+    <string name="dhuhr">Dhuhr</string>
+    <string name="asr">Asr</string>
+    <string name="maghrib">Maghrib</string>
+    <string name="isha">Isha</string>
 </resources>
