@@ -4,6 +4,7 @@
     <string name="title_activity_main">Abad El Rahman</string>
     <string name="package_name">com.prayercompanion.pro</string>
     <string name="custom_url_scheme">com.prayercompanion.pro</string>
+    <string name="widget_title">Abad El Rahman</string>
     <string name="fajr">Fajr</string>
     <string name="dhuhr">Dhuhr</string>
     <string name="asr">Asr</string>

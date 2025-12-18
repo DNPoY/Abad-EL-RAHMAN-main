@@ -23,6 +23,8 @@ public class AdhanService extends Service {
     private static final String TAG = "AdhanService";
     private static final String CHANNEL_ID = "adhan_channel";
     private MediaPlayer mediaPlayer;
+    private int originalVolume = -1;
+    private AudioManager audioManager;
 
     @Override
     public void onCreate() {
@@ -87,21 +89,90 @@ public class AdhanService extends Service {
              mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
         }
 
-        // Max Volume enforcement
-        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + soundResId);
+
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
             try {
-                int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
-                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
-                Log.d(TAG, "Adhan volume set to max: " + maxVolume);
+                // Save original volume to restore later
+                originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+                if (audioManager != null) {
+                    // Requests audio focus to lower/pause other apps
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        AudioAttributes focusAttrs = new AudioAttributes.Builder()
+                                .setUsage(AudioAttributes.USAGE_ALARM)
+                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                .build();
+                        android.media.AudioFocusRequest focusRequest = new android.media.AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
+                                .setAudioAttributes(focusAttrs)
+                                .build();
+                        audioManager.requestAudioFocus(focusRequest);
+                    } else {
+                        //noinspection deprecation
+                        audioManager.requestAudioFocus(null, AudioManager.STREAM_ALARM, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                    }
+
+                    int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+                    if (originalVolume == -1) {
+                         originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+                    }
+                    audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
+                    Log.d(TAG, "Adhan volume set to max: " + maxVolume);
+                }
+
+                // Initialize MediaPlayer
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setDataSource(this, soundUri);
+                
+                // Explicitly set stream type for pre-21 and consistency
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                
+                AudioAttributes.Builder attrs = new AudioAttributes.Builder();
+                attrs.setUsage(AudioAttributes.USAGE_ALARM);
+                attrs.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION);
+                mediaPlayer.setAudioAttributes(attrs.build());
+                
+                mediaPlayer.setLooping(false);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+            } catch (IOException e) {
+                Log.e(TAG, "Error setting data source or preparing media player", e);
+                stopAdhan();
+                return;
             } catch (Exception e) {
-                Log.e(TAG, "Failed to set Adhan volume to max", e);
+                Log.e(TAG, "Failed to set Adhan volume or start media player", e);
+                stopAdhan();
+                return;
+            }
+        } else {
+            // Fallback if audioManager is null, try to play without volume control
+            try {
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setDataSource(this, soundUri);
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM); // For older APIs
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    mediaPlayer.setAudioAttributes(
+                            new AudioAttributes.Builder()
+                                    .setUsage(AudioAttributes.USAGE_ALARM)
+                                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                                    .build()
+                    );
+                }
+                mediaPlayer.setLooping(false);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+            } catch (IOException e) {
+                Log.e(TAG, "Error setting data source or preparing media player (no audio manager)", e);
+                stopAdhan();
+                return;
+            } catch (Exception e) {
+                Log.e(TAG, "Error starting media player (no audio manager)", e);
+                stopAdhan();
+                return;
             }
         }
 
         mediaPlayer.setOnCompletionListener(mp -> stopAdhan());
-        mediaPlayer.setLooping(false);
-        mediaPlayer.start();
     }
 
     private void stopAdhan() {
@@ -116,6 +187,17 @@ public class AdhanService extends Service {
                 mediaPlayer.release();
                 mediaPlayer = null;
             }
+        }
+        
+        // Restore original volume after Azan completes
+        if (originalVolume != -1 && audioManager != null) {
+            try {
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, originalVolume, 0);
+                Log.d(TAG, "Restored original volume to: " + originalVolume);
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to restore original volume", e);
+            }
+            originalVolume = -1;
         }
         
         if (wakeLock != null && wakeLock.isHeld()) {

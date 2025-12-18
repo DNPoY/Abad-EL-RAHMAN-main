@@ -48,22 +48,46 @@ public class PrayerWidgetProvider extends AppWidgetProvider {
         
         views.setTextViewText(R.id.widget_hijri_date, hijriDate);
 
-        // Reset Colors (White default)
+        // Colors
         int white = android.graphics.Color.WHITE;
-        int gold = 0xFFFFD700; // Gold Color
+        int gold = 0xFFC5A059; // Matte Gold Color
+        int goldLabel = 0xFFC5A059;
 
+        // Reset all time colors to white and labels to gold
         views.setTextColor(R.id.widget_fajr_time, white);
         views.setTextColor(R.id.widget_dhuhr_time, white);
         views.setTextColor(R.id.widget_asr_time, white);
         views.setTextColor(R.id.widget_maghrib_time, white);
         views.setTextColor(R.id.widget_isha_time, white);
 
-        // Highlight Next Prayer
-        if (nextPrayerName.equals("Fajr") || nextPrayerName.equals("الفجر")) views.setTextColor(R.id.widget_fajr_time, gold);
-        if (nextPrayerName.equals("Dhuhr") || nextPrayerName.equals("الظهر")) views.setTextColor(R.id.widget_dhuhr_time, gold);
-        if (nextPrayerName.equals("Asr") || nextPrayerName.equals("العصر")) views.setTextColor(R.id.widget_asr_time, gold);
-        if (nextPrayerName.equals("Maghrib") || nextPrayerName.equals("المغرب")) views.setTextColor(R.id.widget_maghrib_time, gold);
-        if (nextPrayerName.equals("Isha") || nextPrayerName.equals("العشاء")) views.setTextColor(R.id.widget_isha_time, gold);
+        // Reset all backgrounds to normal
+        views.setInt(R.id.layout_fajr, "setBackgroundResource", R.drawable.widget_prayer_card);
+        views.setInt(R.id.layout_dhuhr, "setBackgroundResource", R.drawable.widget_prayer_card);
+        views.setInt(R.id.layout_asr, "setBackgroundResource", R.drawable.widget_prayer_card);
+        views.setInt(R.id.layout_maghrib, "setBackgroundResource", R.drawable.widget_prayer_card);
+        views.setInt(R.id.layout_isha, "setBackgroundResource", R.drawable.widget_prayer_card);
+
+        // Highlight Next Prayer with active card style
+        if (nextPrayerName.equals("Fajr") || nextPrayerName.equals("الفجر")) {
+            views.setInt(R.id.layout_fajr, "setBackgroundResource", R.drawable.widget_prayer_card_active);
+            views.setTextColor(R.id.widget_fajr_time, gold);
+        }
+        if (nextPrayerName.equals("Dhuhr") || nextPrayerName.equals("الظهر")) {
+            views.setInt(R.id.layout_dhuhr, "setBackgroundResource", R.drawable.widget_prayer_card_active);
+            views.setTextColor(R.id.widget_dhuhr_time, gold);
+        }
+        if (nextPrayerName.equals("Asr") || nextPrayerName.equals("العصر")) {
+            views.setInt(R.id.layout_asr, "setBackgroundResource", R.drawable.widget_prayer_card_active);
+            views.setTextColor(R.id.widget_asr_time, gold);
+        }
+        if (nextPrayerName.equals("Maghrib") || nextPrayerName.equals("المغرب")) {
+            views.setInt(R.id.layout_maghrib, "setBackgroundResource", R.drawable.widget_prayer_card_active);
+            views.setTextColor(R.id.widget_maghrib_time, gold);
+        }
+        if (nextPrayerName.equals("Isha") || nextPrayerName.equals("العشاء")) {
+            views.setInt(R.id.layout_isha, "setBackgroundResource", R.drawable.widget_prayer_card_active);
+            views.setTextColor(R.id.widget_isha_time, gold);
+        }
 
         // App Launch Intent
         Intent intent = new Intent(context, MainActivity.class);

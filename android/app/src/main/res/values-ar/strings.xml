@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">عباد الرحمن</string>
     <string name="title_activity_main">عباد الرحمن</string>
+    <string name="widget_title">عباد الرحمن</string>
     <string name="fajr">الفجر</string>
     <string name="dhuhr">الظهر</string>
     <string name="asr">العصر</string>

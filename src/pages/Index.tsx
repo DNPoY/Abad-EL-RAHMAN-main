@@ -14,6 +14,7 @@ import { AlarmChallenge } from "@/components/AlarmChallenge";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { Clock, Compass, BookOpen, Settings, Calendar, Moon, Heart, ClipboardList, Terminal, MapPin } from "lucide-react";
 import { HijriDateDisplay } from "@/components/HijriDateDisplay";
+import { getHijriYear } from "@/lib/date-utils";
 import { HijriCalendar } from "@/components/HijriCalendar";
 import { QuranIndex } from "@/components/QuranIndex";
 import { SunnahPrayers } from "@/components/SunnahPrayers";
@@ -170,7 +171,7 @@ const Index = () => {
           <div className="w-px h-6 bg-white/20 mx-4" />
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-gold-matte" />
-            <span className="text-xs text-white/80 font-tajawal">1445 AH</span>
+            <span className="text-xs text-white/80 font-tajawal">{getHijriYear(new Date())} AH</span>
           </div>
         </div>
 
@@ -235,18 +236,14 @@ const Index = () => {
                   }
                 }}
                 className={cn(
-                  "relative flex flex-col items-center justify-center w-14 h-14 rounded-full transition-all duration-300 group",
+                  "relative flex flex-col items-center justify-center w-14 h-14 rounded-full transition-all duration-300 group outline-none ring-0 select-none",
                   isActive
-                    ? "bg-gold-matte text-white shadow-lg shadow-gold-matte/30 scale-110 -translate-y-2"
-                    : "text-white/60 hover:text-white hover:bg-white/10"
+                    ? "bg-gold-matte text-white shadow-lg shadow-gold-matte/30 scale-110"
+                    : "text-white/60"
                 )}
+                style={{ WebkitTapHighlightColor: "transparent" }}
               >
-                <Icon className={cn("w-5 h-5 mb-0.5", isActive && "fill-current")} strokeWidth={isActive ? 2.5 : 2} />
-                {isActive && (
-                  <span className="absolute -bottom-8 bg-emerald-deep text-white text-[10px] px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">
-                    {item.label}
-                  </span>
-                )}
+                <Icon className={cn("w-5 h-5", isActive && "fill-current")} strokeWidth={isActive ? 2.5 : 2} />
               </button>
             );
           })}

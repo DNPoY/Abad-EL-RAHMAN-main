@@ -22,6 +22,8 @@ export interface WidgetBridgePlugin {
     scheduleAlarm(options: { timestamp: number; soundName?: string }): Promise<void>;
     stopAlarm(): Promise<void>;
     getPendingAlarms(): Promise<{ alarms: { prayerName: string; timestamp: number; soundName: string }[] }>;
+    pickRingtone(): Promise<{ uri: string; title: string }>;
+    getCustomRingtone(): Promise<{ uri: string | null; title: string | null }>;
 }
 
 const WidgetBridge = registerPlugin<WidgetBridgePlugin>('WidgetBridge');

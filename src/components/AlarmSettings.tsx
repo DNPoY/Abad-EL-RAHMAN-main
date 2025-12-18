@@ -6,14 +6,50 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAlarm, type AlarmChallengeType } from "@/contexts/AlarmContext";
-import { AlarmClock, Bell, BellOff } from "lucide-react";
-import { useState } from "react";
+import { AlarmClock, Bell, BellOff, Music } from "lucide-react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { Capacitor } from "@capacitor/core";
 
 export const AlarmSettings = () => {
     const { t, language } = useLanguage();
     const { alarmTime, setAlarmTime, isAlarmActive, challengeType, setChallengeType, alarmSound, setAlarmSound } = useAlarm();
     const [timeInput, setTimeInput] = useState(alarmTime || "04:30");
+    const [customRingtoneTitle, setCustomRingtoneTitle] = useState<string | null>(null);
+
+    // Load custom ringtone title on mount
+    useEffect(() => {
+        const loadCustomRingtone = async () => {
+            if (Capacitor.isNativePlatform()) {
+                try {
+                    const { default: WidgetBridge } = await import("@/lib/widget-bridge");
+                    const result = await WidgetBridge.getCustomRingtone();
+                    if (result.title) {
+                        setCustomRingtoneTitle(result.title);
+                    }
+                } catch (e) {
+                    console.error("Error loading custom ringtone", e);
+                }
+            }
+        };
+        loadCustomRingtone();
+    }, []);
+
+    const handlePickRingtone = async () => {
+        if (!Capacitor.isNativePlatform()) {
+            toast.error(language === "ar" ? "متاح فقط على الهاتف" : "Only available on mobile");
+            return;
+        }
+        try {
+            const { default: WidgetBridge } = await import("@/lib/widget-bridge");
+            const result = await WidgetBridge.pickRingtone();
+            setCustomRingtoneTitle(result.title);
+            setAlarmSound("custom");
+            toast.success(language === "ar" ? `تم اختيار: ${result.title}` : `Selected: ${result.title}`);
+        } catch (e) {
+            console.error("Ringtone picker error", e);
+        }
+    };
 
     const handleSetAlarm = () => {
         setAlarmTime(timeInput);
@@ -76,7 +112,7 @@ export const AlarmSettings = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <Label className="font-amiri">{t.alarmType}</Label>
+                    <Label className="font-amiri">{language === "ar" ? "نغمة المنبه" : "Alarm Sound"}</Label>
                     <Select
                         value={alarmSound}
                         onValueChange={setAlarmSound}
@@ -98,8 +134,24 @@ export const AlarmSettings = () => {
                             <SelectItem value="egypt" className="font-amiri text-[#FFD700]">
                                 {language === "ar" ? "أذان مصر" : "Egypt Adhan"}
                             </SelectItem>
+                            {customRingtoneTitle && (
+                                <SelectItem value="custom" className="font-amiri text-emerald-600">
+                                    📱 {customRingtoneTitle}
+                                </SelectItem>
+                            )}
                         </SelectContent>
                     </Select>
+
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handlePickRingtone}
+                        disabled={isAlarmActive}
+                        className="w-full mt-2 font-amiri"
+                    >
+                        <Music className="w-4 h-4 mr-2" />
+                        {language === "ar" ? "اختر نغمة من هاتفك" : "Pick Ringtone from Phone"}
+                    </Button>
                 </div>
 
                 <div className="space-y-2">

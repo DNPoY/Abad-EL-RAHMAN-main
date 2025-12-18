@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -21,6 +22,8 @@ public class AlarmService extends Service {
     private static final String TAG = "AlarmService";
     private static final String CHANNEL_ID = "alarm_channel";
     private MediaPlayer mediaPlayer;
+    private int originalVolume = -1;
+    private AudioManager audioManager;
 
     @Override
     public void onCreate() {
@@ -58,14 +61,23 @@ public class AlarmService extends Service {
 
         Uri soundUri = null;
         if (soundName != null && !soundName.equals("default")) {
-             // Map sound names to raw resources
-             int resId = 0;
-             if (soundName.equals("makkah")) resId = R.raw.adhan_makkah;
-             else if (soundName.equals("madinah")) resId = R.raw.adhan_madinah;
-             else if (soundName.equals("egypt")) resId = R.raw.adhan_egypt;
-             
-             if (resId != 0) {
-                 soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + resId);
+             // Check for custom ringtone first
+             if (soundName.equals("custom")) {
+                 SharedPreferences prefs = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE);
+                 String customUri = prefs.getString("customRingtoneUri", null);
+                 if (customUri != null) {
+                     soundUri = Uri.parse(customUri);
+                 }
+             } else {
+                 // Map sound names to raw resources
+                 int resId = 0;
+                 if (soundName.equals("makkah")) resId = R.raw.adhan_makkah;
+                 else if (soundName.equals("madinah")) resId = R.raw.adhan_madinah;
+                 else if (soundName.equals("egypt")) resId = R.raw.adhan_egypt;
+                 
+                 if (resId != 0) {
+                     soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + resId);
+                 }
              }
         }
 
@@ -74,6 +86,20 @@ public class AlarmService extends Service {
             soundUri = android.provider.Settings.System.DEFAULT_ALARM_ALERT_URI;
             if (soundUri == null) soundUri = android.provider.Settings.System.DEFAULT_NOTIFICATION_URI;
             if (soundUri == null) soundUri = android.provider.Settings.System.DEFAULT_RINGTONE_URI;
+        }
+
+        // Max Volume enforcement with save/restore
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if (audioManager != null) {
+            try {
+                // Save original volume to restore later
+                originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+                int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
+                Log.d(TAG, "Alarm volume set to max: " + maxVolume + " (original was: " + originalVolume + ")");
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to set Alarm volume to max", e);
+            }
         }
 
         mediaPlayer = new MediaPlayer();
@@ -112,6 +138,18 @@ public class AlarmService extends Service {
                 mediaPlayer = null;
             }
         }
+        
+        // Restore original volume after alarm stops
+        if (originalVolume != -1 && audioManager != null) {
+            try {
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, originalVolume, 0);
+                Log.d(TAG, "Restored original volume to: " + originalVolume);
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to restore original volume", e);
+            }
+            originalVolume = -1;
+        }
+        
         stopForeground(true);
         stopSelf();
     }

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -126,10 +126,19 @@ export const SurahView = () => {
     const [jumpToAyah, setJumpToAyah] = useState<number | null>(null);
     const ayahRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
     const { quranFont } = useSettings();
+    const [showPlayer, setShowPlayer] = useState(false);
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
     // Add extra padding at bottom for audio player
     const containerClass = "min-h-screen bg-[#0c3f2d] pb-40";
     const ITEMS_PER_PAGE = 20;
+
+    // Page change handler - defined early for use in effects
+    const handlePageChange = useCallback((newPage: number) => {
+        setCurrentPage(newPage);
+        localStorage.setItem(`quran_progress_${surahId}`, newPage.toString());
+        window.scrollTo(0, 0);
+    }, [surahId]);
 
     // Scroll to playing ayah and turn page if needed
     useEffect(() => {
@@ -150,7 +159,7 @@ export const SurahView = () => {
                 }
             }, 100);
         }
-    }, [playingAyahNumber, currentPage]);
+    }, [playingAyahNumber, currentPage, handlePageChange]);
 
     // Ensure scroll to top when page changes
     useEffect(() => {
@@ -158,6 +167,20 @@ export const SurahView = () => {
     }, [currentPage, surahId]);
 
     const surahInfo = surahs.find((s) => s.number === Number(surahId));
+
+    // Save global last read position
+    useEffect(() => {
+        if (surahInfo && currentPage) {
+            const lastRead = {
+                surahId: surahInfo.number,
+                surahName: surahInfo.name,
+                englishName: surahInfo.englishName,
+                pageNumber: currentPage,
+                timestamp: Date.now()
+            };
+            localStorage.setItem("last_read_position", JSON.stringify(lastRead));
+        }
+    }, [currentPage, surahInfo]);
 
     useEffect(() => {
         const fetchSurah = async () => {
@@ -295,12 +318,6 @@ export const SurahView = () => {
         currentPage * ITEMS_PER_PAGE
     ) : [];
 
-    const handlePageChange = (newPage: number) => {
-        setCurrentPage(newPage);
-        localStorage.setItem(`quran_progress_${surahId}`, newPage.toString());
-        window.scrollTo(0, 0);
-    };
-
     return (
         <div className="min-h-screen relative overflow-hidden bg-paper-warm" dir={language === "ar" ? "rtl" : "ltr"}>
             {/* Texture Overlay */}
@@ -362,7 +379,10 @@ export const SurahView = () => {
                                             key={ayah.number}
                                             id={`ayah-${ayah.numberInSurah}`}
                                             ref={(el) => (ayahRefs.current[actualAyahNumber] = el)}
-                                            onClick={() => setJumpToAyah(actualAyahNumber)} // Click to play
+                                            onClick={() => {
+                                                setJumpToAyah(actualAyahNumber);
+                                                setShowPlayer(true);
+                                            }} // Click to play
                                             className={`relative group inline px-1.5 rounded-lg transition-colors duration-200 cursor-pointer ${isPlaying
                                                 ? "bg-gold-matte/20"
                                                 : "hover:bg-emerald-deep/5"
@@ -399,7 +419,11 @@ export const SurahView = () => {
                     <div className="flex justify-between items-center mt-8 px-4 max-w-2xl mx-auto">
                         <Button
                             variant="ghost"
-                            onClick={() => handlePageChange(currentPage - 1)}
+                            onClick={() => {
+                                const newPage = currentPage - 1;
+                                handlePageChange(newPage);
+                                if (isAudioPlaying) setJumpToAyah(((newPage - 1) * ITEMS_PER_PAGE) + 1);
+                            }}
                             disabled={currentPage === 1}
                             className="text-emerald-deep/70 hover:text-emerald-deep hover:bg-emerald-deep/5 font-tajawal"
                         >
@@ -413,7 +437,11 @@ export const SurahView = () => {
 
                         <Button
                             variant="ghost"
-                            onClick={() => handlePageChange(currentPage + 1)}
+                            onClick={() => {
+                                const newPage = currentPage + 1;
+                                handlePageChange(newPage);
+                                if (isAudioPlaying) setJumpToAyah(((newPage - 1) * ITEMS_PER_PAGE) + 1);
+                            }}
                             disabled={currentPage === totalPages}
                             className="text-emerald-deep/70 hover:text-emerald-deep hover:bg-emerald-deep/5 font-tajawal"
                         >
@@ -424,14 +452,16 @@ export const SurahView = () => {
                 )}
 
                 {/* Audio Player */}
-                {surahId && surahData && (
-                    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-safe bg-gradient-to-t from-cream via-cream/95 to-transparent">
-                        <div className="max-w-xl mx-auto shadow-lg rounded-2xl overflow-hidden ring-1 ring-emerald-deep/5">
+                {surahId && surahData && showPlayer && (
+                    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-safe bg-gradient-to-t from-cream via-cream/95 to-transparent pointer-events-none">
+                        <div className="max-w-xl mx-auto pointer-events-auto">
                             <SurahAudioPlayer
                                 surahNumber={Number(surahId)}
                                 totalAyahs={surahData.ayahs.length}
                                 onAyahChange={setPlayingAyahNumber}
                                 jumpToAyah={jumpToAyah}
+                                onClose={() => setShowPlayer(false)}
+                                onPlayChange={setIsAudioPlaying}
                             />
                         </div>
                     </div>
@@ -455,6 +485,9 @@ export const SurahView = () => {
                         </Link>
                     ) : null}
                 </div>
+
+                {/* Spacer for Audio Player */}
+                <div className={`transition-all duration-300 ${showPlayer ? "h-48" : "h-0"}`} />
 
                 {surahInfo && selectedAyah && (
                     <TafsirModal

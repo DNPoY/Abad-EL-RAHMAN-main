@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Play, Pause, Loader2, SkipForward, SkipBack } from "lucide-react";
+import { Play, Pause, Loader2, SkipForward, SkipBack, X } from "lucide-react";
 import { RECITERS } from "@/lib/audio-constants";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -10,9 +10,11 @@ interface SurahAudioPlayerProps {
     totalAyahs: number;
     onAyahChange: (ayahNumber: number | null) => void;
     jumpToAyah?: number | null;
+    onClose?: () => void;
+    onPlayChange?: (isPlaying: boolean) => void;
 }
 
-export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpToAyah }: SurahAudioPlayerProps) => {
+export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpToAyah, onClose, onPlayChange }: SurahAudioPlayerProps) => {
     const { language } = useLanguage();
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentAyah, setCurrentAyah] = useState(1);
@@ -20,23 +22,44 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
     const [selectedReciterId, setSelectedReciterId] = useState<string>(RECITERS[0].id);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
+    // Ref to avoid stale closure issues
+    const onAyahChangeRef = useRef(onAyahChange);
+    const onPlayChangeRef = useRef(onPlayChange);
+
+    useEffect(() => {
+        onAyahChangeRef.current = onAyahChange;
+        onPlayChangeRef.current = onPlayChange;
+    }, [onAyahChange, onPlayChange]);
+
+    // Notify parent about play state change
+    useEffect(() => {
+        if (onPlayChangeRef.current) {
+            onPlayChangeRef.current(isPlaying);
+        }
+    }, [isPlaying]);
+
+    // Handle external jump requests
+    // Reset to Ayah 1 when Surah changes
+    useEffect(() => {
+        setCurrentAyah(1);
+        setIsPlaying(false);
+    }, [surahNumber]);
+
     // Handle external jump requests
     useEffect(() => {
         if (jumpToAyah && jumpToAyah !== currentAyah) {
             setCurrentAyah(jumpToAyah);
             setIsPlaying(true);
-        } else if (jumpToAyah && jumpToAyah === currentAyah && !isPlaying) {
-            setIsPlaying(true);
         }
     }, [jumpToAyah]);
 
     // Construct URL for specific Ayah
-    const getAyahUrl = (surah: number, ayah: number) => {
+    const getAyahUrl = useCallback((surah: number, ayah: number) => {
         const reciter = RECITERS.find(r => r.id === selectedReciterId) || RECITERS[0];
         const paddedSurah = surah.toString().padStart(3, "0");
         const paddedAyah = ayah.toString().padStart(3, "0");
         return `${reciter.url}${paddedSurah}${paddedAyah}.mp3`;
-    };
+    }, [selectedReciterId]);
 
     // Initialize/Update Audio Source when Ayah changes
     useEffect(() => {
@@ -65,7 +88,7 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
             } else {
                 setIsPlaying(false);
                 setCurrentAyah(1); // Reset to start
-                onAyahChange(null);
+                onAyahChangeRef.current(null);
             }
         };
 
@@ -81,9 +104,9 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
 
         // Notify parent to highlight this ayah
         if (isPlaying) {
-            onAyahChange(currentAyah);
+            onAyahChangeRef.current(currentAyah);
         } else {
-            onAyahChange(null);
+            onAyahChangeRef.current(null);
         }
 
         return () => {
@@ -91,7 +114,7 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
             audio.removeEventListener('canplay', handleCanPlay);
             audio.removeEventListener('error', handleError);
         };
-    }, [surahNumber, currentAyah, selectedReciterId, isPlaying]); // Added isPlaying dependency
+    }, [surahNumber, currentAyah, selectedReciterId, isPlaying, getAyahUrl, totalAyahs]);
 
     // Cleanup on unmount
     useEffect(() => {
@@ -99,7 +122,7 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
             if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current = null;
-                onAyahChange(null);
+                onAyahChangeRef.current(null);
             }
         };
     }, []);
@@ -125,9 +148,10 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
     };
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-md border-t border-border p-4 shadow-lg z-50 animate-in slide-in-from-bottom">
-            <div className="container max-w-2xl mx-auto flex flex-col gap-3">
-                <div className="flex items-center justify-between gap-4">
+        <div className="w-full bg-background/95 backdrop-blur-md border-t border-border p-4 shadow-lg animate-in slide-in-from-bottom rounded-t-2xl">
+            <div className="container max-w-2xl mx-auto flex flex-col gap-3 relative">
+
+                <div className="flex items-center justify-between gap-4 mt-2">
                     <div className="flex items-center gap-2">
                         <Button variant="ghost" size="icon" onClick={prevAyah} disabled={currentAyah === 1}>
                             <SkipBack className="h-5 w-5" />
@@ -138,7 +162,7 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
                             size="icon"
                             onClick={togglePlay}
                             disabled={isLoading}
-                            className="h-12 w-12 rounded-full"
+                            className="h-12 w-12 rounded-full shadow-md shadow-primary/20"
                         >
                             {isLoading ? (
                                 <Loader2 className="h-6 w-6 animate-spin" />
@@ -156,7 +180,7 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
 
                     <div className="flex-1 flex flex-col gap-1">
                         <Select value={selectedReciterId} onValueChange={setSelectedReciterId}>
-                            <SelectTrigger className="w-full text-xs h-8">
+                            <SelectTrigger className="w-full text-xs h-8 bg-background/50">
                                 <SelectValue placeholder="Select Reciter" />
                             </SelectTrigger>
                             <SelectContent>
@@ -167,7 +191,7 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
                                 ))}
                             </SelectContent>
                         </Select>
-                        <div className="text-xs text-center text-muted-foreground w-full">
+                        <div className="text-xs text-center text-muted-foreground w-full font-mono">
                             {language === 'ar' ? 'الآية' : 'Ayah'} {currentAyah} / {totalAyahs}
                         </div>
                     </div>

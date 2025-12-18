@@ -81,6 +81,7 @@
 
   html {
     @apply scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -145,11 +146,9 @@
   }
 
   .glass-panel-dark {
-    background: rgba(9, 66, 49, 0.85);
-    /* Deep Emerald Glass */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(9, 66, 49, 0.95);
+    /* Deep Emerald - higher opacity, no blur for Android compatibility */
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   /* Arabic Typography */

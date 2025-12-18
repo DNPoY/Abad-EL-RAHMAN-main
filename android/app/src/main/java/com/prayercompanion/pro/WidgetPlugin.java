@@ -248,4 +248,60 @@ public class WidgetPlugin extends Plugin {
         ret.put("alarms", alarms);
         call.resolve(ret);
     }
+
+    private PluginCall savedRingtoneCall = null;
+    private static final int RINGTONE_PICKER_REQUEST = 1001;
+
+    @PluginMethod
+    public void pickRingtone(PluginCall call) {
+        savedRingtoneCall = call;
+        call.setKeepAlive(true);
+        
+        Intent intent = new Intent(android.media.RingtoneManager.ACTION_RINGTONE_PICKER);
+        intent.putExtra(android.media.RingtoneManager.EXTRA_RINGTONE_TYPE, android.media.RingtoneManager.TYPE_ALARM);
+        intent.putExtra(android.media.RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Alarm Ringtone");
+        intent.putExtra(android.media.RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+        intent.putExtra(android.media.RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+        
+        startActivityForResult(call, intent, "handleRingtoneResult");
+    }
+
+    @com.getcapacitor.annotation.ActivityCallback
+    private void handleRingtoneResult(PluginCall call, androidx.activity.result.ActivityResult result) {
+        if (result.getResultCode() == android.app.Activity.RESULT_OK && result.getData() != null) {
+            android.net.Uri uri = result.getData().getParcelableExtra(android.media.RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+            if (uri != null) {
+                android.media.Ringtone ringtone = android.media.RingtoneManager.getRingtone(getContext(), uri);
+                String title = ringtone != null ? ringtone.getTitle(getContext()) : "Custom Ringtone";
+                
+                // Save to SharedPreferences
+                SharedPreferences prefs = getContext().getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE);
+                prefs.edit()
+                    .putString("customRingtoneUri", uri.toString())
+                    .putString("customRingtoneTitle", title)
+                    .apply();
+                
+                JSObject ret = new JSObject();
+                ret.put("uri", uri.toString());
+                ret.put("title", title);
+                call.resolve(ret);
+            } else {
+                call.reject("No ringtone selected");
+            }
+        } else {
+            call.reject("Ringtone picker cancelled");
+        }
+    }
+
+    @PluginMethod
+    public void getCustomRingtone(PluginCall call) {
+        SharedPreferences prefs = getContext().getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE);
+        String uri = prefs.getString("customRingtoneUri", null);
+        String title = prefs.getString("customRingtoneTitle", null);
+        
+        JSObject ret = new JSObject();
+        ret.put("uri", uri);
+        ret.put("title", title);
+        call.resolve(ret);
+    }
 }

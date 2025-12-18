@@ -52,6 +52,17 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [ayahResults, setAyahResults] = useState<SearchResult[]>([]);
     const [isSearching, setIsSearching] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [lastRead, setLastRead] = useState<any>(null);
+
+    useEffect(() => {
+        const saved = localStorage.getItem("last_read_position");
+        if (saved) {
+            try {
+                setLastRead(JSON.parse(saved));
+            } catch (e) { console.error(e); }
+        }
+    }, []);
 
     // Debounced search effect removed to prevent auto-search
     // User must press Enter or click Search button
@@ -121,6 +132,34 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
             />
 
             <div className="relative z-10 px-4 pt-safe pb-32 animate-fade-in">
+                {/* Continue Reading Card */}
+                {lastRead && !searchQuery && (
+                    <div className="max-w-xl mx-auto mb-6 px-1 animate-fade-in-up delay-100">
+                        <Link to={`/quran/${lastRead.surahId}`}>
+                            <div className="bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-all flex items-center justify-between group border border-white/10">
+                                <div className="flex items-center gap-4">
+                                    <div className="p-3 bg-white/10 rounded-full backdrop-blur-sm">
+                                        <BookOpen className="w-6 h-6 text-gold-matte" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-emerald-100/60 uppercase tracking-wider font-semibold mb-0.5">
+                                            {language === "ar" ? "تابع القراءة" : "Continue Reading"}
+                                        </p>
+                                        <h3 className="font-bold font-tajawal text-lg leading-none mt-1">
+                                            {lastRead.surahName}
+                                            <span className="mx-2 text-white/40 text-sm font-light">|</span>
+                                            <span className="text-sm font-normal text-emerald-100">
+                                                {language === "ar" ? "صفحة" : "Page"} {lastRead.pageNumber}
+                                            </span>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <ArrowRight className={`w-5 h-5 text-gold-matte transition-transform duration-300 ${language === 'ar' ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`} />
+                            </div>
+                        </Link>
+                    </div>
+                )}
+
                 {/* Header */}
                 <div className="flex flex-col items-center justify-center pt-8 mb-8 relative">
                     {!isEmbedded && (
