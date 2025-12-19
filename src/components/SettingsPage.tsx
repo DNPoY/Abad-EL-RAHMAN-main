@@ -227,6 +227,41 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                             </div>
                         </div>
                     </Card>
+                    {/* Privacy & About */}
+                    <Card className="p-6 border-emerald-deep/5 bg-white/60 backdrop-blur-sm shadow-sm">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="p-2 bg-emerald-deep/10 rounded-full">
+                                <Settings className="w-4 h-4 text-emerald-deep" />
+                            </div>
+                            <h3 className="text-lg font-bold font-amiri text-emerald-deep">
+                                {language === "ar" ? "حول التطبيق" : "About & Privacy"}
+                            </h3>
+                        </div>
+
+                        <div className="space-y-4">
+                            <a
+                                href="/privacy-policy.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-between p-3 rounded-lg bg-white border border-emerald-deep/5 hover:bg-emerald-50 transition-colors"
+                            >
+                                <span className="font-tajawal text-emerald-deep">
+                                    {language === "ar" ? "سياسة الخصوصية" : "Privacy Policy"}
+                                </span>
+                                <Globe className="w-4 h-4 text-emerald-deep/40" />
+                            </a>
+
+                            <a
+                                href="mailto:ahmeddnelhariri@gmail.com"
+                                className="flex items-center justify-between p-3 rounded-lg bg-white border border-emerald-deep/5 hover:bg-emerald-50 transition-colors"
+                            >
+                                <span className="font-tajawal text-emerald-deep">
+                                    {language === "ar" ? "تواصل معنا (Email)" : "Contact Us (Email)"}
+                                </span>
+                                <Globe className="w-4 h-4 text-emerald-deep/40" />
+                            </a>
+                        </div>
+                    </Card>
                 </TabsContent>
 
                 <TabsContent value="notifications" className="space-y-6">
