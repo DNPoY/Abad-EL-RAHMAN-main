@@ -6,7 +6,11 @@ import { toast } from "sonner";
 
 export const QiblaCompass = () => {
   const { t, language } = useLanguage();
-  const [qiblaDirection, setQiblaDirection] = useState<number>(0);
+  // Load cached values immediately to prevent waiting
+  const [qiblaDirection, setQiblaDirection] = useState<number>(() => {
+    const cached = localStorage.getItem("qiblaDirection");
+    return cached ? parseFloat(cached) : 0;
+  });
   const [deviceHeading, setDeviceHeading] = useState<number>(0);
   const [hasPermission, setHasPermission] = useState(false);
 
@@ -30,16 +34,27 @@ export const QiblaCompass = () => {
       bearing = (bearing + 360) % 360;
 
       setQiblaDirection(bearing);
+      localStorage.setItem("qiblaDirection", bearing.toString());
     };
 
     if ("geolocation" in navigator) {
+      // 1. Try to get cached location immediately (fastest)
       navigator.geolocation.getCurrentPosition(
         (position) => {
           calculateQibla(position.coords.latitude, position.coords.longitude);
         },
         (error) => {
-          console.error("Error getting location:", error);
-        }
+          console.log("Cached location failed, trying fresh...", error);
+          // 2. Fallback to fresh location if no cache available
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              calculateQibla(position.coords.latitude, position.coords.longitude);
+            },
+            (err) => console.error("Error getting location:", err),
+            { enableHighAccuracy: true, timeout: 10000 }
+          );
+        },
+        { maximumAge: Infinity, timeout: 5000, enableHighAccuracy: false }
       );
     }
   }, []);

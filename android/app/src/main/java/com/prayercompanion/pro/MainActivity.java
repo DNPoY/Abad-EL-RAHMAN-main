@@ -2,6 +2,7 @@ package com.prayercompanion.pro;
 
 import com.getcapacitor.BridgeActivity;
 
+import android.webkit.WebView;
 import android.os.Bundle;
 
 public class MainActivity extends BridgeActivity {
@@ -9,6 +10,7 @@ public class MainActivity extends BridgeActivity {
     public void onCreate(Bundle savedInstanceState) {
         registerPlugin(WidgetPlugin.class);
         super.onCreate(savedInstanceState);
+        WebView.setWebContentsDebuggingEnabled(true);
 
         android.view.View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(

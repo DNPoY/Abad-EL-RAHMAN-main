@@ -73,7 +73,7 @@ public class AlarmService extends Service {
                  int resId = 0;
                  if (soundName.equals("makkah")) resId = R.raw.adhan_makkah;
                  else if (soundName.equals("madinah")) resId = R.raw.adhan_madinah;
-                 else if (soundName.equals("egypt")) resId = R.raw.adhan_egypt;
+                 else if (soundName.equals("egyptw")) resId = R.raw.adhan_egypt;
                  
                  if (resId != 0) {
                      soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + resId);

@@ -149,6 +149,8 @@
     background: rgba(9, 66, 49, 0.95);
     /* Deep Emerald - higher opacity, no blur for Android compatibility */
     border: 1px solid rgba(255, 255, 255, 0.15);
+    border-style: solid !important;
+    outline: none !important;
   }
 
   /* Arabic Typography */
@@ -287,4 +289,29 @@
 
 .animate-pulse-glow-green {
   animation: pulseGlowGreen 2s infinite ease-in-out;
+}
+
+/* Force removal of focus outlines for navigation items */
+.disable-nav-outline {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+
+  /* Reset Tailwind Ring Variables to prevent artifacts */
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-color: transparent !important;
+}
+
+.disable-nav-outline:focus,
+.disable-nav-outline:active,
+.disable-nav-outline:visited,
+.disable-nav-outline:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  /* Temporarily kill shadow on focus to test if it's the culprit */
 }

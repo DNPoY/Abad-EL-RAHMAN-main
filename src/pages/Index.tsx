@@ -219,35 +219,38 @@ const Index = () => {
 
       {/* Modern Floating Dock Navigation */}
       <div className="fixed bottom-6 left-4 right-4 z-50 flex justify-center pb-safe">
-        <nav className="glass-panel-dark rounded-[2rem] p-2 flex items-center gap-1 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] overflow-x-auto no-scrollbar max-w-full">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isQuran = item.id === "quran";
-            const isActive = activeTab === item.id;
+        {/* Container for Style (Border, Background, Shadow) */}
+        <div className="glass-panel-dark rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] max-w-full">
+          {/* Scrollable Area - Added padding here to prevent clipping of scaled items */}
+          <nav className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full p-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isQuran = item.id === "quran";
+              const isActive = activeTab === item.id;
 
-            return (
-              <button
-                key={item.id}
-                onClick={() => {
-                  if (isQuran) {
-                    window.location.href = "/quran";
-                  } else {
-                    setActiveTab(item.id);
-                  }
-                }}
-                className={cn(
-                  "relative flex flex-col items-center justify-center w-14 h-14 rounded-full transition-all duration-300 group outline-none ring-0 select-none",
-                  isActive
-                    ? "bg-gold-matte text-white shadow-lg shadow-gold-matte/30 scale-110"
-                    : "text-white/60"
-                )}
-                style={{ WebkitTapHighlightColor: "transparent" }}
-              >
-                <Icon className={cn("w-5 h-5", isActive && "fill-current")} strokeWidth={isActive ? 2.5 : 2} />
-              </button>
-            );
-          })}
-        </nav>
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    if (isQuran) {
+                      window.location.href = "/quran";
+                    } else {
+                      setActiveTab(item.id);
+                    }
+                  }}
+                  className={cn(
+                    "relative flex flex-col items-center justify-center w-12 h-12 rounded-full transition-all duration-300 group shrink-0 ring-0 select-none disable-nav-outline",
+                    isActive
+                      ? "bg-gold-matte text-white shadow-lg shadow-gold-matte/30 scale-110"
+                      : "text-white/60"
+                  )}
+                >
+                  <Icon className={cn("w-5 h-5", isActive && "fill-current")} strokeWidth={isActive ? 2.5 : 2} />
+                </button>
+              );
+            })}
+          </nav>
+        </div>
       </div>
     </div>
   );
