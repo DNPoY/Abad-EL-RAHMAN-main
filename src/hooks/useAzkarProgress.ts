@@ -24,8 +24,13 @@ export const useAzkarProgress = (type: "morning" | "evening" | "afterPrayer" | "
     }, [type]);
 
     const [progress, setProgress] = useState<Record<number, number>>(() => {
-        const saved = localStorage.getItem(getStorageKey());
-        return saved ? JSON.parse(saved) : {};
+        try {
+            const saved = localStorage.getItem(getStorageKey());
+            return saved ? JSON.parse(saved) : {};
+        } catch (e) {
+            console.error("Error parsing azkar progress:", e);
+            return {};
+        }
     });
 
     // When key changes (e.g. new day or new prayer), load that new key's progress

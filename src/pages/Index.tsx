@@ -233,7 +233,7 @@ const Index = () => {
                   key={item.id}
                   onClick={() => {
                     if (isQuran) {
-                      window.location.href = "/quran";
+                      navigate("/quran");
                     } else {
                       setActiveTab(item.id);
                     }

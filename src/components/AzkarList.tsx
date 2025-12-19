@@ -97,22 +97,39 @@ const AzkarCategory = ({
               </>
             )}
 
-            <Button
-              onClick={() => incrementCount(dhikr.id, dhikr.count)}
-              disabled={isComplete}
-              className={`w-full mt-4 active:scale-95 transition-transform border border-emerald-deep/10 ${isComplete
-                ? "bg-transparent text-emerald-deep/40 shadow-none"
-                : "bg-emerald-deep text-white hover:bg-emerald-light shadow-md"
-                }`}
-            >
-              {isComplete
-                ? language === "ar"
-                  ? "مكتمل"
-                  : "Completed"
-                : language === "ar"
-                  ? "عد"
-                  : "Count"}
-            </Button>
+            <div className="flex gap-2 mt-4">
+              <Button
+                onClick={() => incrementCount(dhikr.id, dhikr.count)}
+                disabled={isComplete && currentCount === dhikr.count}
+                className={`flex-1 active:scale-95 transition-transform border border-emerald-deep/10 ${isComplete && currentCount === dhikr.count
+                  ? "bg-transparent text-emerald-deep/40 shadow-none"
+                  : "bg-emerald-deep text-white hover:bg-emerald-light shadow-md"
+                  }`}
+              >
+                {isComplete && currentCount === dhikr.count
+                  ? language === "ar"
+                    ? "مكتمل"
+                    : "Completed"
+                  : (language === "ar" ? "عد" : "Count") + ` (${dhikr.count})`}
+              </Button>
+
+              {dhikr.secondaryCount && (
+                <Button
+                  onClick={() => incrementCount(dhikr.id, dhikr.secondaryCount)}
+                  disabled={currentCount >= dhikr.secondaryCount}
+                  className={`flex-1 active:scale-95 transition-transform border border-emerald-deep/10 ${currentCount >= dhikr.secondaryCount
+                    ? "bg-transparent text-emerald-deep/40 shadow-none"
+                    : "bg-gold-matte text-white hover:bg-gold-matte/80 shadow-md"
+                    }`}
+                >
+                  {currentCount >= dhikr.secondaryCount
+                    ? language === "ar"
+                      ? "مكتمل (100)"
+                      : "Completed (100)"
+                    : (language === "ar" ? "عد" : "Count") + ` (${dhikr.secondaryCount})`}
+                </Button>
+              )}
+            </div>
           </Card>
         );
       })}

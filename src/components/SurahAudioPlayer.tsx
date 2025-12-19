@@ -12,9 +12,11 @@ interface SurahAudioPlayerProps {
     jumpToAyah?: number | null;
     onClose?: () => void;
     onPlayChange?: (isPlaying: boolean) => void;
+    onSurahEnd?: () => void;
+    autoPlay?: boolean;
 }
 
-export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpToAyah, onClose, onPlayChange }: SurahAudioPlayerProps) => {
+export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpToAyah, onClose, onPlayChange, onSurahEnd, autoPlay = false }: SurahAudioPlayerProps) => {
     const { language } = useLanguage();
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentAyah, setCurrentAyah] = useState(1);
@@ -25,11 +27,13 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
     // Ref to avoid stale closure issues
     const onAyahChangeRef = useRef(onAyahChange);
     const onPlayChangeRef = useRef(onPlayChange);
+    const onSurahEndRef = useRef(onSurahEnd);
 
     useEffect(() => {
         onAyahChangeRef.current = onAyahChange;
         onPlayChangeRef.current = onPlayChange;
-    }, [onAyahChange, onPlayChange]);
+        onSurahEndRef.current = onSurahEnd;
+    }, [onAyahChange, onPlayChange, onSurahEnd]);
 
     // Notify parent about play state change
     useEffect(() => {
@@ -37,13 +41,10 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
             onPlayChangeRef.current(isPlaying);
         }
     }, [isPlaying]);
-
-    // Handle external jump requests
-    // Reset to Ayah 1 when Surah changes
     useEffect(() => {
         setCurrentAyah(1);
-        setIsPlaying(false);
-    }, [surahNumber]);
+        setIsPlaying(autoPlay);
+    }, [surahNumber, autoPlay]);
 
     // Handle external jump requests
     useEffect(() => {
@@ -86,9 +87,13 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
             if (currentAyah < totalAyahs) {
                 setCurrentAyah(prev => prev + 1); // Play next
             } else {
-                setIsPlaying(false);
-                setCurrentAyah(1); // Reset to start
-                onAyahChangeRef.current(null);
+                if (onSurahEndRef.current) {
+                    onSurahEndRef.current();
+                } else {
+                    setIsPlaying(false);
+                    setCurrentAyah(1); // Reset to start
+                    onAyahChangeRef.current(null);
+                }
             }
         };
 

@@ -1,6 +1,7 @@
 import { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProviders } from "@/components/AppProviders";
+import { NotificationManager } from "@/components/NotificationManager";
 import { BackButtonHandler } from "@/components/BackButtonHandler";
 import { BackgroundMode } from "@anuradev/capacitor-background-mode";
 import { Capacitor } from "@capacitor/core";
@@ -59,6 +60,7 @@ const App = () => {
 
   return (
     <AppProviders>
+      <NotificationManager />
       <BrowserRouter>
         <BackButtonHandler />
         <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-[#f8f9fa] dark:bg-[#1a1c1e] text-primary">Loading...</div>}>

@@ -42,8 +42,13 @@ const NotificationContext = createContext<NotificationContextType | undefined>(u
 export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { language, t } = useLanguage();
   const [settings, setSettings] = useState<NotificationSettings>(() => {
-    const saved = localStorage.getItem("notificationSettings");
-    return saved ? JSON.parse(saved) : defaultSettings;
+    try {
+      const saved = localStorage.getItem("notificationSettings");
+      return saved ? JSON.parse(saved) : defaultSettings;
+    } catch (e) {
+      console.error("Error parsing notification settings:", e);
+      return defaultSettings;
+    }
   });
   const [hasPermission, setHasPermission] = useState(false);
 

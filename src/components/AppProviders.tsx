@@ -8,6 +8,7 @@ import { FontSizeProvider } from "@/contexts/FontSizeContext";
 import { SettingsProvider } from "@/contexts/SettingsContext";
 import { AlarmProvider } from "@/contexts/AlarmContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
+import { PrayerTimesProvider } from "@/contexts/PrayerTimesContext";
 
 const queryClient = new QueryClient();
 
@@ -22,13 +23,15 @@ export const AppProviders = ({ children }: AppProvidersProps) => {
                 <FontSizeProvider>
                     <SettingsProvider>
                         <NotificationProvider>
-                            <AlarmProvider>
-                                <TooltipProvider>
-                                    <Toaster />
-                                    <Sonner />
-                                    {children}
-                                </TooltipProvider>
-                            </AlarmProvider>
+                            <PrayerTimesProvider>
+                                <AlarmProvider>
+                                    <TooltipProvider>
+                                        <Toaster />
+                                        <Sonner />
+                                        {children}
+                                    </TooltipProvider>
+                                </AlarmProvider>
+                            </PrayerTimesProvider>
                         </NotificationProvider>
                     </SettingsProvider>
                 </FontSizeProvider>

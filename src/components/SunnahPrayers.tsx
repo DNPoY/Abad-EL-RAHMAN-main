@@ -91,14 +91,14 @@ export const SunnahPrayers = () => {
                         >
                             <div className="flex justify-between items-start">
                                 <span className="text-xl font-bold font-tajawal text-emerald-deep">
-                                    {prayer.name}
+                                    {language === "ar" ? prayer.name : prayer.nameEn}
                                 </span>
                                 <Badge className="bg-emerald-deep/10 text-emerald-deep hover:bg-emerald-deep/20 border-none">
-                                    {prayer.rakaat}
+                                    {language === "ar" ? prayer.rakaat : prayer.rakaatEn}
                                 </Badge>
                             </div>
                             <p className="text-sm text-emerald-deep/70 font-tajawal leading-relaxed">
-                                {prayer.description}
+                                {language === "ar" ? prayer.description : prayer.descriptionEn}
                             </p>
                         </div>
                     ))}

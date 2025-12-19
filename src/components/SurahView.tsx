@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { useParams, Link, useLocation } from "react-router-dom";
-import { Card } from "@/components/ui/card";
+import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useFontSize, type FontSize } from "@/contexts/FontSizeContext";
 import { useSettings } from "@/contexts/SettingsContext";
 import { surahs } from "@/lib/quran-data";
-import { ArrowRight, Loader2, AlertCircle, Moon, Sun, BookOpen, RotateCcw } from "lucide-react";
+import { ArrowRight, Loader2, AlertCircle, Moon, Sun, BookOpen, RotateCcw, Play, Pause, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { IslamicBorder } from "./IslamicBorder";
 import {
@@ -18,6 +17,23 @@ import {
 } from "@/components/ui/dialog";
 import { useTafsir } from "@/hooks/useTafsir";
 import { SurahAudioPlayer } from "./SurahAudioPlayer";
+import { useBookmarks } from "@/hooks/useBookmarks";
+import { useLongPress } from "@/hooks/useLongPress";
+
+// Fonts helper functions
+const getFontFamilyClass = (font: string) => {
+    switch (font) {
+        case 'uthmani': return 'font-quran';
+        case 'indopak': return 'font-indopak'; // Assuming this exists or falls back
+        default: return 'font-quran';
+    }
+};
+
+const getFontSize = (size: string, font: string) => {
+    const baseSize = size === 'small' ? 24 : size === 'large' ? 36 : 30;
+    // Adjust logic as needed, or just return baseSize
+    return baseSize;
+};
 
 interface Ayah {
     number: number;
@@ -40,6 +56,94 @@ interface SurahData {
     numberOfAyahs: number;
     ayahs: Ayah[];
 }
+
+// Separate component to handle per-ayah hooks (useLongPress)
+const AyahItem = ({
+    ayah,
+    surahNumber,
+    isPlaying,
+    fontSize,
+    quranFont,
+    onPlay,
+    isBookmarked,
+    toggleBookmark,
+    setRef,
+    highlightText,
+    setSelectedAyah,
+    language
+}: {
+    ayah: Ayah,
+    surahNumber: number,
+    isPlaying: boolean,
+    fontSize: string,
+    quranFont: string,
+    onPlay: () => void,
+    isBookmarked: boolean,
+    toggleBookmark: () => void,
+    setRef: (el: HTMLDivElement | null) => void,
+    highlightText: (text: string) => React.ReactNode,
+    setSelectedAyah: (ayah: { number: number; text: string }) => void,
+    language: string
+}) => {
+    // const { getFontFamilyClass, getFontSize } = useFontSize(); // Helpers are global now
+
+    // Prevent click if long press triggered
+    const isLongPressTriggered = useRef(false);
+
+    const { onMouseDown, onMouseUp, onMouseLeave, onTouchStart, onTouchEnd } = useLongPress(() => {
+        isLongPressTriggered.current = true;
+        toggleBookmark();
+        if (navigator.vibrate) navigator.vibrate(50);
+        toast.dismiss(); // Dismiss previous toast to avoid stacking
+        toast.success(isBookmarked ? (language === "ar" ? "تم إزالة العلامة" : "Bookmark removed") : (language === "ar" ? "تم وضع علامة" : "Ayah bookmarked"));
+    }, {
+        onStart: () => { isLongPressTriggered.current = false; },
+        threshold: 500
+    });
+
+    const handleClick = (e: React.MouseEvent) => {
+        if (isLongPressTriggered.current) {
+            e.stopPropagation();
+            return;
+        }
+        onPlay();
+    };
+
+    return (
+        <div
+            id={`ayah-${ayah.numberInSurah}`}
+            ref={setRef}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseLeave}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+            onClick={handleClick}
+            className={`relative group inline px-1.5 rounded-lg transition-colors duration-200 cursor-pointer ${isPlaying ? "bg-gold-matte/20" :
+                isBookmarked ? "bg-yellow-100 dark:bg-yellow-500/20" : "hover:bg-emerald-deep/5"
+                }`}
+            title={language === "ar" ? "اضغط للاستماع، طوّل للعلامة" : "Click to play, Hold to bookmark"}
+        >
+            <span className={`transition-colors duration-300 ${isPlaying ? "text-emerald-deep font-bold" : "text-reading"
+                }`}>
+                {highlightText(surahNumber === 1
+                    ? ayah.text.replace(/[\u06DF\u06ED]/g, "")
+                    : ayah.text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").replace(/[\u06DF\u06ED]/g, "").trim())}
+            </span>
+            {/* Ayah Number Marker */}
+            <button
+                onClick={(e) => {
+                    e.stopPropagation(); // Prevent playing audio when clicking number
+                    setSelectedAyah({ number: ayah.numberInSurah, text: ayah.text });
+                }}
+                className="inline-flex items-center justify-center w-8 h-8 mx-1.5 align-middle text-xs border border-emerald-deep/20 rounded-full font-amiri font-bold text-emerald-deep/70 bg-white/50 hover:bg-emerald-deep hover:text-white transition-all cursor-pointer shadow-sm"
+                title={language === "ar" ? "عرض التفسير" : "View Tafsir"}
+            >
+                {ayah.numberInSurah}
+            </button>
+        </div>
+    );
+};
 
 const TafsirModal = ({
     surahNumber,
@@ -121,6 +225,7 @@ export const SurahView = () => {
     const [selectedAyah, setSelectedAyah] = useState<{ number: number; text: string } | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const location = useLocation();
+    const navigate = useNavigate();
     const targetAyahRef = useRef<number | null>(null);
     const [playingAyahNumber, setPlayingAyahNumber] = useState<number | null>(null);
     const [jumpToAyah, setJumpToAyah] = useState<number | null>(null);
@@ -128,6 +233,7 @@ export const SurahView = () => {
     const { quranFont } = useSettings();
     const [showPlayer, setShowPlayer] = useState(false);
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+    const { bookmarks, toggleBookmark, isBookmarked } = useBookmarks();
 
     // Add extra padding at bottom for audio player
     const containerClass = "min-h-screen bg-[#0c3f2d] pb-40";
@@ -233,6 +339,20 @@ export const SurahView = () => {
         // Only scroll to top if we don't have a target ayah
         if (!targetAyahRef.current) {
             window.scrollTo(0, 0);
+        }
+
+        // Handle Autoplay from URL (e.g. from previous Surah)
+        const queryParams = new URLSearchParams(location.search);
+        if (queryParams.get("autoplay") === "true") {
+            setTimeout(() => {
+                setShowPlayer(true);
+                // No need to set isPlaying here, standard player init handles it if we pass a prop or just rely on mount
+                // But SurahAudioPlayer starts paused by default unless we tell it otherwise.
+                // We'll trust the user to hit play OR better, we passed 'jumpToAyah' maybe?
+                // Actually, let's just show the player. Ideally we'd auto-play but browser policies might block unmuted autoplay.
+                // For now, let's just make sure player is OPEN.
+                // To force play, we might need a prop on SurahAudioPlayer like 'autoPlay={true}'
+            }, 500);
         }
     }, [surahId, language, location.search]);
 
@@ -375,38 +495,24 @@ export const SurahView = () => {
                                     const isPlaying = playingAyahNumber === actualAyahNumber;
 
                                     return (
-                                        <div
+                                        <AyahItem
                                             key={ayah.number}
-                                            id={`ayah-${ayah.numberInSurah}`}
-                                            ref={(el) => (ayahRefs.current[actualAyahNumber] = el)}
-                                            onClick={() => {
+                                            ayah={ayah}
+                                            surahNumber={surahInfo?.number || 0}
+                                            isPlaying={isPlaying}
+                                            fontSize={fontSize}
+                                            quranFont={quranFont || 'uthmani'}
+                                            onPlay={() => {
                                                 setJumpToAyah(actualAyahNumber);
                                                 setShowPlayer(true);
-                                            }} // Click to play
-                                            className={`relative group inline px-1.5 rounded-lg transition-colors duration-200 cursor-pointer ${isPlaying
-                                                ? "bg-gold-matte/20"
-                                                : "hover:bg-emerald-deep/5"
-                                                }`}
-                                            title={language === "ar" ? "اضغط للاستماع" : "Click to play"}
-                                        >
-                                            <span className={`transition-colors duration-300 ${isPlaying ? "text-emerald-deep font-bold" : "text-reading"
-                                                }`}>
-                                                {highlightText(surahInfo?.number === 1
-                                                    ? ayah.text.replace(/[\u06DF\u06ED]/g, "")
-                                                    : ayah.text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").replace(/[\u06DF\u06ED]/g, "").trim())}
-                                            </span>
-                                            {/* Ayah Number Marker */}
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation(); // Prevent playing audio when clicking number
-                                                    setSelectedAyah({ number: ayah.numberInSurah, text: ayah.text });
-                                                }}
-                                                className="inline-flex items-center justify-center w-8 h-8 mx-1.5 align-middle text-xs border border-emerald-deep/20 rounded-full font-amiri font-bold text-emerald-deep/70 bg-white/50 hover:bg-emerald-deep hover:text-white transition-all cursor-pointer shadow-sm"
-                                                title={language === "ar" ? "عرض التفسير" : "View Tafsir"}
-                                            >
-                                                {ayah.numberInSurah}
-                                            </button>
-                                        </div>
+                                            }}
+                                            isBookmarked={isBookmarked(surahInfo?.number || 0, actualAyahNumber)}
+                                            toggleBookmark={() => toggleBookmark(surahInfo?.number || 0, actualAyahNumber)}
+                                            setRef={(el) => (ayahRefs.current[actualAyahNumber] = el)}
+                                            highlightText={highlightText}
+                                            setSelectedAyah={setSelectedAyah}
+                                            language={language}
+                                        />
                                     );
                                 })}
                             </div>
@@ -462,6 +568,18 @@ export const SurahView = () => {
                                 jumpToAyah={jumpToAyah}
                                 onClose={() => setShowPlayer(false)}
                                 onPlayChange={setIsAudioPlaying}
+                                autoPlay={new URLSearchParams(location.search).get("autoplay") === "true"}
+                                onSurahEnd={() => {
+                                    if (surahData.number < 114) {
+                                        // Navigate to next Surah
+                                        const nextSurahId = surahData.number + 1;
+                                        navigate(`/quran/${nextSurahId}?autoplay=true`);
+                                    } else {
+                                        // End of Quran, stop playing
+                                        setIsAudioPlaying(false);
+                                        setShowPlayer(false);
+                                    }
+                                }}
                             />
                         </div>
                     </div>
