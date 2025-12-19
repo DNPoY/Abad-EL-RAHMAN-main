@@ -175,12 +175,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Contact Note - User Request */}
-        <div className="mt-4 text-center animate-fade-in delay-300">
-          <p className="text-[10px] text-white/70 font-tajawal leading-relaxed max-w-xs mx-auto">
-            نسخة تجربية جارى العمل عليها لاى اقتراح او شكوى أحمد الحريري 01019152314
-          </p>
-        </div>
+
       </header>
 
       <Dialog open={isDuaOpen} onOpenChange={setIsDuaOpen}>
