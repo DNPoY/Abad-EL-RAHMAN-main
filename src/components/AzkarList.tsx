@@ -9,6 +9,17 @@ import { CheckCircle2, RotateCcw } from "lucide-react";
 import { useAzkarProgress } from "@/hooks/useAzkarProgress";
 import { toast } from "sonner";
 import { useFontSize } from "@/contexts/FontSizeContext";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const AzkarCategory = ({
   data,
@@ -53,21 +64,23 @@ const AzkarCategory = ({
 
       {data.map((dhikr, index) => {
         const currentCount = progress[dhikr.id] || 0;
-        const isComplete = currentCount >= dhikr.count;
+        const finalTarget = dhikr.secondaryCount || dhikr.count;
+        const isCardComplete = currentCount >= finalTarget;
+        const isPrimaryComplete = currentCount >= dhikr.count;
 
         return (
           <Card
             key={dhikr.id}
-            className={`p-6 transition-all duration-300 border-emerald-deep/5 ${isComplete ? "opacity-60 bg-emerald-50/50" : "bg-white hover:shadow-lg hover:-translate-y-1"
+            className={`p-6 transition-all duration-300 border-emerald-deep/5 ${isCardComplete ? "opacity-70 bg-gold-matte/10 border-gold-matte/20" : "bg-white hover:shadow-lg hover:-translate-y-1"
               }`}
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Badge
-                  className={`gap-1 ${isComplete ? "bg-emerald-deep/10 text-emerald-deep hover:bg-emerald-deep/20" : "bg-emerald-deep text-white hover:bg-emerald-deep/90"}`}
+                  className={`gap-1 ${isCardComplete ? "bg-emerald-deep/10 text-emerald-deep hover:bg-emerald-deep/20" : "bg-emerald-deep text-white hover:bg-emerald-deep/90"}`}
                 >
-                  {isComplete && <CheckCircle2 className="w-3 h-3" />}
-                  {currentCount} / {dhikr.count}
+                  {isCardComplete && <CheckCircle2 className="w-3 h-3" />}
+                  {currentCount} / {currentCount > dhikr.count && dhikr.secondaryCount ? dhikr.secondaryCount : dhikr.count}
                 </Badge>
                 {currentCount > 0 && (
                   <Button
@@ -100,13 +113,13 @@ const AzkarCategory = ({
             <div className="flex gap-2 mt-4">
               <Button
                 onClick={() => incrementCount(dhikr.id, dhikr.count)}
-                disabled={isComplete && currentCount === dhikr.count}
-                className={`flex-1 active:scale-95 transition-transform border border-emerald-deep/10 ${isComplete && currentCount === dhikr.count
+                disabled={isPrimaryComplete}
+                className={`flex-1 active:scale-95 transition-transform border border-emerald-deep/10 ${isPrimaryComplete
                   ? "bg-transparent text-emerald-deep/40 shadow-none"
                   : "bg-emerald-deep text-white hover:bg-emerald-light shadow-md"
                   }`}
               >
-                {isComplete && currentCount === dhikr.count
+                {isPrimaryComplete
                   ? language === "ar"
                     ? "مكتمل"
                     : "Completed"
@@ -142,33 +155,57 @@ export const AzkarList = () => {
   const [resetKey, setResetKey] = useState(0);
 
   const handleResetAll = () => {
-    if (confirm(language === "ar" ? "هل أنت متأكد من إعادة تعيين جميع الأذكار؟" : "Are you sure you want to reset all Azkar?")) {
-      const d = new Date();
-      const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      const types = ["morning", "evening", "afterPrayer", "sleep", "nightAnxiety", "badDreams"];
+    const d = new Date();
+    const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const types = ["morning", "evening", "afterPrayer", "sleep", "nightAnxiety", "badDreams"];
 
-      types.forEach(type => {
-        localStorage.removeItem(`azkar-progress-${type}-${today}`);
-        localStorage.removeItem(`azkar-last-active-${type}`);
-      });
+    types.forEach(type => {
+      localStorage.removeItem(`azkar-progress-${type}-${today}`);
+      localStorage.removeItem(`azkar-last-active-${type}`);
+    });
 
-      setResetKey(prev => prev + 1);
-      toast.success(language === "ar" ? "تم إعادة تعيين الأذكار" : "Azkar reset successfully");
-    }
+    setResetKey(prev => prev + 1);
+    toast.success(language === "ar" ? "تم إعادة تعيين الأذكار" : "Azkar reset successfully");
   };
 
   return (
     <div className="space-y-4">
       <div className="flex justify-end mb-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleResetAll}
-          className="text-emerald-deep/60 border-emerald-deep/20 hover:text-emerald-deep hover:bg-emerald-deep/5 hover:border-emerald-deep/30"
-        >
-          <RotateCcw className="w-4 h-4 mr-2" />
-          {language === "ar" ? "بدء من جديد" : "Start Over"}
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-emerald-deep/60 border-emerald-deep/20 hover:text-emerald-deep hover:bg-emerald-deep/5 hover:border-emerald-deep/30"
+            >
+              <RotateCcw className="w-4 h-4 mr-2" />
+              {language === "ar" ? "بدء من جديد" : "Start Over"}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="bg-cream border-emerald-deep/10 text-emerald-deep">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="font-amiri text-2xl text-emerald-deep">
+                {language === "ar" ? "تأكيد إعادة البدء" : "Confirm Reset"}
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-emerald-deep/70">
+                {language === "ar"
+                  ? "هل أنت متأكد أنك تريد إعادة تعيين جميع عدادات الأذكار لهذا اليوم؟"
+                  : "Are you sure you want to reset all Azkar counters for today?"}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel className="border-emerald-deep/10 text-emerald-deep hover:bg-emerald-deep/5">
+                {language === "ar" ? "إلغاء" : "Cancel"}
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleResetAll}
+                className="bg-gold-matte text-white hover:bg-gold-matte/80"
+              >
+                {language === "ar" ? "نعم، أعد البدء" : "Yes, Reset"}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
 
       <Tabs key={resetKey} defaultValue="morning" className="w-full" dir={language === "ar" ? "rtl" : "ltr"}>
@@ -220,4 +257,5 @@ export const AzkarList = () => {
     </div>
   );
 };
+
 

@@ -135,7 +135,7 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
                 {/* Continue Reading Card */}
                 {lastRead && !searchQuery && (
                     <div className="max-w-xl mx-auto mb-6 px-1 animate-fade-in-up delay-100">
-                        <Link to={`/quran/${lastRead.surahId}`}>
+                        <Link to={`/quran/${lastRead.surahId}${lastRead.ayahNumber ? `?ayah=${lastRead.ayahNumber}` : ''}`}>
                             <div className="bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-all flex items-center justify-between group border border-white/10">
                                 <div className="flex items-center gap-4">
                                     <div className="p-3 bg-white/10 rounded-full backdrop-blur-sm">
@@ -149,7 +149,10 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
                                             {lastRead.surahName}
                                             <span className="mx-2 text-white/40 text-sm font-light">|</span>
                                             <span className="text-sm font-normal text-emerald-100">
-                                                {language === "ar" ? "صفحة" : "Page"} {lastRead.pageNumber}
+                                                {lastRead.ayahNumber
+                                                    ? (language === "ar" ? `آية ${lastRead.ayahNumber}` : `Ayah ${lastRead.ayahNumber}`)
+                                                    : (language === "ar" ? "صفحة" : "Page") + ` ${lastRead.pageNumber}`
+                                                }
                                             </span>
                                         </h3>
                                     </div>
@@ -188,13 +191,12 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
                     <div className="relative group">
                         <div className="absolute inset-0 bg-emerald-deep/5 blur-xl rounded-full transform scale-90 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="relative flex shadow-[0_8px_30px_rgba(0,0,0,0.04)] rounded-2xl bg-white border border-emerald-deep/5 overflow-hidden">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-deep/40 w-5 h-5 z-20" />
                             <Input
                                 placeholder={language === "ar" ? "ابحث عن سورة أو آية..." : "Search Surah or Ayah..."}
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                                className="pl-12 py-7 border-none bg-transparent text-emerald-deep placeholder:text-emerald-deep/30 focus:ring-0 text-lg font-tajawal w-full"
+                                className="pl-4 py-7 border-none bg-transparent text-emerald-deep placeholder:text-emerald-deep/30 focus:ring-0 text-lg font-tajawal w-full"
                             />
                             <Button
                                 onClick={handleSearch}

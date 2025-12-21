@@ -111,7 +111,7 @@ export const AlarmChallenge = () => {
 
                     <div>
                         <h2 className="text-3xl font-bold font-amiri text-primary mb-2">
-                            {t.fajrAlarm}
+                            {t.alarm}
                         </h2>
                         {challengeType === "normal" ? (
                             <p className="text-lg text-muted-foreground font-amiri">

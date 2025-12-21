@@ -2,6 +2,22 @@ import { DuaItem } from "./types";
 
 export const personalDuas: DuaItem[] = [
     {
+        id: 'personal-1',
+        arabic: "وَجَعَلْنَا مِن بَيْنِ أَيْدِيهِمْ سَدًّا وَمِنْ خَلْفِهِمْ سَدًّا فَأَغْشَيْنَاهُمْ فَهُمْ لَا يُبْصِرُونَ",
+        translation: "And We have put before them a barrier and behind them a barrier and covered them, so they do not see.",
+        transliteration: "Wa ja'alna mim bayni aydihim saddan wa min khalfihim saddan fa aghshaynahum fahum la yubsirun",
+        source: "Surah Yasin (36:9)",
+        category: "personal"
+    },
+    {
+        id: 'personal-2',
+        arabic: "وَقَالَ إِنِّي ذَاهِبٌ إِلَىٰ رَبِّي سَيَهْدِينِ",
+        translation: "And (Abraham) said: 'Lo! I am going unto my Lord who will guide me.'",
+        transliteration: "Wa qaala innee thaahibun ilaa rabbee sayahdeen",
+        source: "Surah As-Saffat (37:99)",
+        category: "personal"
+    },
+    {
         id: 1,
         category: "personal",
         arabic: "اللهم إني أسألك علمًا نافعًا، ورزقًا طيبًا، وعملاً متقبلاً",

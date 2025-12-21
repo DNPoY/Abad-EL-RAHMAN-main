@@ -96,10 +96,24 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
     }, [calculationMethod, locationMode, madhab]);
 
     const refreshLocation = useCallback(() => {
-        setLoading(true);
+        // Only show loading if we have absolutely no data
+        if (!prayerTimes) setLoading(true);
+
         if (locationMode === "manual") {
             calculatePrayerTimes(manualLatitude, manualLongitude);
         } else if ("geolocation" in navigator) {
+            // Optimization: Try to use last known location immediately while waiting for fresh fix
+            const lastKnown = localStorage.getItem('lastKnownLocation');
+            if (lastKnown) {
+                try {
+                    const { latitude, longitude } = JSON.parse(lastKnown);
+                    // Update times immediately using last known location
+                    calculatePrayerTimes(latitude, longitude);
+                } catch (e) {
+                    console.error("Error parsing last location", e);
+                }
+            }
+
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
@@ -108,33 +122,33 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
                 },
                 (error) => {
                     console.warn("Location fetch failed, using cache/defaults", error);
-                    if (localStorage.getItem('cachedPrayerTimes')) {
-                        // Keep existing data 
-                        setLoading(false);
-                    } else {
-                        setLoading(false);
-                    }
+                    setLoading(false);
                 },
                 { enableHighAccuracy: false, timeout: 15000, maximumAge: 300000 }
             );
         }
-    }, [calculatePrayerTimes, locationMode, manualLatitude, manualLongitude]);
+    }, [calculatePrayerTimes, locationMode, manualLatitude, manualLongitude, prayerTimes]);
 
     // Initial Load
     useEffect(() => {
-        // 1. Try cache
+        // 1. Try cache for instant render
         const cachedData = localStorage.getItem('cachedPrayerTimes');
         if (cachedData) {
             try {
                 const { times } = JSON.parse(cachedData) as { times: PrayerTimesData; date: string };
                 setPrayerTimes(times);
-                setLoading(false);
+                // Don't set loading false here, it's already initialized based on cache presence
             } catch (e) { /* ignore */ }
         }
 
-        // 2. Fetch fresh
-        refreshLocation();
-    }, [calculationMethod, madhab, locationMode, manualLatitude, manualLongitude, refreshLocation]);
+        // 2. Refresh (Background update)
+        // We use a small timeout to ensure the render cycle completes with cached data first
+        const timer = setTimeout(() => {
+            refreshLocation();
+        }, 100);
+
+        return () => clearTimeout(timer);
+    }, [calculationMethod, madhab, locationMode, manualLatitude, manualLongitude]);
 
     // Next Prayer Logic
     useEffect(() => {

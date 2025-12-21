@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { useTafsir } from "@/hooks/useTafsir";
 import { SurahAudioPlayer } from "./SurahAudioPlayer";
-import { useBookmarks } from "@/hooks/useBookmarks";
-import { useLongPress } from "@/hooks/useLongPress";
+
 
 // Fonts helper functions
 const getFontFamilyClass = (font: string) => {
@@ -57,7 +56,7 @@ interface SurahData {
     ayahs: Ayah[];
 }
 
-// Separate component to handle per-ayah hooks (useLongPress)
+// Separate component to handle per-ayah hooks (useLongPress removed)
 const AyahItem = ({
     ayah,
     surahNumber,
@@ -65,8 +64,6 @@ const AyahItem = ({
     fontSize,
     quranFont,
     onPlay,
-    isBookmarked,
-    toggleBookmark,
     setRef,
     highlightText,
     setSelectedAyah,
@@ -78,8 +75,6 @@ const AyahItem = ({
     fontSize: string,
     quranFont: string,
     onPlay: () => void,
-    isBookmarked: boolean,
-    toggleBookmark: () => void,
     setRef: (el: HTMLDivElement | null) => void,
     highlightText: (text: string) => React.ReactNode,
     setSelectedAyah: (ayah: { number: number; text: string }) => void,
@@ -87,25 +82,7 @@ const AyahItem = ({
 }) => {
     // const { getFontFamilyClass, getFontSize } = useFontSize(); // Helpers are global now
 
-    // Prevent click if long press triggered
-    const isLongPressTriggered = useRef(false);
-
-    const { onMouseDown, onMouseUp, onMouseLeave, onTouchStart, onTouchEnd } = useLongPress(() => {
-        isLongPressTriggered.current = true;
-        toggleBookmark();
-        if (navigator.vibrate) navigator.vibrate(50);
-        toast.dismiss(); // Dismiss previous toast to avoid stacking
-        toast.success(isBookmarked ? (language === "ar" ? "تم إزالة العلامة" : "Bookmark removed") : (language === "ar" ? "تم وضع علامة" : "Ayah bookmarked"));
-    }, {
-        onStart: () => { isLongPressTriggered.current = false; },
-        threshold: 500
-    });
-
     const handleClick = (e: React.MouseEvent) => {
-        if (isLongPressTriggered.current) {
-            e.stopPropagation();
-            return;
-        }
         onPlay();
     };
 
@@ -113,16 +90,10 @@ const AyahItem = ({
         <div
             id={`ayah-${ayah.numberInSurah}`}
             ref={setRef}
-            onMouseDown={onMouseDown}
-            onMouseUp={onMouseUp}
-            onMouseLeave={onMouseLeave}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
             onClick={handleClick}
-            className={`relative group inline px-1.5 rounded-lg transition-colors duration-200 cursor-pointer ${isPlaying ? "bg-gold-matte/20" :
-                isBookmarked ? "bg-yellow-100 dark:bg-yellow-500/20" : "hover:bg-emerald-deep/5"
+            className={`relative group inline px-1.5 rounded-lg transition-colors duration-200 cursor-pointer ${isPlaying ? "bg-gold-matte/20" : "hover:bg-emerald-deep/5"
                 }`}
-            title={language === "ar" ? "اضغط للاستماع، طوّل للعلامة" : "Click to play, Hold to bookmark"}
+            title={language === "ar" ? "اضغط للاستماع" : "Click to play"}
         >
             <span className={`transition-colors duration-300 ${isPlaying ? "text-emerald-deep font-bold" : "text-reading"
                 }`}>
@@ -233,7 +204,6 @@ export const SurahView = () => {
     const { quranFont } = useSettings();
     const [showPlayer, setShowPlayer] = useState(false);
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const { bookmarks, toggleBookmark, isBookmarked } = useBookmarks();
 
     // Add extra padding at bottom for audio player
     const containerClass = "min-h-screen bg-[#0c3f2d] pb-40";
@@ -274,19 +244,43 @@ export const SurahView = () => {
 
     const surahInfo = surahs.find((s) => s.number === Number(surahId));
 
-    // Save global last read position
+    // Track visible Ayahs for "Continue Reading"
     useEffect(() => {
-        if (surahInfo && currentPage) {
-            const lastRead = {
-                surahId: surahInfo.number,
-                surahName: surahInfo.name,
-                englishName: surahInfo.englishName,
-                pageNumber: currentPage,
-                timestamp: Date.now()
-            };
-            localStorage.setItem("last_read_position", JSON.stringify(lastRead));
-        }
-    }, [currentPage, surahInfo]);
+        if (!surahInfo || isLoading) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const ayahNum = parseInt(entry.target.getAttribute("data-ayah-number") || "0");
+                        if (ayahNum > 0) {
+                            // Update local storage with precise location
+                            const lastRead = {
+                                surahId: surahInfo.number,
+                                surahName: surahInfo.name,
+                                englishName: surahInfo.englishName,
+                                pageNumber: currentPage,
+                                ayahNumber: ayahNum, // Save exact ayah
+                                timestamp: Date.now()
+                            };
+                            localStorage.setItem("last_read_position", JSON.stringify(lastRead));
+                        }
+                    }
+                });
+            },
+            {
+                rootMargin: "-40% 0px -40% 0px" // Trigger when element is in the vertical center 20%
+            }
+        );
+
+        // Observe all ayah elements on the current page
+        const ayahElements = document.querySelectorAll('.ayah-container');
+        ayahElements.forEach((el) => observer.observe(el));
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [surahInfo, currentPage, isLoading]);
 
     useEffect(() => {
         const fetchSurah = async () => {
@@ -495,24 +489,23 @@ export const SurahView = () => {
                                     const isPlaying = playingAyahNumber === actualAyahNumber;
 
                                     return (
-                                        <AyahItem
-                                            key={ayah.number}
-                                            ayah={ayah}
-                                            surahNumber={surahInfo?.number || 0}
-                                            isPlaying={isPlaying}
-                                            fontSize={fontSize}
-                                            quranFont={quranFont || 'uthmani'}
-                                            onPlay={() => {
-                                                setJumpToAyah(actualAyahNumber);
-                                                setShowPlayer(true);
-                                            }}
-                                            isBookmarked={isBookmarked(surahInfo?.number || 0, actualAyahNumber)}
-                                            toggleBookmark={() => toggleBookmark(surahInfo?.number || 0, actualAyahNumber)}
-                                            setRef={(el) => (ayahRefs.current[actualAyahNumber] = el)}
-                                            highlightText={highlightText}
-                                            setSelectedAyah={setSelectedAyah}
-                                            language={language}
-                                        />
+                                        <span key={ayah.number} className="ayah-container" data-ayah-number={actualAyahNumber}>
+                                            <AyahItem
+                                                ayah={ayah}
+                                                surahNumber={surahInfo?.number || 0}
+                                                isPlaying={isPlaying}
+                                                fontSize={fontSize}
+                                                quranFont={quranFont || 'uthmani'}
+                                                onPlay={() => {
+                                                    setJumpToAyah(actualAyahNumber);
+                                                    setShowPlayer(true);
+                                                }}
+                                                setRef={(el) => (ayahRefs.current[actualAyahNumber] = el)}
+                                                highlightText={highlightText}
+                                                setSelectedAyah={setSelectedAyah}
+                                                language={language}
+                                            />
+                                        </span>
                                     );
                                 })}
                             </div>
@@ -604,8 +597,18 @@ export const SurahView = () => {
                     ) : null}
                 </div>
 
-                {/* Spacer for Audio Player */}
-                <div className={`transition-all duration-300 ${showPlayer ? "h-48" : "h-0"}`} />
+                {/* Floating Back Button */}
+                <div className="fixed bottom-6 left-4 z-50 animate-fade-in-up">
+                    <Link to="/quran">
+                        <Button
+                            variant="secondary"
+                            size="icon"
+                            className="w-12 h-12 rounded-full shadow-lg bg-emerald-deep text-white hover:bg-emerald-deep/90 border border-white/10"
+                        >
+                            <ArrowRight className={`w-5 h-5 ${language === "ar" ? "rotate-180" : ""}`} />
+                        </Button>
+                    </Link>
+                </div>
 
                 {surahInfo && selectedAyah && (
                     <TafsirModal

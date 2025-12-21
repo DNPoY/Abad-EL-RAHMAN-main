@@ -107,7 +107,7 @@
 
   /* Safe Area Utilities */
   .pt-safe {
-    padding-top: env(safe-area-inset-top);
+    padding-top: max(env(safe-area-inset-top), 35px);
   }
 
   .pb-safe {
@@ -248,15 +248,9 @@
   font-family: 'Tajawal', sans-serif;
 }
 
-@font-face {
-  font-family: 'indopak';
-  src: url('/fonts/indopak.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
+/* Indopak font file is missing, using fallback for now */
 .font-indopak {
-  font-family: 'indopak', serif;
+  font-family: 'original-hafs', serif;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -121,21 +121,19 @@ const Index = () => {
 
       {/* Modern Header - Deep Emerald */}
       <header
-        className="relative z-10 pt-safe pb-6 px-6 bg-emerald-deep text-white rounded-b-[3rem] shadow-[0_15px_50px_-10px_rgba(9,66,49,0.4)] mb-6 overflow-hidden"
+        className="relative z-10 pt-safe pb-4 px-4 bg-emerald-deep text-white rounded-b-[2.5rem] shadow-[0_10px_40px_-10px_rgba(9,66,49,0.4)] mb-4 overflow-hidden"
       >
         {/* Abstract Pattern Overlay for Header */}
         <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay"
           style={{ backgroundImage: `url('/assets/pattern.png')`, backgroundSize: '150px' }}>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center pt-2 animate-fade-in-down">
+        <div className="relative flex flex-col items-center justify-center pt-1 animate-fade-in-down">
           {/* Top Row: Language & Dev Trigger */}
           <div className="absolute top-0 right-0 p-2 z-20 flex items-center gap-2">
             <LanguageToggle />
           </div>
 
-          {/* Dev Mode Trigger - "Hidden" Area (User Request) */}
-          {/* Placing it subtly but accessible - maybe user meant it was literally invisible before */}
           {/* Dev Mode Trigger - Expanded Area */}
           <div
             onClick={handleDevTrigger}
@@ -144,8 +142,8 @@ const Index = () => {
           />
 
           {/* Centered Greeting & Logo */}
-          <div className="flex flex-col items-center text-center space-y-3 mt-6">
-            <span className="text-emerald-100/90 font-tajawal text-lg font-medium tracking-wide animate-fade-in delay-100">
+          <div className="flex flex-col items-center text-center space-y-1 mt-2">
+            <span className="text-emerald-100/90 font-tajawal text-base font-medium tracking-wide animate-fade-in delay-100">
               {language === "ar" ? "السلام عليكم" : "Assalamu Alaikum"}
             </span>
 
@@ -155,7 +153,6 @@ const Index = () => {
               className="cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95 group relative flex justify-center items-center"
             >
               <div className="absolute inset-0 bg-white/10 blur-3xl rounded-full opacity-50 pointer-events-none" />
-              {/* User provided transparent unique image - rendering as is without aggressive filters */}
               <img
                 src="/assets/logo_caligraphy.png"
                 alt="Ibad Al-Rahman"
@@ -165,17 +162,15 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Date Display - Floating Pill */}
-        <div className="mt-6 mx-auto max-w-sm bg-white/10 backdrop-blur-md rounded-full px-6 py-2 border border-white/20 flex items-center justify-between shadow-lg animate-fade-in-up delay-200">
+        {/* Date Display - Compact Floating Pill */}
+        <div className="mt-3 mx-auto max-w-sm bg-white/10 backdrop-blur-md rounded-full px-4 py-1.5 border border-white/20 flex items-center justify-between shadow-lg animate-fade-in-up delay-200">
           <HijriDateDisplay />
-          <div className="w-px h-6 bg-white/20 mx-4" />
-          <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-gold-matte" />
-            <span className="text-xs text-white/80 font-tajawal">{getHijriYear(new Date())} AH</span>
+          <div className="w-px h-5 bg-white/20 mx-3" />
+          <div className="flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5 text-gold-matte" />
+            <span className="text-[10px] text-white/80 font-tajawal">{getHijriYear(new Date())} AH</span>
           </div>
         </div>
-
-
       </header>
 
       <Dialog open={isDuaOpen} onOpenChange={setIsDuaOpen}>

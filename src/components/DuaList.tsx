@@ -11,6 +11,7 @@ import { cn, removeTashkil } from "@/lib/utils";
 import { toast } from "sonner";
 import { TasbihCounter } from "@/components/TasbihCounter";
 import { useFontSize } from "@/contexts/FontSizeContext";
+import { Share } from '@capacitor/share';
 import {
     personalDuas,
     duaForDeceasedMale,
@@ -66,18 +67,16 @@ export const DuaList = () => {
 
     const handleShare = async (dua: DuaItem) => {
         const text = `${dua.arabic}\n\n${dua.translation || ''}\n${dua.source || ''}`;
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: 'Dua',
-                    text: text,
-                });
-            } catch (err) {
-                console.error('Error sharing:', err);
-            }
-        } else {
-            navigator.clipboard.writeText(text);
-            toast.success(t.copied);
+        try {
+            await Share.share({
+                title: 'Dua from Ibad Al-Rahman',
+                text: text,
+                dialogTitle: 'Share Dua',
+            });
+        } catch (err) {
+            console.error('Error sharing:', err);
+            // Verify if user cancelled or real error. Fallback copy only if needed?
+            // Usually Share plugin handles availability check internally.
         }
     };
 

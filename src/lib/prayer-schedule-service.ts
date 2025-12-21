@@ -73,8 +73,14 @@ export const PrayerScheduleService = {
                         await WidgetBridge.cancelAdhan({ prayerName: `${p}_${i}` });
                     }
                 }
-                await LocalNotifications.cancel({ notifications: [] });
-                await LocalNotifications.cancel({ notifications: [] });
+                try {
+                    const pending = await LocalNotifications.getPending();
+                    if (pending.notifications.length > 0) {
+                        await LocalNotifications.cancel(pending);
+                    }
+                } catch (e) {
+                    console.error("Error clearing pending notifications", e);
+                }
                 if (options.devMode) {
                     toast.warning("Scheduler: Notifications Disabled (Cancelled All)", { duration: 10000 });
                 }
@@ -160,56 +166,76 @@ export const PrayerScheduleService = {
             }
 
             // Reminders Logic (Preserved from original hook)
-            if (hasNotificationPerm && (options.notifSettings.reminderMinutes > 0 || options.preAzanReminder)) {
-                const remindersToSchedule = [];
-                const arabicNames: Record<string, string> = { "fajr": options.t.fajr, "dhuhr": options.t.dhuhr, "asr": options.t.asr, "maghrib": options.t.maghrib, "isha": options.t.isha };
-
-                for (let i = 0; i < 3; i++) {
-                    const date = new Date();
-                    date.setDate(date.getDate() + i);
-                    const prayers = new PrayerTimes(coordinates, date, params);
-                    const times = [
-                        { name: "fajr", date: prayers.fajr },
-                        { name: "dhuhr", date: prayers.dhuhr },
-                        { name: "asr", date: prayers.asr },
-                        { name: "maghrib", date: prayers.maghrib },
-                        { name: "isha", date: prayers.isha },
-                    ];
-
-                    for (const prayer of times) {
-                        if (options.notifSettings.enabledPrayers[prayer.name as keyof typeof options.notifSettings.enabledPrayers]) {
-                            // Standard Reminder
-                            if (options.notifSettings.reminderMinutes > 0) {
-                                const reminderTime = new Date(prayer.date.getTime() - options.notifSettings.reminderMinutes * 60000);
-                                if (reminderTime > now) {
-                                    remindersToSchedule.push({
-                                        title: options.language === "ar" ? `تنبيه: ${arabicNames[prayer.name]}` : `Reminder: ${prayer.name}`,
-                                        body: options.language === "ar" ? `بعد ${options.notifSettings.reminderMinutes} دقائق` : `In ${options.notifSettings.reminderMinutes} minutes`,
-                                        id: Math.floor(Math.random() * 1000000) + (i * 100),
-                                        schedule: { at: reminderTime },
-                                        channelId: 'prayer_reminder',
-                                    });
-                                }
-                            }
-
-                            // 9-Min Pre-Azan
-                            if (options.preAzanReminder) {
-                                const pre9MinTime = new Date(prayer.date.getTime() - 9 * 60000);
-                                if (pre9MinTime > now) {
-                                    remindersToSchedule.push({
-                                        title: options.language === "ar" ? `اقتراب الصلاة: ${arabicNames[prayer.name]}` : `Prayer Approaching: ${prayer.name}`,
-                                        body: options.language === "ar" ? `متبقي ٩ دقائق على الأذان` : `9 minutes remaining until Azan`,
-                                        id: Math.floor(Math.random() * 1000000) + (i * 500) + 999,
-                                        schedule: { at: pre9MinTime },
-                                        channelId: 'prayer_reminder',
-                                    });
-                                }
-                            }
-                        }
+            // Reminders Logic - Fixed to prevent 500 Alarm Limit
+            if (hasNotificationPerm) {
+                // 1. CLEAR ALL PENDING NOTIFICATIONS to prevent buildup/leaks
+                try {
+                    const pending = await LocalNotifications.getPending();
+                    if (pending.notifications.length > 0) {
+                        await LocalNotifications.cancel(pending);
                     }
+                } catch (e) {
+                    console.error("Error clearing pending notifications", e);
                 }
-                if (remindersToSchedule.length > 0) {
-                    await LocalNotifications.schedule({ notifications: remindersToSchedule });
+
+                if (options.notifSettings.reminderMinutes > 0 || options.preAzanReminder) {
+                    const remindersToSchedule = [];
+                    const arabicNames: Record<string, string> = { "fajr": options.t.fajr, "dhuhr": options.t.dhuhr, "asr": options.t.asr, "maghrib": options.t.maghrib, "isha": options.t.isha };
+                    const prayerNamesList = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+
+                    for (let i = 0; i < 3; i++) {
+                        const date = new Date();
+                        date.setDate(date.getDate() + i);
+                        const prayers = new PrayerTimes(coordinates, date, params);
+                        const times = [
+                            { name: "fajr", date: prayers.fajr },
+                            { name: "dhuhr", date: prayers.dhuhr },
+                            { name: "asr", date: prayers.asr },
+                            { name: "maghrib", date: prayers.maghrib },
+                            { name: "isha", date: prayers.isha },
+                        ];
+
+                        times.forEach((prayer, prayerIndex) => {
+                            if (options.notifSettings.enabledPrayers[prayer.name as keyof typeof options.notifSettings.enabledPrayers]) {
+                                // Deterministic ID generation:
+                                // Day (0-2) * 100 + Prayer (0-4) * 10 + Type (1=Remind, 2=PreAzan)
+                                // Range: 0 to ~300. Safe from collisions.
+                                const baseId = (i * 100) + (prayerIndex * 10);
+
+                                // Standard Reminder
+                                if (options.notifSettings.reminderMinutes > 0) {
+                                    const reminderTime = new Date(prayer.date.getTime() - options.notifSettings.reminderMinutes * 60000);
+                                    if (reminderTime > now) {
+                                        remindersToSchedule.push({
+                                            title: options.language === "ar" ? `تنبيه: ${arabicNames[prayer.name]}` : `Reminder: ${prayer.name}`,
+                                            body: options.language === "ar" ? `بعد ${options.notifSettings.reminderMinutes} دقائق` : `In ${options.notifSettings.reminderMinutes} minutes`,
+                                            id: baseId + 1,
+                                            schedule: { at: reminderTime },
+                                            channelId: 'prayer_reminder',
+                                        });
+                                    }
+                                }
+
+                                // 9-Min Pre-Azan
+                                if (options.preAzanReminder) {
+                                    const pre9MinTime = new Date(prayer.date.getTime() - 9 * 60000);
+                                    if (pre9MinTime > now) {
+                                        remindersToSchedule.push({
+                                            title: options.language === "ar" ? `اقتراب الصلاة: ${arabicNames[prayer.name]}` : `Prayer Approaching: ${prayer.name}`,
+                                            body: options.language === "ar" ? `متبقي ٩ دقائق على الأذان` : `9 minutes remaining until Azan`,
+                                            id: baseId + 2,
+                                            schedule: { at: pre9MinTime },
+                                            channelId: 'prayer_reminder',
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    if (remindersToSchedule.length > 0) {
+                        await LocalNotifications.schedule({ notifications: remindersToSchedule });
+                    }
                 }
             }
 

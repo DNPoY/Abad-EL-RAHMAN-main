@@ -14,8 +14,8 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Prayer Companion Pro',
-        short_name: 'PrayerPro',
+        name: 'Abad El Rahman',
+        short_name: 'AbadElRahman',
         description: 'Your daily Muslim companion for prayers, azkar, and qibla.',
         theme_color: '#047857',
         background_color: '#ffffff',
