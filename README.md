@@ -1,51 +1,4 @@
-# Prayer Companion Pro
 
-## Project info
-
-
-Ibad Al-Rahman" – Your Ultimate Daily Worship Companion
-
-Designed with elegance and purpose, "Ibad Al-Rahman" (Servants of the Merciful) provides every Muslim with the essential tools needed for daily worship. Combining a premium, modern design with deeply authentic content, it offers a seamless spiritual experience free from distractions.
-
-✨ New Feature: Deep Azkar Insights We have enriched our Azkar library! Now, every Dua and Azkar item includes detailed Occasion (When to say it) and Reward/Fadl (Benefits from Hadith), accessible via a simple tap on the info icon. Understand the meaning and power behind every word you recite.
-
-Key Features:
-
-📍 Accurate Prayer Times
-
-Precise calculations based on your exact location.
-Supports multiple calculation methods and Shafi/Hanafi Asr times.
-Offline Ready: Works perfectly without an internet connection.
-🕌 Smart Notifications & Azan
-
-Full Azan Audio: Listen to the heartfelt call to prayer (options: Makkah, Madinah, Egypt).
-Pre-Prayer Alerts: Get notified before Salah time to prepare yourself spiritually.
-Background Reliability: Alerts work perfectly even if the app is closed.
-📖 The Holy Quran
-
-Crystal clear Arabic text (Uthmani script) for comfortable reading.
-Audio Recitations: High-quality audio from renowned Reciters.
-Tafsir & Translation: Understand the deeper meaning of verses instantly.
-📿 Comprehensive Azkar & Duas
-
-Morning & Evening Azkar: Complete authentic collection with counters.
-Contextual Duas: Supplications for waking up, sleeping, anxiety, protection, and more.
-Occasion & Rewards: [NEW] View specific benefits and occasions for each Azkar.
-🧭 Qibla Compass & Mosque Finder
-
-Qibla: Accurate direction to the Kaaba with a smooth, responsive compass.
-Mosque Finder: Instantly locate the nearest mosques around you with one tap.
-📅 Tools for the Faithful
-
-Hijri Calendar: Track important Islamic dates and events.
-Missed Prayers (Qada): A dedicated tracker to help you count and make up missed prayers.
-Sunnah Prayers: Detailed guidance and tracking for voluntary (Nawafil) prayers.
-🎨 Experience the Difference
-
-Premium Design: A beautiful "Deep Emerald" theme that is easy on the eyes.
-Dark Mode: Fully supported system-wide dark mode.
-Privacy First: No tracking, no ads, no data collection. Your worship is yours alone.
-Home Screen Widgets: Beautiful widgets to see prayer times at a glance.
 "عباد الرحمن" – رفيقك اليومي للعبادة والطاعة
 
 صُمم تطبيق "عباد الرحمن" بعناية ليجمع بين جمال التصميم وسهولة الاستخدام، موفراً لكل مسلم الأدوات الأساسية التي يحتاجها في يومه. واجهة عصرية وهادئة تأخذك في رحلة إيمانية خالية من المشتتات.
@@ -91,6 +44,51 @@ Home Screen Widgets: Beautiful widgets to see prayer times at a glance.
 ويديجت (Widgets): أدوات للشاشة الرئيسية لعرض مواقيت الصلاة بأناقة.
 
 
+
+
+Ibad Al-Rahman" – Your Ultimate Daily Worship Companion
+
+Designed with elegance and purpose, "Ibad Al-Rahman" (Servants of the Merciful) provides every Muslim with the essential tools needed for daily worship. Combining a premium, modern design with deeply authentic content, it offers a seamless spiritual experience free from distractions.
+
+✨ New Feature: Deep Azkar Insights We have enriched our Azkar library! Now, every Dua and Azkar item includes detailed Occasion (When to say it) and Reward/Fadl (Benefits from Hadith), accessible via a simple tap on the info icon. Understand the meaning and power behind every word you recite.
+
+Key Features:
+
+📍 Accurate Prayer Times
+
+Precise calculations based on your exact location.
+Supports multiple calculation methods and Shafi/Hanafi Asr times.
+Offline Ready: Works perfectly without an internet connection.
+🕌 Smart Notifications & Azan
+
+Full Azan Audio: Listen to the heartfelt call to prayer (options: Makkah, Madinah, Egypt).
+Pre-Prayer Alerts: Get notified before Salah time to prepare yourself spiritually.
+Background Reliability: Alerts work perfectly even if the app is closed.
+📖 The Holy Quran
+
+Crystal clear Arabic text (Uthmani script) for comfortable reading.
+Audio Recitations: High-quality audio from renowned Reciters.
+Tafsir & Translation: Understand the deeper meaning of verses instantly.
+📿 Comprehensive Azkar & Duas
+
+Morning & Evening Azkar: Complete authentic collection with counters.
+Contextual Duas: Supplications for waking up, sleeping, anxiety, protection, and more.
+Occasion & Rewards: [NEW] View specific benefits and occasions for each Azkar.
+🧭 Qibla Compass & Mosque Finder
+
+Qibla: Accurate direction to the Kaaba with a smooth, responsive compass.
+Mosque Finder: Instantly locate the nearest mosques around you with one tap.
+📅 Tools for the Faithful
+
+Hijri Calendar: Track important Islamic dates and events.
+Missed Prayers (Qada): A dedicated tracker to help you count and make up missed prayers.
+Sunnah Prayers: Detailed guidance and tracking for voluntary (Nawafil) prayers.
+🎨 Experience the Difference
+
+Premium Design: A beautiful "Deep Emerald" theme that is easy on the eyes.
+Dark Mode: Fully supported system-wide dark mode.
+Privacy First: No tracking, no ads, no data collection. Your worship is yours alone.
+Home Screen Widgets: Beautiful widgets to see prayer times at a glance.
 
 ## Getting Started
 
