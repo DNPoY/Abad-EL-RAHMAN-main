@@ -1,4 +1,4 @@
-package com.prayercompanion.pro;
+package com.ibadalrahman.app;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
-import com.prayercompanion.pro.R;
+import com.ibadalrahman.app.R;
 
 public class PrayerWidgetProvider extends AppWidgetProvider {
 

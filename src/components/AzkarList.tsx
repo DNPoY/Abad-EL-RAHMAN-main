@@ -5,7 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { morningAzkar, eveningAzkar, afterPrayerAzkar, sleepAzkar, nightAnxietyAzkar, badDreamsAzkar } from "@/lib/azkar-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle2, RotateCcw } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { CheckCircle2, RotateCcw, Info } from "lucide-react";
 import { useAzkarProgress } from "@/hooks/useAzkarProgress";
 import { toast } from "sonner";
 import { useFontSize } from "@/contexts/FontSizeContext";
@@ -93,6 +100,44 @@ const AzkarCategory = ({
                   </Button>
                 )}
               </div>
+
+              {/* Info Popup Trigger */}
+              {(dhikr.occasion || dhikr.reward) && (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-emerald-deep/60 hover:text-emerald-deep hover:bg-emerald-deep/5">
+                      <Info className="w-5 h-5" />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="bg-cream border-emerald-deep/10 max-w-[90vw] sm:max-w-md rounded-2xl">
+                    <DialogHeader>
+                      <DialogTitle className="font-amiri text-2xl text-emerald-deep text-center mb-4 border-b border-emerald-deep/10 pb-2">
+                        {language === 'ar' ? 'فضل الذكر ومناسبته' : 'Virtues & Occasion'}
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4 font-amiri text-lg text-emerald-deep/80 text-right max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar" dir="rtl">
+                      {dhikr.occasion && (
+                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-deep/5">
+                          <h4 className="font-bold mb-2 text-gold-matte flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-gold-matte shrink-0" />
+                            {language === 'ar' ? 'المناسبة:' : 'Occasion:'}
+                          </h4>
+                          <p className="leading-relaxed">{dhikr.occasion}</p>
+                        </div>
+                      )}
+                      {dhikr.reward && (
+                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-deep/5">
+                          <h4 className="font-bold mb-2 text-gold-matte flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-gold-matte shrink-0" />
+                            {language === 'ar' ? 'الفضل/الأجر:' : 'Reward:'}
+                          </h4>
+                          <p className="leading-relaxed">{dhikr.reward}</p>
+                        </div>
+                      )}
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              )}
             </div>
 
             <p className={`${getFontSizeClass()} font-amiri mb-4 text-right text-emerald-deep break-words`} lang="ar">

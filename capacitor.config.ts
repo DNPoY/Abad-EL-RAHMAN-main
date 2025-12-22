@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.prayercompanion.pro',
+  appId: 'com.ibadalrahman.app',
   appName: 'Ibad Al-Rahman',
   webDir: 'dist'
 };

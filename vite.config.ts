@@ -14,8 +14,8 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Abad El Rahman',
-        short_name: 'AbadElRahman',
+        name: 'Ibad Al-Rahman',
+        short_name: 'IbadAlRahman',
         description: 'Your daily Muslim companion for prayers, azkar, and qibla.',
         theme_color: '#047857',
         background_color: '#ffffff',

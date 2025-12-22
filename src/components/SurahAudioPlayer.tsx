@@ -25,7 +25,13 @@ export const SurahAudioPlayer = ({ surahNumber, totalAyahs, onAyahChange, jumpTo
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentAyah, setCurrentAyah] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedReciterId, setSelectedReciterId] = useState<string>(RECITERS[0].id);
+    const [selectedReciterId, setSelectedReciterId] = useState<string>(() => {
+        return localStorage.getItem("selectedReciterId") || RECITERS[0].id;
+    });
+
+    useEffect(() => {
+        localStorage.setItem("selectedReciterId", selectedReciterId);
+    }, [selectedReciterId]);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isDownloading, setIsDownloading] = useState(false);
     const [downloadProgress, setDownloadProgress] = useState(0);

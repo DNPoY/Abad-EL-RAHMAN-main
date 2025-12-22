@@ -5,23 +5,21 @@ export interface AzkarItem {
   translation: string;
   count: number;
   secondaryCount?: number;
+  occasion?: string;
+  reward?: string;
 }
 
 export const morningAzkar: AzkarItem[] = [
 
-  {
-    id: 2,
-    arabic: "آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ. لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ.",
-    transliteration: "Amanar-Rasulu bima unzila ilayhi min Rabbihi wal-mu'minun. Kullun amana billahi wa mala'ikatihi wa kutubihi wa rusulih. La nufarriqu bayna ahadim-mir-rusulih. Wa qalu sami'na wa ata'na ghufranaka Rabbana wa ilaykal-masir. La yukallifullahu nafsan illa wus'aha. Laha ma kasabat wa 'alayha maktasabat. Rabbana la tu'akhidhna in nasina aw akhta'na. Rabbana wa la tahmil 'alayna isran kama hamaltahu 'alal-ladhina min qablina. Rabbana wa la tuhammilna ma la taqata lana bih. Wa'fu 'anna waghfir lana warhamna. Anta Mawlana fansurna 'alal-qawmil-kafirin.",
-    translation: "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allah and His angels and His books and His messengers, [saying], 'We make no distinction between any of His messengers.' And they say, 'We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.' Allah does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. 'Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.'",
-    count: 1,
-  },
+
   {
     id: 3,
     arabic: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
     transliteration: "Allahu la ilaha illa Huwa, Al-Hayyul-Qayyum. La ta'khudhuhu sinatun wa la nawm. Lahu ma fis-samawati wa ma fil-ard. Man dhalladhi yashfa'u 'indahu illa bi-idhnih. Ya'lamu ma bayna aydihim wa ma khalfahum, wa la yuhituna bishay'im-min 'ilmihi illa bima sha'. Wasi'a kursiyyuhus-samawati wal-ard, wa la ya'uduhu hifzuhuma, wa Huwal-'Aliyyul-'Azim.",
     translation: "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.",
     count: 1,
+    occasion: "أذكار الصباح والمساء، وعند النوم، ودبر كل صلاة.",
+    reward: "من قالها حين يصبح أجير من الجن حتى يمسي، ومن قالها حين يمسي أجير من الجن حتى يصبح. (رواه الحاكم). ومن قرأها دبر كل صلاة لم يمنعه من دخول الجنة إلا الموت. (رواه النسائي)",
   },
   {
     id: 4,
@@ -29,6 +27,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Qul Huwallahu Ahad. Allahus-Samad. Lam yalid wa lam yulad. Wa lam yakun lahu kufuwan ahad.",
     translation: "Say, 'He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.'",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قرأها ثلاث مرات حين يصبح وحين يمسي كفته من كل شيء. (رواه أبو داود والترمذي)",
   },
   {
     id: 5,
@@ -36,6 +36,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Qul a'udhu bi-rabbil-falaq. Min sharri ma khalaq. Wa min sharri ghasiqin idha waqab. Wa min sharrin-naffathati fil-'uqad. Wa min sharri hasidin idha hasad.",
     translation: "Say, 'I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.'",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قرأها ثلاث مرات حين يصبح وحين يمسي كفته من كل شيء. (رواه أبو داود والترمذي)",
   },
   {
     id: 6,
@@ -43,6 +45,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Qul a'udhu bi-rabbin-nas. Malikin-nas. Ilahin-nas. Min sharril-waswasil-khannas. Alladhi yuwaswisu fi sudurin-nas. Minal-jinnati wan-nas.",
     translation: "Say, 'I seek refuge in the Lord of mankind, The Sovereign of mankind. The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind.'",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قرأها ثلاث مرات حين يصبح وحين يمسي كفته من كل شيء. (رواه أبو داود والترمذي)",
   },
   {
     id: 7,
@@ -50,6 +54,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Asbahna wa-asbahal-mulku lillah wal-hamdu lillah, la ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir. Rabbi as'aluka khayra ma fi hadhal-yawmi wa khayra ma ba'dahu, wa a'udhu bika min sharri ma fi hadhal-yawmi wa sharri ma ba'dahu. Rabbi a'udhu bika minal-kasali wa su'il-kibar, Rabbi a'udhu bika min 'adhabin fin-nari wa 'adhabin fil-qabr.",
     translation: "We have entered the morning and at this very time the whole kingdom belongs to Allah, and all praise is due to Allah. There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything. My Lord, I ask You for the good of this day and the good of what follows it, and I seek refuge in You from the evil of this day and the evil of what follows it. My Lord, I seek refuge in You from laziness and the helplessness of old age. My Lord, I seek refuge in You from the punishment of the Fire and the punishment of the grave.",
     count: 1,
+    occasion: "الصباح.",
+    reward: "دعاء الاستفتاح لليوم وطلب البركة والتعوذ من الشر.",
   },
   {
     id: 8,
@@ -57,6 +63,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma bika asbahna, wa bika amsayna, wa bika nahya, wa bika namutu wa ilaykan-nushur.",
     translation: "O Allah, by Your leave we have reached the morning and by Your leave we have reached the evening, by Your leave we live and die and unto You is our resurrection.",
     count: 1,
+    occasion: "الصباح.",
+    reward: "تجديد العهد والتوكل على الله.",
   },
   {
     id: 9,
@@ -64,6 +72,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma Anta Rabbi la ilaha illa Ant. Khalaqtani wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika mastata't. A'udhu bika min sharri ma sana't. Abu'u laka bini'matika 'alayya wa abu'u bidhanbi faghfir li fa-innahu la yaghfirudh-dhunuba illa Ant.",
     translation: "O Allah, You are my Lord, there is no god but You. You created me and I am Your slave, and I am faithful to my covenant and my promise (to You) as much as I can. I seek refuge in You from all the evil I have done. I acknowledge before You all the blessings You have bestowed upon me, and I confess to You all my sins. So I entreat You to forgive me, for no one can forgive sins except You.",
     count: 1,
+    occasion: "سيد الاستغفار، يقال في الصباح والمساء.",
+    reward: "من قالها موقناً بها حين يمسي ومات من ليلته دخل الجنة، وكذلك إذا أصبح. (رواه البخاري)",
   },
   {
     id: 10,
@@ -71,6 +81,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma inni asbahtu ushhiduk, wa ushhidu hamalata 'arshik, wa mala'ikatak, wa jami'a khalqik, annaka Antallahu la ilaha illa Ant, wahdaka la sharika lak, wa anna Muhammadan 'abduka wa rasuluk.",
     translation: "O Allah, I have reached the morning and call upon You, the bearers of Your Throne, Your angels and all Your creation to bear witness that You are Allah, there is no god but You, the One, having no partner with Him, and that Muhammad is Your slave and Messenger.",
     count: 4,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها أربع مرات حين يصبح أو يمسي أعتقه الله من النار. (رواه أبو داود)",
   },
   {
     id: 11,
@@ -78,6 +90,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma ma asbaha bi min ni'matin aw bi-ahadin min khalqik, faminka wahdaka la sharika lak, falakal-hamdu wa lakash-shukr.",
     translation: "O Allah, whatever blessing has been received by me or anyone of Your creation is from You alone, You have no partner. So to You belongs all praise and all thanks.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها حين يصبح فقد أدى شكر يومه، ومن قالها حين يمسي فقد أدى شكر ليلته. (رواه أبو داود)",
   },
   {
     id: 12,
@@ -85,6 +99,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma 'afini fi badani, Allahumma 'afini fi sam'i, Allahumma 'afini fi basari, la ilaha illa Ant. Allahumma inni a'udhu bika minal-kufri wal-faqr, wa a'udhu bika min 'adhibil-qabr, la ilaha illa Ant.",
     translation: "O Allah, make me healthy in my body. O Allah, preserve for me my hearing. O Allah, preserve for me my sight. There is no god but You. O Allah, I seek refuge in You from disbelief and poverty and I seek refuge in You from the punishment of the grave. There is no god but You.",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "دعاء بالعافية في الدينا والآخرة.",
   },
   {
     id: 13,
@@ -92,6 +108,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Hasbiyallahu la ilaha illa Huwa 'alayhi tawakkaltu wa Huwa Rabbul-'Arshil-'Azim.",
     translation: "Allah is sufficient for me. There is no god but Him. I have placed my trust in Him, and He is the Lord of the Majestic Throne.",
     count: 7,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها سبع مرات كفاه الله ما أهمه من أمر الدنيا والآخرة. (رواه ابن السني)",
   },
   {
     id: 14,
@@ -99,6 +117,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma inni as'alukal-'afwa wal-'afiyata fid-dunya wal-akhirah. Allahumma inni as'alukal-'afwa wal-'afiyata fi dini wa dunyaya wa ahli wa mali. Allahummastur 'awrati wa amin raw'ati. Allahummahfanzni min bayni yadayya wa min khalfi wa 'an yamini wa 'an shimali wa min fawqi, wa a'udhu bi'azamatika an ughtala min tahti.",
     translation: "O Allah, I ask You for pardon and well-being in this world and the Hereafter. O Allah, I ask You for pardon and well-being in my religion and my worldly affairs, and my family and my wealth. O Allah, veil my weaknesses and set at ease my dismay. O Allah, preserve me from the front and from behind and on my right and on my left and from above, and I seek refuge in Your Greatness lest I be swallowed up by the earth.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "لم يضره شيء.",
   },
   {
     id: 15,
@@ -106,6 +126,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma 'Alimal-ghaybi wash-shahadah, Fatiras-samawati wal-ard, Rabba kulli shay'in wa malikah, ashhadu an la ilaha illa Ant, a'udhu bika min sharri nafsi wa min sharrish-shaytani wa shirkih, wa an aqtarifa 'ala nafsi su'an aw ajurrahu ila Muslim.",
     translation: "O Allah, Knower of the unseen and the evident, Maker of the heavens and the earth, Lord of everything and its Possessor, I bear witness that there is no god but You. I seek refuge in You from the evil of my own soul and from the evil of Satan and the shirk (polytheism) to which he calls, and from committing wrong against my soul or bringing such upon another Muslim.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "التعوذ من شر النفس والشيطان.",
   },
   {
     id: 16,
@@ -113,6 +135,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Bismillahil-ladhi la yadurru ma'as-mihi shay'un fil-ardi wa la fis-sama'i wa Huwas-Sami'ul-'Alim.",
     translation: "In the Name of Allah, Who with His Name nothing can cause harm in the earth nor in the heavens, and He is the All-Hearing, the All-Knowing.",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها ثلاثاً لم يضره شيء. (رواه الترمذي وابن ماجه)",
   },
   {
     id: 17,
@@ -120,6 +144,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Raditu billahi Rabba, wa bil-Islami dina, wa bi-Muhammadin sallallahu 'alayhi wa sallama nabiyya.",
     translation: "I am pleased with Allah as my Lord, with Islam as my religion and with Muhammad (peace and blessings of Allah be upon him) as my Prophet.",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها ثلاثاً كان حقاً على الله أن يرضيه يوم القيامة. (رواه أحمد)",
   },
   {
     id: 18,
@@ -127,6 +153,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Ya Hayyu ya Qayyum, bi-rahmatika astaghith, aslih li sha'ni kullah, wa la takilni ila nafsi tarfata 'ayn.",
     translation: "O Ever Living One, O Eternal One, by Your mercy I call on You to set right all my affairs. Do not place me in charge of my soul even for the blinking of an eye.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "دعاء بصلاح الشأن كله.",
   },
   {
     id: 19,
@@ -134,6 +162,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Asbahna 'ala fitratil-Islam, wa 'ala kalimatil-ikhlas, wa 'ala dini nabiyyina Muhammadin sallallahu 'alayhi wa sallam, wa 'ala millati abina Ibrahima hanifam-muslima, wa ma kana minal-mushrikin.",
     translation: "We have entered the morning upon the natural religion of Islam, the word of pure faith, the religion of our Prophet Muhammad (peace and blessings of Allah be upon him) and the religion of our father Abraham, who was a Muslim and of true faith and was not of those who associate others with Allah.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "تأكيد على الفطرة والإيمان.",
   },
   {
     id: 20,
@@ -141,6 +171,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Subhanallahi wa bihamdih.",
     translation: "Glory is to Allah and to Him is the praise.",
     count: 100,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها في يوم مائة مرة حطت خطاياه ولو كانت مثل زبد البحر. (متفق عليه)",
   },
   {
     id: 21,
@@ -149,6 +181,8 @@ export const morningAzkar: AzkarItem[] = [
     translation: "There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything.",
     count: 10,
     secondaryCount: 100,
+    occasion: "الصباح (١٠٠ مرة أو ١٠ مرات).",
+    reward: "من قالها ١٠٠ مرة: كانت له عدل عشر رقاب، وكتبت له مائة حسنة، ومحيت عنه مائة سيئة، وكانت له حرزاً من الشيطان يومه ذلك حتى يمسي. (متفق عليه)",
   },
   {
     id: 22,
@@ -156,6 +190,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Subhanallahi wa bihamdih, 'adada khalqih, wa rida nafsih, wa zinata 'arshih, wa midada kalimatih.",
     translation: "Glory is to Allah and to Him is the praise, as much as the number of His creation, as much as pleases Him, as much as the weight of His Throne and as much as the ink of His words.",
     count: 3,
+    occasion: "الصباح.",
+    reward: "لو وزنت بما ذكرت منذ اليوم لوزنتهن. (رواه مسلم)",
   },
   {
     id: 23,
@@ -163,6 +199,8 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Allahumma inni as'aluka 'ilman nafi'a, wa rizqan tayyiba, wa 'amalan mutaqabbala.",
     translation: "O Allah, I ask You for knowledge that is of benefit, a good provision and deeds that will be accepted.",
     count: 1,
+    occasion: "الصباح.",
+    reward: "طلب العلم النافع والرزق والعمل المتقبل.",
   },
   {
     id: 24,
@@ -170,17 +208,92 @@ export const morningAzkar: AzkarItem[] = [
     transliteration: "Astaghfirullaha wa atubu ilayh.",
     translation: "I seek forgiveness of Allah and repent to Him.",
     count: 100,
+    occasion: "الصباح والمساء.",
+    reward: "مغفرة الذنوب وطهارة القلب.",
+  },
+  {
+    id: 25,
+    arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، عَلَيْكَ تَوَكَّلْتُ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ، مَا شَاءَ اللَّهُ كَانَ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ، أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ",
+    transliteration: "Allahumma Anta Rabbi la ilaha illa Ant, 'alayka tawakkaltu wa Anta Rabbul-'Arshil-'Azim. Ma sha' Allahu kana wa ma lam yasha' lam yakun, wa la hawla wa la quwwata illa billahil-'Aliyyil-'Azim. A'lamu annallaha 'ala kulli shay'in qadir, wa annallaha qad ahata bikulli shay'in 'ilma. Allahumma inni a'udhu bika min sharri nafsi wa min sharri kulli dabbatin Anta akhidhun binasiyatiha, inna Rabbi 'ala siratim mustaqim.",
+    translation: "O Allah, You are my Lord, there is no god but You. In You I put my trust, and You are the Lord of the Mighty Throne. What Allah wills happens, and what He does not will does not happen. There is no power or strength except with Allah, the Exalted, the Mighty. I know that Allah has power over all things, and that Allah comprehends all things in knowledge. O Allah, I seek refuge in You from the evil of my soul and from the evil of every living creature that You hold by its forelock. Indeed, my Lord is on a Straight Path.",
+    count: 1,
+    occasion: "أذكار الصباح والمساء الحاقظة من الضر.",
+    reward: "من قالها أول نهاره لم تصبه مصيبة حتى يمسي، ومن قالها آخر نهاره لم تصبه مصيبة حتى يصبح. (رواه السني وأبو داود)",
+  },
+  {
+    id: 26,
+    arabic: "اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ",
+    transliteration: "Allahumma inna na'udhu bika min an nushrika bika shay'an na'lamuh, wa nastaghfiruka lima la na'lamuh.",
+    translation: "O Allah, we seek refuge in You from knowingly associating partners with You, and we ask Your forgiveness for that which we do not know.",
+    count: 3,
+    occasion: "للحفظ من الشرك الأصغر والرياء.",
+    reward: "من قالها أذهب الله عنه الشرك أصغره وأكبره. (صحيح الجامع)",
+  },
+  {
+    id: 27,
+    arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ",
+    transliteration: "Allahumma inni a'udhu bika minal-hammi wal-hazan, wa a'udhu bika minal-'ajzi wal-kasal, wa a'udhu bika minal-jubni wal-bukhl, wa a'udhu bika min ghalabatid-dayni wa qahrir-rijal.",
+    translation: "O Allah, I seek refuge in You from anxiety and sorrow, weakness and laziness, miserliness and cowardice, the burden of debts and from being overpowered by men.",
+    count: 3,
+    occasion: "عند الشعور بالهم أو الحزن أو الكسل.",
+    reward: "من قالها صباحاً ومساءً أذهب الله همه وقضى دينه. (رواه أبو داود)",
+  },
+  {
+    id: 28,
+    arabic: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+    transliteration: "A'udhu bikalimatillahit-tammati min sharri ma khalaq.",
+    translation: "I seek refuge in the Perfect Words of Allah from the evil of what He has created.",
+    count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها ثلاثاً لم يضره شيء. (رواه مسلم)",
+  },
+  {
+    id: 29,
+    arabic: "اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى نَبِيِّنَا مُحَمَّدٍ",
+    transliteration: "Allahumma salli wa sallim wa barik 'ala nabiyyina Muhammad.",
+    translation: "O Allah, send prayers and peace and blessings upon our Prophet Muhammad.",
+    count: 10,
+    occasion: "الصباح والمساء.",
+    reward: "مَنْ صَلَّى عَلَيَّ حِينَ يُصْبِحُ عَشْرًا، وَحِينَ يُمْسِي عَشْرًا أَدْرَكَتْهُ شَفَاعَتِي يَوْمَ الْقِيَامَةِ. (رواه الطبراني)",
+  },
+  {
+    id: 30,
+    arabic: "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
+    transliteration: "Astaghfirullahal-'Azim alladhi la ilaha illa Huwal-Hayyul-Qayyum wa atubu ilayh.",
+    translation: "I seek forgiveness from Allah, the Magnificent, none has the right to be worshipped but Him, the Ever-Living, the One Who sustains and protects all that exists, and I turn to Him in repentance.",
+    count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها غفرت له ذنوبه وإن كان فاراً من الزحف. (رواه الترمذي)",
+  },
+  {
+    id: 31,
+    arabic: "يَا رَبِّ، لَكَ الْحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ، وَلِعَظِيمِ سُلْطَانِكَ",
+    transliteration: "Ya Rabbi, lakal-hamdu kama yanbaghi lijalali wajhika, wa li'azimi sultanik.",
+    translation: "O my Lord, all praise is due to You as befits the Majesty of Your Face and the Greatness of Your Sovereignty.",
+    count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "يقول الله للملائكة: اكتبوها كما قال عبدي حتى يلقاني فأجزيه بها. (رواه ابن ماجه)",
   },
 ];
 
 export const eveningAzkar: AzkarItem[] = [
-
+  {
+    id: 1,
+    arabic: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
+    transliteration: "Amsayna wa amsal-mulku lillah wal-hamdu lillah, la ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir. Rabbi as'aluka khayra ma fi hadhihil-laylati wa khayra ma ba'daha, wa a'udhu bika min sharri ma fi hadhihil-laylati wa sharri ma ba'daha. Rabbi a'udhu bika minal-kasali wa su'il-kibar, Rabbi a'udhu bika min 'adhabin fin-nari wa 'adhabin fil-qabr.",
+    translation: "We have reached the evening and at this very time the whole kingdom belongs to Allah, and all praise is due to Allah. There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything. My Lord, I ask You for the good of this night and the good of what follows it, and I seek refuge in You from the evil of this night and the evil of what follows it. My Lord, I seek refuge in You from laziness and the helplessness of old age. My Lord, I seek refuge in You from the punishment of the Fire and the punishment of the grave.",
+    count: 1,
+    occasion: "المساء.",
+    reward: "دعاء المساء وطلب خير الليل.",
+  },
   {
     id: 2,
     arabic: "آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ. لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ.",
     transliteration: "Amanar-Rasulu bima unzila ilayhi min Rabbihi wal-mu'minun. Kullun amana billahi wa mala'ikatihi wa kutubihi wa rusulih. La nufarriqu bayna ahadim-mir-rusulih. Wa qalu sami'na wa ata'na ghufranaka Rabbana wa ilaykal-masir. La yukallifullahu nafsan illa wus'aha. Laha ma kasabat wa 'alayha maktasabat. Rabbana la tu'akhidhna in nasina aw akhta'na. Rabbana wa la tahmil 'alayna isran kama hamaltahu 'alal-ladhina min qablina. Rabbana wa la tuhammilna ma la taqata lana bih. Wa'fu 'anna waghfir lana warhamna. Anta Mawlana fansurna 'alal-qawmil-kafirin.",
     translation: "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allah and His angels and His books and His messengers, [saying], 'We make no distinction between any of His messengers.' And they say, 'We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.' Allah does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. 'Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.'",
     count: 1,
+    occasion: "المساء.",
+    reward: "من قرأهما في ليلة كفتاه.",
   },
   {
     id: 3,
@@ -188,6 +301,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Allahu la ilaha illa Huwa, Al-Hayyul-Qayyum. La ta'khudhuhu sinatun wa la nawm. Lahu ma fis-samawati wa ma fil-ard. Man dhalladhi yashfa'u 'indahu illa bi-idhnih. Ya'lamu ma bayna aydihim wa ma khalfahum, wa la yuhituna bishay'im-min 'ilmihi illa bima sha'. Wasi'a kursiyyuhus-samawati wal-ard, wa la ya'uduhu hifzuhuma, wa Huwal-'Aliyyul-'Azim.",
     translation: "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.",
     count: 1,
+    occasion: "المساء.",
+    reward: "من قالها حين يمسي أجير من الجن حتى يصبح.",
   },
   {
     id: 4,
@@ -195,6 +310,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Qul Huwallahu Ahad. Allahus-Samad. Lam yalid wa lam yulad. Wa lam yakun lahu kufuwan ahad.",
     translation: "Say, 'He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.'",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "تكفيك من كل شيء.",
   },
   {
     id: 5,
@@ -202,6 +319,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Qul a'udhu bi-rabbil-falaq. Min sharri ma khalaq. Wa min sharri ghasiqin idha waqab. Wa min sharrin-naffathati fil-'uqad. Wa min sharri hasidin idha hasad.",
     translation: "Say, 'I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.'",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "تكفيك من كل شيء.",
   },
   {
     id: 6,
@@ -209,20 +328,26 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Qul a'udhu bi-rabbin-nas. Malikin-nas. Ilahin-nas. Min sharril-waswasil-khannas. Alladhi yuwaswisu fi sudurin-nas. Minal-jinnati wan-nas.",
     translation: "Say, 'I seek refuge in the Lord of mankind, The Sovereign of mankind. The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind.'",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "تكفيك من كل شيء.",
   },
   {
     id: 7,
-    arabic: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
-    transliteration: "Amsayna wa amsal-mulku lillah wal-hamdu lillah, la ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir. Rabbi as'aluka khayra ma fi hadhihil-laylati wa khayra ma ba'daha, wa a'udhu bika min sharri ma fi hadhihil-laylati wa sharri ma ba'daha. Rabbi a'udhu bika minal-kasali wa su'il-kibar, Rabbi a'udhu bika min 'adhabin fin-nari wa 'adhabin fil-qabr.",
-    translation: "We have reached the evening and at this very time the whole kingdom belongs to Allah, and all praise is due to Allah. There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything. My Lord, I ask You for the good of this night and the good of what follows it, and I seek refuge in You from the evil of this night and the evil of what follows it. My Lord, I seek refuge in You from laziness and the helplessness of old age. My Lord, I seek refuge in You from the punishment of the Fire and the punishment of the grave.",
-    count: 1,
-  },
-  {
-    id: 8,
     arabic: "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ",
     transliteration: "Allahumma bika amsayna, wa bika asbahna, wa bika nahya, wa bika namutu wa ilaykal-masir.",
     translation: "O Allah, by Your leave we have reached the evening and by Your leave we have reached the morning, by Your leave we live and die and unto You is our return.",
     count: 1,
+    occasion: "المساء.",
+    reward: "تجديد العهد والتوكل على الله.",
+  },
+  {
+    id: 8,
+    arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+    transliteration: "Allahumma Anta Rabbi la ilaha illa Ant. Khalaqtani wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika mastata't. A'udhu bika min sharri ma sana't. Abu'u laka bini'matika 'alayya wa abu'u bidhanbi faghfir li fa-innahu la yaghfirudh-dhunuba illa Ant.",
+    translation: "O Allah, You are my Lord, there is no god but You. You created me and I am Your slave, and I am faithful to my covenant and my promise (to You) as much as I can. I seek refuge in You from all the evil I have done. I acknowledge before You all the blessings You have bestowed upon me, and I confess to You all my sins. So I entreat You to forgive me, for no one can forgive sins except You.",
+    count: 1,
+    occasion: "المساء.",
+    reward: "من قالها موقناً بها حين يمسي ومات من ليلته دخل الجنة.",
   },
   {
     id: 9,
@@ -230,6 +355,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Allahumma Anta Rabbi la ilaha illa Ant. Khalaqtani wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika mastata't. A'udhu bika min sharri ma sana't. Abu'u laka bini'matika 'alayya wa abu'u bidhanbi faghfir li fa-innahu la yaghfirudh-dhunuba illa Ant.",
     translation: "O Allah, You are my Lord, there is no god but You. You created me and I am Your slave, and I am faithful to my covenant and my promise (to You) as much as I can. I seek refuge in You from all the evil I have done. I acknowledge before You all the blessings You have bestowed upon me, and I confess to You all my sins. So I entreat You to forgive me, for no one can forgive sins except You.",
     count: 1,
+    occasion: "المساء.",
+    reward: "من قالها موقناً بها حين يمسي ومات من ليلته دخل الجنة.",
   },
   {
     id: 10,
@@ -237,6 +364,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Allahumma inni amsaytu ushhiduk, wa ushhidu hamalata 'arshik, wa mala'ikatak, wa jami'a khalqik, annaka Antallahu la ilaha illa Ant, wahdaka la sharika lak, wa anna Muhammadan 'abduka wa rasuluk.",
     translation: "O Allah, I have reached the evening and call upon You, the bearers of Your Throne, Your angels and all Your creation to bear witness that You are Allah, there is no god but You, the One, having no partner with Him, and that Muhammad is Your slave and Messenger.",
     count: 4,
+    occasion: "المساء.",
+    reward: "من قالها أربع مرات أعتقه الله من النار.",
   },
   {
     id: 11,
@@ -244,6 +373,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Allahumma ma amsa bi min ni'matin aw bi-ahadin min khalqik, faminka wahdaka la sharika lak, falakal-hamdu wa lakash-shukr.",
     translation: "O Allah, whatever blessing has been received by me or anyone of Your creation is from You alone, You have no partner. So to You belongs all praise and all thanks.",
     count: 1,
+    occasion: "المساء.",
+    reward: "من قالها حين يمسي فقد أدى شكر ليلته.",
   },
   {
     id: 12,
@@ -251,6 +382,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Allahumma 'afini fi badani, Allahumma 'afini fi sam'i, Allahumma 'afini fi basari, la ilaha illa Ant. Allahumma inni a'udhu bika minal-kufri wal-faqr, wa a'udhu bika min 'adhibil-qabr, la ilaha illa Ant.",
     translation: "O Allah, make me healthy in my body. O Allah, preserve for me my hearing. O Allah, preserve for me my sight. There is no god but You. O Allah, I seek refuge in You from disbelief and poverty and I seek refuge in You from the punishment of the grave. There is no god but You.",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "دعاء بالعافية.",
   },
   {
     id: 13,
@@ -258,6 +391,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Hasbiyallahu la ilaha illa Huwa 'alayhi tawakkaltu wa Huwa Rabbul-'Arshil-'Azim.",
     translation: "Allah is sufficient for me. There is no god but Him. I have placed my trust in Him, and He is the Lord of the Majestic Throne.",
     count: 7,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها سبع مرات كفاه الله ما أهمه.",
   },
   {
     id: 14,
@@ -265,6 +400,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Allahumma inni as'alukal-'afwa wal-'afiyata fid-dunya wal-akhirah. Allahumma inni as'alukal-'afwa wal-'afiyata fi dini wa dunyaya wa ahli wa mali. Allahummastur 'awrati wa amin raw'ati. Allahummahfanzni min bayni yadayya wa min khalfi wa 'an yamini wa 'an shimali wa min fawqi, wa a'udhu bi'azamatika an ughtala min tahti.",
     translation: "O Allah, I ask You for pardon and well-being in this world and the Hereafter. O Allah, I ask You for pardon and well-being in my religion and my worldly affairs, and my family and my wealth. O Allah, veil my weaknesses and set at ease my dismay. O Allah, preserve me from the front and from behind and on my right and on my left and from above, and I seek refuge in Your Greatness lest I be swallowed up by the earth.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "سؤال العفو والعافية.",
   },
   {
     id: 15,
@@ -272,6 +409,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Allahumma 'Alimal-ghaybi wash-shahadah, Fatiras-samawati wal-ard, Rabba kulli shay'in wa malikah, ashhadu an la ilaha illa Ant, a'udhu bika min sharri nafsi wa min sharrish-shaytani wa shirkih, wa an aqtarifa 'ala nafsi su'an aw ajurrahu ila Muslim.",
     translation: "O Allah, Knower of the unseen and the evident, Maker of the heavens and the earth, Lord of everything and its Possessor, I bear witness that there is no god but You. I seek refuge in You from the evil of my own soul and from the evil of Satan and the shirk (polytheism) to which he calls, and from committing wrong against my soul or bringing such upon another Muslim.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "التعوذ بالله من شر النفس والشيطان.",
   },
   {
     id: 16,
@@ -279,6 +418,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Bismillahil-ladhi la yadurru ma'as-mihi shay'un fil-ardi wa la fis-sama'i wa Huwas-Sami'ul-'Alim.",
     translation: "In the Name of Allah, Who with His Name nothing can cause harm in the earth nor in the heavens, and He is the All-Hearing, the All-Knowing.",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها ثلاثاً لم يضره شيء.",
   },
   {
     id: 17,
@@ -286,6 +427,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Raditu billahi Rabba, wa bil-Islami dina, wa bi-Muhammadin sallallahu 'alayhi wa sallama nabiyya.",
     translation: "I am pleased with Allah as my Lord, with Islam as my religion and with Muhammad (peace and blessings of Allah be upon him) as my Prophet.",
     count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها ثلاثاً كان حقاً على الله أن يرضيه.",
   },
   {
     id: 18,
@@ -293,6 +436,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Ya Hayyu ya Qayyum, bi-rahmatika astaghith, aslih li sha'ni kullah, wa la takilni ila nafsi tarfata 'ayn.",
     translation: "O Ever Living One, O Eternal One, by Your mercy I call on You to set right all my affairs. Do not place me in charge of my soul even for the blinking of an eye.",
     count: 1,
+    occasion: "الصباح والمساء.",
+    reward: "دعاء بصلاح الشأن.",
   },
   {
     id: 19,
@@ -300,6 +445,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Amsayna 'ala fitratil-Islam, wa 'ala kalimatil-ikhlas, wa 'ala dini nabiyyina Muhammadin sallallahu 'alayhi wa sallam, wa 'ala millati abina Ibrahima hanifam-muslima, wa ma kana minal-mushrikin.",
     translation: "We have reached the evening upon the natural religion of Islam, the word of pure faith, the religion of our Prophet Muhammad (peace and blessings of Allah be upon him) and the religion of our father Abraham, who was a Muslim and of true faith and was not of those who associate others with Allah.",
     count: 1,
+    occasion: "المساء.",
+    reward: "تأكيد على الفطرة والإيمان.",
   },
   {
     id: 20,
@@ -307,6 +454,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Subhanallahi wa bihamdih.",
     translation: "Glory is to Allah and to Him is the praise.",
     count: 100,
+    occasion: "الصباح والمساء.",
+    reward: "حطت خطاياه ولو كانت مثل زبد البحر.",
   },
   {
     id: 21,
@@ -315,6 +464,8 @@ export const eveningAzkar: AzkarItem[] = [
     translation: "There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything.",
     count: 10,
     secondaryCount: 100,
+    occasion: "المساء.",
+    reward: "من قالها ١٠٠ مرة آمن من الشيطان، وكتبت له حسنات ومحيت عنه سيئات.",
   },
   {
     id: 22,
@@ -322,6 +473,8 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "A'udhu bikalimatillahit-tammati min sharri ma khalaq.",
     translation: "I seek refuge in the Perfect Words of Allah from the evil of what He has created.",
     count: 3,
+    occasion: "المساء.",
+    reward: "من قالها ثلاثاً لم تضره حمة (ذوات السموم) تلك الليلة.",
   },
   {
     id: 23,
@@ -329,6 +482,62 @@ export const eveningAzkar: AzkarItem[] = [
     transliteration: "Astaghfirullaha wa atubu ilayh.",
     translation: "I seek forgiveness of Allah and repent to Him.",
     count: 100,
+    occasion: "الصباح والمساء.",
+    reward: "مغفرة الذنوب.",
+  },
+  {
+    id: 24,
+    arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، عَلَيْكَ تَوَكَّلْتُ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ، مَا شَاءَ اللَّهُ كَانَ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ، أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ",
+    transliteration: "Allahumma Anta Rabbi la ilaha illa Ant, 'alayka tawakkaltu wa Anta Rabbul-'Arshil-'Azim. Ma sha' Allahu kana wa ma lam yasha' lam yakun, wa la hawla wa la quwwata illa billahil-'Aliyyil-'Azim. A'lamu annallaha 'ala kulli shay'in qadir, wa annallaha qad ahata bikulli shay'in 'ilma. Allahumma inni a'udhu bika min sharri nafsi wa min sharri kulli dabbatin Anta akhidhun binasiyatiha, inna Rabbi 'ala siratim mustaqim.",
+    translation: "O Allah, You are my Lord, there is no god but You. In You I put my trust, and You are the Lord of the Mighty Throne. What Allah wills happens, and what He does not will does not happen. There is no power or strength except with Allah, the Exalted, the Mighty. I know that Allah has power over all things, and that Allah comprehends all things in knowledge. O Allah, I seek refuge in You from the evil of my soul and from the evil of every living creature that You hold by its forelock. Indeed, my Lord is on a Straight Path.",
+    count: 1,
+    occasion: "أذكار الصباح والمساء الحاقظة من الضر.",
+    reward: "من قالها أول نهاره لم تصبه مصيبة حتى يمسي، ومن قالها آخر نهاره لم تصبه مصيبة حتى يصبح. (رواه السني وأبو داود)",
+  },
+  {
+    id: 25,
+    arabic: "اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ",
+    transliteration: "Allahumma inna na'udhu bika min an nushrika bika shay'an na'lamuh, wa nastaghfiruka lima la na'lamuh.",
+    translation: "O Allah, we seek refuge in You from knowingly associating partners with You, and we ask Your forgiveness for that which we do not know.",
+    count: 3,
+    occasion: "للحفظ من الشرك الأصغر والرياء.",
+    reward: "من قالها أذهب الله عنه الشرك أصغره وأكبره. (صحيح الجامع)",
+  },
+  {
+    id: 26,
+    arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ",
+    transliteration: "Allahumma inni a'udhu bika minal-hammi wal-hazan, wa a'udhu bika minal-'ajzi wal-kasal, wa a'udhu bika minal-jubni wal-bukhl, wa a'udhu bika min ghalabatid-dayni wa qahrir-rijal.",
+    translation: "O Allah, I seek refuge in You from anxiety and sorrow, weakness and laziness, miserliness and cowardice, the burden of debts and from being overpowered by men.",
+    count: 3,
+    occasion: "عند الشعور بالهم أو الحزن أو الكسل.",
+    reward: "من قالها صباحاً ومساءً أذهب الله همه وقضى دينه. (رواه أبو داود)",
+  },
+  {
+    id: 27,
+    arabic: "اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى نَبِيِّنَا مُحَمَّدٍ",
+    transliteration: "Allahumma salli wa sallim wa barik 'ala nabiyyina Muhammad.",
+    translation: "O Allah, send prayers and peace and blessings upon our Prophet Muhammad.",
+    count: 10,
+    occasion: "الصباح والمساء.",
+    reward: "مَنْ صَلَّى عَلَيَّ حِينَ يُصْبِحُ عَشْرًا، وَحِينَ يُمْسِي عَشْرًا أَدْرَكَتْهُ شَفَاعَتِي يَوْمَ الْقِيَامَةِ. (رواه الطبراني)",
+  },
+  {
+    id: 28,
+    arabic: "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
+    transliteration: "Astaghfirullahal-'Azim alladhi la ilaha illa Huwal-Hayyul-Qayyum wa atubu ilayh.",
+    translation: "I seek forgiveness from Allah, the Magnificent, none has the right to be worshipped but Him, the Ever-Living, the One Who sustains and protects all that exists, and I turn to Him in repentance.",
+    count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "من قالها غفرت له ذنوبه وإن كان فاراً من الزحف. (رواه الترمذي)",
+  },
+  {
+    id: 29,
+    arabic: "يَا رَبِّ، لَكَ الْحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ، وَلِعَظِيمِ سُلْطَانِكَ",
+    transliteration: "Ya Rabbi, lakal-hamdu kama yanbaghi lijalali wajhika, wa li'azimi sultanik.",
+    translation: "O my Lord, all praise is due to You as befits the Majesty of Your Face and the Greatness of Your Sovereignty.",
+    count: 3,
+    occasion: "الصباح والمساء.",
+    reward: "يقول الله للملائكة: اكتبوها كما قال عبدي حتى يلقاني فأجزيه بها. (رواه ابن ماجه)",
   },
 ];
 
@@ -339,6 +548,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Astaghfirullah (3x). Allahumma Antas-Salam wa minkas-salam, tabarakta ya Dhal-Jalali wal-Ikram.",
     translation: "I seek the forgiveness of Allah (3 times). O Allah, You are Peace and from You comes peace. Blessed are You, O Owner of Majesty and Honor.",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "السنة والافتتاح بالاستغفار.",
   },
   {
     id: 2,
@@ -346,6 +557,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Ayat al-Kursi",
     translation: "Recite Ayat al-Kursi",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "من قرأها دبر كل صلاة لم يمنعه من دخول الجنة إلا الموت. (رواه النسائي)",
   },
   {
     id: 3,
@@ -353,6 +566,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Qul Huwallahu Ahad. Allahus-Samad. Lam yalid wa lam yulad. Wa lam yakun lahu kufuwan ahad.",
     translation: "Say, 'He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.'",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "تحصين وقراءة المعوذات.",
   },
   {
     id: 4,
@@ -360,6 +575,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Qul a'udhu bi-rabbil-falaq. Min sharri ma khalaq. Wa min sharri ghasiqin idha waqab. Wa min sharrin-naffathati fil-'uqad. Wa min sharri hasidin idha hasad.",
     translation: "Say, 'I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.'",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "تحصين وقراءة المعوذات.",
   },
   {
     id: 5,
@@ -367,6 +584,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Qul a'udhu bi-rabbin-nas. Malikin-nas. Ilahin-nas. Min sharril-waswasil-khannas. Alladhi yuwaswisu fi sudurin-nas. Minal-jinnati wan-nas.",
     translation: "Say, 'I seek refuge in the Lord of mankind, The Sovereign of mankind. The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind.'",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "تحصين وقراءة المعوذات.",
   },
   {
     id: 6,
@@ -374,6 +593,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir. Allahumma la mani'a lima a'tayt, wa la mu'tiya lima mana't, wa la yanfa'u dhal-jaddi minkal-jadd.",
     translation: "There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything. O Allah, none can prevent what You have willed to bestow and none can bestow what You have willed to prevent, and no wealth or majesty can benefit anyone, as from You is all wealth and majesty.",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "دعاء التوحيد والتفويض.",
   },
   {
     id: 7,
@@ -381,6 +602,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir. La hawla wa la quwwata illa billah. La ilaha illallah, wa la na'budu illa iyyah. Lahun-ni'matu wa lahul-fadlu wa lahuth-thana'ul-hasan. La ilaha illallahu mukhlisina lahud-dina wa law karihal-kafirun.",
     translation: "There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything. There is no might and no power except with Allah. There is no god but Allah, and we worship none but Him. To Him belongs the favor, and to Him belongs the grace, and to Him belongs the best praise. There is no god but Allah, we are sincere to Him in religion, although the disbelievers may detest it.",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "دعاء التوحيد والثناء.",
   },
   {
     id: 8,
@@ -388,6 +611,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Subhanallah.",
     translation: "Glory is to Allah.",
     count: 33,
+    occasion: "دبر كل صلاة.",
+    reward: "من سبح وحمد وكبر دبر كل صلاة غفرت خطاياه ولو كانت مثل زبد البحر. (رواه مسلم)",
   },
   {
     id: 9,
@@ -395,6 +620,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Alhamdulillah.",
     translation: "Praise is to Allah.",
     count: 33,
+    occasion: "دبر كل صلاة.",
+    reward: "من سبح وحمد وكبر دبر كل صلاة غفرت خطاياه ولو كانت مثل زبد البحر. (رواه مسلم)",
   },
   {
     id: 10,
@@ -402,6 +629,8 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "Allahu Akbar.",
     translation: "Allah is the Most Great.",
     count: 33,
+    occasion: "دبر كل صلاة.",
+    reward: "من سبح وحمد وكبر دبر كل صلاة غفرت خطاياه ولو كانت مثل زبد البحر. (رواه مسلم)",
   },
   {
     id: 11,
@@ -409,16 +638,20 @@ export const afterPrayerAzkar: AzkarItem[] = [
     transliteration: "La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir.",
     translation: "There is no god but Allah, the One, having no partner with Him. To Him belongs the sovereignty and to Him is the praise and He has full power over everything.",
     count: 1,
+    occasion: "دبر كل صلاة.",
+    reward: "تمام المائة، وغفران الخطايا.",
   },
 ];
 
 export const sleepAzkar: AzkarItem[] = [
   {
     id: 1,
-    arabic: "يجمع كفيه ثم ينفث فيهما والقراءة فيهما‏:‏ ‏{‏قل هو الله أحد‏}‏ و‏{‏قل أعوذ برب الفلق‏}‏ و‏{‏قل أعوذ برب الناس‏}‏ ومسح ما استطاع من الجسد يبدأ بهما على رأسه ووجه وما أقبل من جسده.",
-    transliteration: "Yajma'u kaffayhi thumma yanfuthu fihima wal-qira'atu fihima: {Qul Huwallahu Ahad} wa {Qul a'udhu bi-rabbil-falaq} wa {Qul a'udhu bi-rabbin-nas} wa mashu ma astata'a minal-jasadi yabda'u bihima 'ala ra'sihi wa wajhihi wa ma aqbala min jasadih.",
-    translation: "He joins his palms together and blows into them, reciting in them: [Surah Al-Ikhlas], [Surah Al-Falaq], and [Surah An-Nas]. Then he wipes over whatever he can of his body, starting with his head and face and the front of his body.",
+    arabic: "قراءة سورة الإخلاص والمعوذتين، ينفث فيهما ويمسح بهما ما استطاع من جسده",
+    transliteration: "Qira'at Surat Al-Ikhlas wa Al-Mu'awwidhatayn. Yanfuthu fihim wa yamsahu bihima ma istata'a min jasadih.",
+    translation: "Read Surah Al-Ikhlas and Al-Mu'awwidhatayn, then blow (spit lightly) into your hands and wipe them over whatever you can of your body.",
     count: 3,
+    occasion: "قبل النوم.",
+    reward: "تكون حرزًا ووقاية لقارئها.",
   },
   {
     id: 2,
@@ -426,6 +659,8 @@ export const sleepAzkar: AzkarItem[] = [
     transliteration: "Allahu la ilaha illa Huwa, Al-Hayyul-Qayyum. La ta'khudhuhu sinatun wa la nawm. Lahu ma fis-samawati wa ma fil-ard. Man dhalladhi yashfa'u 'indahu illa bi-idhnih. Ya'lamu ma bayna aydihim wa ma khalfahum, wa la yuhituna bishay'im-min 'ilmihi illa bima sha'. Wasi'a kursiyyuhus-samawati wal-ard, wa la ya'uduhu hifzuhuma, wa Huwal-'Aliyyul-'Azim.",
     translation: "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.",
     count: 1,
+    occasion: "عند النوم.",
+    reward: "من قرأها عند النوم لن يزال عليه من الله حافظ، ولا يقربه شيطان حتى يصبح.",
   },
   {
     id: 3,
@@ -433,6 +668,8 @@ export const sleepAzkar: AzkarItem[] = [
     transliteration: "Amanar-Rasulu bima unzila ilayhi min Rabbihi wal-mu'minun. Kullun amana billahi wa mala'ikatihi wa kutubihi wa rusulih. La nufarriqu bayna ahadim-mir-rusulih. Wa qalu sami'na wa ata'na ghufranaka Rabbana wa ilaykal-masir. La yukallifullahu nafsan illa wus'aha. Laha ma kasabat wa 'alayha maktasabat. Rabbana la tu'akhidhna in nasina aw akhta'na. Rabbana wa la tahmil 'alayna isran kama hamaltahu 'alal-ladhina min qablina. Rabbana wa la tuhammilna ma la taqata lana bih. Wa'fu 'anna waghfir lana warhamna. Anta Mawlana fansurna 'alal-qawmil-kafirin.",
     translation: "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allah and His angels and His books and His messengers, [saying], 'We make no distinction between any of His messengers.' And they say, 'We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.' Allah does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. 'Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.'",
     count: 1,
+    occasion: "عند النوم.",
+    reward: "من قرأهما في ليلة كفتاه (أي من كل شر).",
   },
   {
     id: 4,
@@ -440,6 +677,8 @@ export const sleepAzkar: AzkarItem[] = [
     transliteration: "Bismika Rabbi wada'tu janbi, wa bika arfa'uh. Fa-in amsakta nafsi farhamha, wa in arsaltaha fahfazha bima tahfazu bihi 'ibadakas-salihin.",
     translation: "In Your Name my Lord I have laid down my side, and by You I lift it. If You take my soul, then have mercy on it, and if You send it back, then protect it with what You protect Your righteous slaves.",
     count: 1,
+    occasion: "عند النوم.",
+    reward: "دعاء الاضطجاع للنوم، طلب الحفظ والرحمة.",
   },
   {
     id: 5,
@@ -447,6 +686,8 @@ export const sleepAzkar: AzkarItem[] = [
     transliteration: "Allahumma innaka khalaqta nafsi wa Anta tawaffaha. Laka mamatuha wa mahyaha. In ahyaytaha fahfazha, wa in amattaha faghfir laha. Allahumma inni as'alukal-'afiyah.",
     translation: "O Allah, You have created my soul and You take it back. Unto You is its death and its life. If You give it life then protect it, and if You cause it to die then forgive it. O Allah, I ask You for strength.",
     count: 1,
+    occasion: "عند النوم.",
+    reward: "تفويض الأمر لله وطلب العافية.",
   },
   {
     id: 6,
@@ -454,6 +695,8 @@ export const sleepAzkar: AzkarItem[] = [
     transliteration: "Al-hamdu lillahil-ladhi at'amana wa saqana, wa kafana, wa awana, fakam mimman la kafiya lahu wa la mu'wi.",
     translation: "Praise is to Allah Who has provided us with food and drink, sufficed us and gave us an abode, for how many are there who have no one to suffice them or give them an abode.",
     count: 1,
+    occasion: "عند النوم.",
+    reward: "الحمد والثناء على الله قبل النوم.",
   },
   {
     id: 7,
@@ -461,6 +704,44 @@ export const sleepAzkar: AzkarItem[] = [
     transliteration: "Allahumma aslamtu nafsi ilayk, wa fawwadtu amri ilayk, wa wajjahtu wajhi ilayk, wa alja'tu zahri ilayk, raghbatan wa rahbatan ilayk. La malja'a wa la manja minka illa ilayk. Amantu bi-kitabikal-ladhi anzalta wa bi-nabiyyikal-ladhi arsalt.",
     translation: "O Allah, I submit my soul unto You, and I entrust my affair unto You, and I turn my face towards You, and I totally rely on You, in hope and fear of You. There is no refuge nor safe haven from You except with You. I believe in Your Book which You have revealed and in Your Prophet whom You have sent.",
     count: 1,
+    occasion: "عند النوم.",
+    reward: "من قالها ثم مات، مات على الفطرة.",
+  },
+  {
+    id: 8,
+    arabic: "سُبْحَانَ اللَّهِ",
+    transliteration: "Subhanallah",
+    translation: "Glory is to Allah",
+    count: 33,
+    occasion: "عند النوم.",
+    reward: "خير من خادم.",
+  },
+  {
+    id: 9,
+    arabic: "الْحَمْدُ لِلَّهِ",
+    transliteration: "Alhamdulillah",
+    translation: "Praise is to Allah",
+    count: 33,
+    occasion: "عند النوم.",
+    reward: "خير من خادم.",
+  },
+  {
+    id: 10,
+    arabic: "اللَّهُ أَكْبَرُ",
+    transliteration: "Allahu Akbar",
+    translation: "Allah is the Most Great",
+    count: 34,
+    occasion: "عند النوم.",
+    reward: "خير من خادم.",
+  },
+  {
+    id: 11,
+    arabic: "اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",
+    transliteration: "Allahumma 'Alimal-ghaybi wash-shahadah, Fatiras-samawati wal-ard, Rabba kulli shay'in wa malikah, ashhadu an la ilaha illa Ant, a'udhu bika min sharri nafsi wa min sharrish-shaytani wa shirkih, wa an aqtarifa 'ala nafsi su'an aw ajurrahu ila Muslim.",
+    translation: "O Allah, Knower of the unseen and the evident, Maker of the heavens and the earth, Lord of everything and its Possessor, I bear witness that there is no god but You. I seek refuge in You from the evil of my own soul and from the evil of Satan and the shirk (polytheism) to which he calls, and from committing wrong against my soul or bringing such upon another Muslim.",
+    count: 1,
+    occasion: "أذكار الصباح والمساء والنوم.",
+    reward: "التعوذ بالله من شر النفس والشيطان.",
   },
 ];
 export const nightAnxietyAzkar: AzkarItem[] = [
@@ -470,6 +751,8 @@ export const nightAnxietyAzkar: AzkarItem[] = [
     transliteration: "Allahumma Rabbas-samawatis-sab'i wa ma azallat, wa Rabbal-ardina wa ma aqallat, wa Rabbash-shayatini wa ma adallat, kun li jaran min khalqika kullihim jami'a, an yafruta 'alayya ahadun minhum aw an yabghiya 'alayya. 'Azza jaruk, wa jalla thana'uk, wa la ilaha ghayruk, wa la ilaha illa Ant.",
     translation: "O Allah, Lord of the seven heavens and what they shadow, Lord of the earths and what they carry, and Lord of the devils and what they mislead, be a Protector to me against all of Your creation, lest any of them transgress against me or oppress me. Mighty is Your Protection, and glorious is Your Praise, and there is no deity other than You, and there is no deity but You.",
     count: 1,
+    occasion: "عند الفزع من النوم أو القلق.",
+    reward: "التحصن بالله من شر الخلق والشياطين.",
   },
   {
     id: 2,
@@ -477,6 +760,8 @@ export const nightAnxietyAzkar: AzkarItem[] = [
     transliteration: "A'udhu bikalimatillahit-tammati min ghadabihi wa sharri 'ibadih, wa min hamazatish-shayatini wa an yahdurun.",
     translation: "I seek refuge in the Perfect Words of Allah from His anger and the evil of His slaves, and from the whispers of the devils and their presence.",
     count: 1,
+    occasion: "عند الفزع والقلق.",
+    reward: "لم يضره شيء.",
   },
 ];
 export const badDreamsAzkar: AzkarItem[] = [
@@ -486,5 +771,7 @@ export const badDreamsAzkar: AzkarItem[] = [
     transliteration: "Ar-ru'yas-salihatu minallah, wal-hulmu minash-shaytan. Faman ra'a shay'an yakrahuhu falyanfuth 'an shimalihi thalathan walyata'awwadh minash-shaytan, fa-innaha la tadurruh.",
     translation: "The good dream is from Allah, and the bad dream is from Satan. So whoever sees something that he dislikes, let him blow (spit lightly) to his left three times and seek refuge from Satan, for it will not harm him.",
     count: 1,
+    occasion: "عند الرؤية السيئة.",
+    reward: "فإنها لا تضره.",
   },
 ];

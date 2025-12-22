@@ -1,4 +1,4 @@
-package com.prayercompanion.pro;
+package com.ibadalrahman.app;
 
 import com.getcapacitor.BridgeActivity;
 

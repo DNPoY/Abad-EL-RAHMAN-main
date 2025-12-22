@@ -5,7 +5,7 @@
 
 Short Description: The ultimate Islamic app designed for every Muslim. Accurate prayer times, Quran, Azkar, Qibla, and more in a beautiful, modern interface.
 
-Full Description: "Abad Al-Rahman" (Servants of the Merciful) is a thoughtfully designed application to help you maintain your daily worship with ease and tranquility. Built with a stunning modern interface, it combines essential Islamic tools into one seamless experience.
+Full Description: "Ibad Al-Rahman" (Servants of the Merciful) is a thoughtfully designed application to help you maintain your daily worship with ease and tranquility. Built with a stunning modern interface, it combines essential Islamic tools into one seamless experience.
 
 Key Features:
 
