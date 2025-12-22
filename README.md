@@ -3,31 +3,51 @@
 ## Project info
 
 
-Short Description: The ultimate Islamic app designed for every Muslim. Accurate prayer times, Quran, Azkar, Qibla, and more in a beautiful, modern interface.
+Ibad Al-Rahman" – Your Ultimate Daily Worship Companion
 
-Full Description: "Ibad Al-Rahman" (Servants of the Merciful) is a thoughtfully designed application to help you maintain your daily worship with ease and tranquility. Built with a stunning modern interface, it combines essential Islamic tools into one seamless experience.
+Designed with elegance and purpose, "Ibad Al-Rahman" (Servants of the Merciful) provides every Muslim with the essential tools needed for daily worship. Combining a premium, modern design with deeply authentic content, it offers a seamless spiritual experience free from distractions.
+
+✨ New Feature: Deep Azkar Insights We have enriched our Azkar library! Now, every Dua and Azkar item includes detailed Occasion (When to say it) and Reward/Fadl (Benefits from Hadith), accessible via a simple tap on the info icon. Understand the meaning and power behind every word you recite.
 
 Key Features:
 
-Accurate Prayer Times: Precise calculations based on your location and preferred method (Shafi/Hanafi).
-Smart Notifications: Full Azan audio and pre-prayer reminders so you never miss a Salah.
-The Holy Quran: Read the complete Quran with clear text, translations, and audio recitation.
-Azkar & Duas: Comprehensive collection of daily Azkar (Morning/Evening) and Duas from the Quran and Sunnah.
-Qibla Compass: Accurate direction to the Kaaba wherever you are.
-Mosque Finder: Easily locate the nearest mosques around you.
-Hijri Calendar: Keep track of Islamic dates and important events.
-Missed Prayers (Qada): A dedicated tracker to help you make up missed prayers.
-Sunnah Prayers: Guidance and tracking for voluntary (Nawafil) prayers.
-Beautiful Design: A premium, eye-friendly "Deep Emerald" theme with dark mode support.
-Offline Mode: Most features work perfectly without an internet connection.
-Widgets: Beautiful home screen widgets for quick access to prayer times.
-Privacy Focused: No data collection. Your worship is personal.
+📍 Accurate Prayer Times
 
+Precise calculations based on your exact location.
+Supports multiple calculation methods and Shafi/Hanafi Asr times.
+Offline Ready: Works perfectly without an internet connection.
+🕌 Smart Notifications & Azan
 
+Full Azan Audio: Listen to the heartfelt call to prayer (options: Makkah, Madinah, Egypt).
+Pre-Prayer Alerts: Get notified before Salah time to prepare yourself spiritually.
+Background Reliability: Alerts work perfectly even if the app is closed.
+📖 The Holy Quran
 
-وصف قصير: التطبيق الإسلامي الأمثل لكل مسلم. مواقيت الصلاة، القرآن الكريم، الأذكار، القبلة، والمزيد في واجهة عصرية جميلة.
+Crystal clear Arabic text (Uthmani script) for comfortable reading.
+Audio Recitations: High-quality audio from renowned Reciters.
+Tafsir & Translation: Understand the deeper meaning of verses instantly.
+📿 Comprehensive Azkar & Duas
 
-الوصف الكامل: "عباد الرحمن" هو تطبيق صُمم بعناية ليكون رفيقك اليومي في العبادة والطاعة. يتميز بواجهة عصرية أنيقة تجمع بين الجمال والسهولة، ليوفر لك كل ما تحتاجه في تطبيق واحد.
+Morning & Evening Azkar: Complete authentic collection with counters.
+Contextual Duas: Supplications for waking up, sleeping, anxiety, protection, and more.
+Occasion & Rewards: [NEW] View specific benefits and occasions for each Azkar.
+🧭 Qibla Compass & Mosque Finder
+
+Qibla: Accurate direction to the Kaaba with a smooth, responsive compass.
+Mosque Finder: Instantly locate the nearest mosques around you with one tap.
+📅 Tools for the Faithful
+
+Hijri Calendar: Track important Islamic dates and events.
+Missed Prayers (Qada): A dedicated tracker to help you count and make up missed prayers.
+Sunnah Prayers: Detailed guidance and tracking for voluntary (Nawafil) prayers.
+🎨 Experience the Difference
+
+Premium Design: A beautiful "Deep Emerald" theme that is easy on the eyes.
+Dark Mode: Fully supported system-wide dark mode.
+Privacy First: No tracking, no ads, no data collection. Your worship is yours alone.
+Home Screen Widgets: Beautiful widgets to see prayer times at a glance.
+
+"عباد الرحمن" هو تطبيق صُمم بعناية ليكون رفيقك اليومي في العبادة والطاعة. يتميز بواجهة عصرية أنيقة تجمع بين الجمال والسهولة، ليوفر لك كل ما تحتاجه في تطبيق واحد.
 
 أهم المميزات:
 
