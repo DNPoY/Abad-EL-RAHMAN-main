@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback, Rea
 import { Coordinates, CalculationMethod, PrayerTimes, Madhab } from 'adhan';
 import { useSettings } from "@/contexts/SettingsContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useWidgetUpdater } from "@/hooks/useWidgetUpdater";
 
 interface PrayerTimesData {
     fajr: string;
@@ -46,6 +47,9 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
 
     const [loading, setLoading] = useState<boolean>(() => !localStorage.getItem('cachedPrayerTimes'));
     const [nextPrayer, setNextPrayer] = useState<NextPrayer | null>(null);
+
+    // Sync Widget
+    useWidgetUpdater(prayerTimes);
 
     const calculatePrayerTimes = useCallback((latitude: number, longitude: number) => {
         try {
