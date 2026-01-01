@@ -13,11 +13,16 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import android.os.Handler;
+import android.os.Looper;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AdhanService extends Service {
     private static final String TAG = "AdhanService";
@@ -25,6 +30,7 @@ public class AdhanService extends Service {
     private MediaPlayer mediaPlayer;
     private int originalVolume = -1;
     private AudioManager audioManager;
+    private Timer fadeInTimer;
 
     @Override
     public void onCreate() {
@@ -112,29 +118,63 @@ public class AdhanService extends Service {
                         audioManager.requestAudioFocus(null, AudioManager.STREAM_ALARM, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
                     }
 
-                    int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
-                    if (originalVolume == -1) {
-                         originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
-                    }
-                    audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
-                    Log.d(TAG, "Adhan volume set to max: " + maxVolume);
-                }
+                    // Read user preferences
+                    SharedPreferences prefs = getSharedPreferences("PrayerWidgetPrefs", Context.MODE_PRIVATE);
+                    int userVolumePercent = prefs.getInt("azanVolume", 100);
+                    boolean smartDnd = prefs.getBoolean("smartDnd", false);
+                    boolean azanFadeIn = prefs.getBoolean("azanFadeIn", false);
 
-                // Initialize MediaPlayer
-                mediaPlayer = new MediaPlayer();
-                mediaPlayer.setDataSource(this, soundUri);
-                
-                // Explicitly set stream type for pre-21 and consistency
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-                
-                AudioAttributes.Builder attrs = new AudioAttributes.Builder();
-                attrs.setUsage(AudioAttributes.USAGE_ALARM);
-                attrs.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION);
-                mediaPlayer.setAudioAttributes(attrs.build());
-                
-                mediaPlayer.setLooping(false);
-                mediaPlayer.prepare();
-                mediaPlayer.start();
+                    // Smart DND Check
+                    int ringerMode = audioManager.getRingerMode();
+                    if (smartDnd && (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE)) {
+                        Log.d(TAG, "Smart DND enabled and phone is silent/vibrate. Skipping audio.");
+                        // We still show notification, but don't play sound.
+                        // We should probably stopSelf immediately or just return?
+                        // If we stopSelf, the notification might vanish if not careful.
+                        // Let's just return and let notification stay (it's foreground).
+                        // But wait, if we don't play sound, the service will keep running forever?
+                        // No, we need to schedule a stop or just show notification and kill service.
+                        // For now, let's just NOT play audio, but allow service to live? 
+                        // Actually, if we don't play, we should probably stop the service so it doesn't drain battery holding wake lock.
+                        // But we want the notification to be visible.
+                        // Let's just return. The notification is "ongoing", user can dismiss it.
+                        // Better: Stop the service but keep notification?
+                        // Current implementation assumes service runs while playing.
+                        // Let's just play silence? Or just return.
+                        // If we return, we must release WakeLock.
+                        if (wakeLock != null && wakeLock.isHeld()) wakeLock.release();
+                        return; 
+                    }
+
+                    int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+                    int targetVolume = (int) (maxVolume * (userVolumePercent / 100.0));
+                    
+                    audioManager.setStreamVolume(AudioManager.STREAM_ALARM, targetVolume, 0);
+                    Log.d(TAG, "Adhan volume set to: " + targetVolume + " (" + userVolumePercent + "%)");
+
+                    // Initialize MediaPlayer
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setDataSource(this, soundUri);
+                    
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                    AudioAttributes.Builder attrs = new AudioAttributes.Builder();
+                    attrs.setUsage(AudioAttributes.USAGE_ALARM);
+                    attrs.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION);
+                    mediaPlayer.setAudioAttributes(attrs.build());
+                    
+                    mediaPlayer.setLooping(false);
+                    mediaPlayer.prepare();
+
+                    if (azanFadeIn) {
+                        mediaPlayer.setVolume(0.01f, 0.01f); // Start very low
+                        mediaPlayer.start();
+                        startFadeIn(targetVolume, maxVolume); // Logic to increase volume
+                    } else {
+                        mediaPlayer.setVolume(1.0f, 1.0f); // Default full volume relative to Stream Volume
+                        mediaPlayer.start();
+                    }
+
+                } // End of inner if (audioManager != null)
             } catch (IOException e) {
                 Log.e(TAG, "Error setting data source or preparing media player", e);
                 stopAdhan();
@@ -277,5 +317,36 @@ public class AdhanService extends Service {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+    }
+    private void startFadeIn(int targetStreamVolume, int maxStreamVolume) {
+        // We are already at volume 0.01 relative to stream volume.
+        // The stream volume is set to 'targetStreamVolume'.
+        // We want to fade the MediaPlayer volume from 0.01 to 1.0 (relative to stream).
+        
+        fadeInTimer = new Timer();
+        fadeInTimer.scheduleAtFixedRate(new TimerTask() {
+            float volume = 0.01f;
+            @Override
+            public void run() {
+                if (mediaPlayer == null || !mediaPlayer.isPlaying()) {
+                    if (fadeInTimer != null) fadeInTimer.cancel();
+                    return;
+                }
+                
+                volume += 0.05f; // Increase by 5% every step
+                if (volume >= 1.0f) {
+                    volume = 1.0f;
+                    if (fadeInTimer != null) fadeInTimer.cancel();
+                }
+                
+                try {
+                    if (mediaPlayer != null) {
+                         mediaPlayer.setVolume(volume, volume);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Error fading in", e);
+                }
+            }
+        }, 0, 500); // Update every 500ms -> reaches 100% in ~10 seconds
     }
 }

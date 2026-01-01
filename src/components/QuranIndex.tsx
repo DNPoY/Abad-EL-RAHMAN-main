@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSettings } from "@/contexts/SettingsContext";
 import { surahs } from "@/lib/quran-data";
 import { Search, BookOpen, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -49,6 +50,7 @@ interface SearchResult {
 
 export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
     const { language } = useLanguage();
+    const { readingStyle, setReadingStyle } = useSettings();
     const [searchQuery, setSearchQuery] = useState("");
     const [ayahResults, setAyahResults] = useState<SearchResult[]>([]);
     const [isSearching, setIsSearching] = useState(false);
@@ -183,6 +185,18 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
                         <span className="text-sm font-tajawal text-emerald-deep/60 mt-1">
                             {language === "ar" ? "اقرأ وارتق" : "Read and Rise"}
                         </span>
+
+                        <Button
+                            variant="outline"
+                            onClick={() => setReadingStyle(readingStyle === 'hafs' ? 'warsh' : 'hafs')}
+                            className="mt-4 gap-2 border-emerald-deep/20 text-emerald-deep hover:bg-emerald-deep/5 font-amiri min-w-[140px]"
+                        >
+                            <BookOpen className="w-4 h-4" />
+                            {readingStyle === 'hafs'
+                                ? (language === "ar" ? "رواية حفص" : "Hafs Style")
+                                : (language === "ar" ? "رواية ورش" : "Warsh Style")
+                            }
+                        </Button>
                     </div>
                 </div>
 

@@ -300,8 +300,50 @@ public class WidgetPlugin extends Plugin {
         String title = prefs.getString("customRingtoneTitle", null);
         
         JSObject ret = new JSObject();
-        ret.put("uri", uri);
         ret.put("title", title);
         call.resolve(ret);
+    }
+
+    @PluginMethod
+    public void setAzanVolume(PluginCall call) {
+        Integer volume = call.getInt("volume");
+        if (volume == null) {
+            call.reject("Must provide volume");
+            return;
+        }
+
+        // Clamp volume between 0 and 100
+        if (volume < 0) volume = 0;
+        if (volume > 100) volume = 100;
+
+        Context context = getContext();
+        SharedPreferences prefs = context.getSharedPreferences("PrayerWidgetPrefs", Context.MODE_PRIVATE);
+        prefs.edit().putInt("azanVolume", volume).apply();
+
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void setSmartDnd(PluginCall call) {
+        Boolean enabled = call.getBoolean("enabled");
+        if (enabled == null) {
+            call.reject("Must provide enabled");
+            return;
+        }
+        getContext().getSharedPreferences("PrayerWidgetPrefs", Context.MODE_PRIVATE)
+                .edit().putBoolean("smartDnd", enabled).apply();
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void setAzanFadeIn(PluginCall call) {
+        Boolean enabled = call.getBoolean("enabled");
+        if (enabled == null) {
+            call.reject("Must provide enabled");
+            return;
+        }
+        getContext().getSharedPreferences("PrayerWidgetPrefs", Context.MODE_PRIVATE)
+                .edit().putBoolean("azanFadeIn", enabled).apply();
+        call.resolve();
     }
 }

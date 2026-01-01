@@ -24,6 +24,9 @@ export interface WidgetBridgePlugin {
     getPendingAlarms(): Promise<{ alarms: { prayerName: string; timestamp: number; soundName: string }[] }>;
     pickRingtone(): Promise<{ uri: string; title: string }>;
     getCustomRingtone(): Promise<{ uri: string | null; title: string | null }>;
+    setAzanVolume(options: { volume: number }): Promise<void>;
+    setSmartDnd(options: { enabled: boolean }): Promise<void>;
+    setAzanFadeIn(options: { enabled: boolean }): Promise<void>;
 }
 
 const WidgetBridge = registerPlugin<WidgetBridgePlugin>('WidgetBridge');

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import WidgetBridge from "@/lib/widget-bridge";
 
 export interface SettingsState {
     calculationMethod: number;
@@ -9,6 +10,10 @@ export interface SettingsState {
     fontFamily: "amiri" | "cairo" | "tajawal";
     quranFont: "uthmani" | "indopak" | "amiri_quran";
     preAzanReminder: boolean;
+    azanVolume: number;
+    smartDnd: boolean;
+    azanFadeIn: boolean;
+    readingStyle: "hafs" | "warsh";
 }
 
 interface SettingsContextType extends SettingsState {
@@ -19,6 +24,10 @@ interface SettingsContextType extends SettingsState {
     setFontFamily: (font: "amiri" | "cairo" | "tajawal") => void;
     setQuranFont: (font: "uthmani" | "indopak" | "amiri_quran") => void;
     setPreAzanReminder: (enabled: boolean) => void;
+    setAzanVolume: (volume: number) => void;
+    setSmartDnd: (enabled: boolean) => void;
+    setAzanFadeIn: (enabled: boolean) => void;
+    setReadingStyle: (style: "hafs" | "warsh") => void;
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -74,6 +83,21 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         return saved ? saved === "true" : false;
     });
 
+    const [azanVolume, setAzanVolumeState] = useState<number>(() => {
+        const saved = localStorage.getItem("azanVolume");
+        return saved ? parseInt(saved, 10) : 77;
+    });
+
+    const [smartDnd, setSmartDndState] = useState<boolean>(() => {
+        const saved = localStorage.getItem("smartDnd");
+        return saved ? saved === "true" : false;
+    });
+
+    const [azanFadeIn, setAzanFadeInState] = useState<boolean>(() => {
+        const saved = localStorage.getItem("azanFadeIn");
+        return saved ? saved === "true" : true;
+    });
+
     // Apply font globally
     useEffect(() => {
         const root = document.documentElement;
@@ -118,6 +142,34 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         localStorage.setItem("preAzanReminder", enabled.toString());
     };
 
+    const setAzanVolume = (volume: number) => {
+        setAzanVolumeState(volume);
+        localStorage.setItem("azanVolume", volume.toString());
+        WidgetBridge.setAzanVolume({ volume }).catch(err => console.error("Failed to set native volume", err));
+    };
+
+    const setSmartDnd = (enabled: boolean) => {
+        setSmartDndState(enabled);
+        localStorage.setItem("smartDnd", enabled.toString());
+        WidgetBridge.setSmartDnd({ enabled }).catch(err => console.error("Failed to set smartDnd", err));
+    };
+
+    const setAzanFadeIn = (enabled: boolean) => {
+        setAzanFadeInState(enabled);
+        localStorage.setItem("azanFadeIn", enabled.toString());
+        WidgetBridge.setAzanFadeIn({ enabled }).catch(err => console.error("Failed to set azanFadeIn", err));
+    };
+
+    const [readingStyle, setReadingStyleState] = useState<"hafs" | "warsh">(() => {
+        const saved = localStorage.getItem("readingStyle");
+        return (saved as "hafs" | "warsh") || "hafs";
+    });
+
+    const setReadingStyle = (style: "hafs" | "warsh") => {
+        setReadingStyleState(style);
+        localStorage.setItem("readingStyle", style);
+    };
+
     return (
         <SettingsContext.Provider
             value={{
@@ -129,6 +181,9 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                 fontFamily,
                 quranFont,
                 preAzanReminder,
+                azanVolume,
+                smartDnd,
+                azanFadeIn,
                 setCalculationMethod,
                 setMadhab,
                 setLocationMode,
@@ -136,6 +191,11 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                 setFontFamily,
                 setQuranFont,
                 setPreAzanReminder,
+                setAzanVolume,
+                setSmartDnd,
+                setAzanFadeIn,
+                readingStyle,
+                setReadingStyle,
             }}
         >
             {children}

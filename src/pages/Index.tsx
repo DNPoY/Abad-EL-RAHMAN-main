@@ -12,6 +12,7 @@ import { AlarmSettings } from "@/components/AlarmSettings";
 import { SettingsPage } from "@/components/SettingsPage";
 import { AlarmChallenge } from "@/components/AlarmChallenge";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { OfflineBanner } from "@/components/OfflineBanner";
 import { Clock, Compass, BookOpen, Settings, Calendar, Moon, Heart, ClipboardList, Terminal, MapPin } from "lucide-react";
 import { HijriDateDisplay } from "@/components/HijriDateDisplay";
 import { getHijriYear } from "@/lib/date-utils";
@@ -21,6 +22,8 @@ import { SunnahPrayers } from "@/components/SunnahPrayers";
 import { MissedPrayersTracker } from "@/components/MissedPrayersTracker";
 import { MasjidFinder } from "@/components/MasjidFinder";
 import { DeveloperPanel } from "@/components/DeveloperPanel";
+import { DockNavigation } from "@/components/DockNavigation";
+import { useVibration } from "@/hooks/useVibration";
 import { cn } from "@/lib/utils";
 
 import {
@@ -40,6 +43,10 @@ const Index = () => {
   const [isDuaOpen, setIsDuaOpen] = useState(false);
   const [devModeEnabled, setDevModeEnabled] = useState(false);
   const [tapCount, setTapCount] = useState(0);
+  const { vibrateLight } = useVibration();
+
+  const [showDevPassword, setShowDevPassword] = useState(false);
+  const [devPasswordInput, setDevPasswordInput] = useState("");
 
   useEffect(() => {
     const isDev = localStorage.getItem("devMode") === "true";
@@ -53,11 +60,21 @@ const Index = () => {
     setTapCount(newCount);
 
     if (newCount >= 7) {
+      setShowDevPassword(true);
+      setTapCount(0);
+    }
+  };
+
+  const verifyDevPassword = () => {
+    if (devPasswordInput === "AllahAkbar@33") {
       localStorage.setItem("devMode", "true");
       localStorage.setItem("devModeDate", new Date().toDateString());
       setDevModeEnabled(true);
+      setShowDevPassword(false);
       toast.success(language === "ar" ? "تم تفعيل وضع المطور!" : "Developer Mode Enabled!");
-      setTapCount(0);
+    } else {
+      toast.error(language === "ar" ? "كلمة المرور غير صحيحة" : "Incorrect Password");
+      setDevPasswordInput("");
     }
   };
 
@@ -116,6 +133,9 @@ const Index = () => {
         style={{ backgroundImage: `url('/textures/cream-paper.png')`, backgroundSize: 'cover' }}>
       </div>
 
+      {/* Offline Banner */}
+      <OfflineBanner />
+
       <AlarmChallenge />
       <PermissionsPrompt />
 
@@ -173,6 +193,26 @@ const Index = () => {
         </div>
       </header>
 
+      <Dialog open={showDevPassword} onOpenChange={setShowDevPassword}>
+        <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-center">Developer Access</DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col gap-4 py-4">
+            <input
+              type="password"
+              value={devPasswordInput}
+              onChange={(e) => setDevPasswordInput(e.target.value)}
+              placeholder="Enter Password"
+              className="p-2 rounded bg-black/50 border border-white/10 text-white w-full"
+            />
+            <Button onClick={verifyDevPassword} className="w-full bg-emerald-600 hover:bg-emerald-700">
+              Verify
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <Dialog open={isDuaOpen} onOpenChange={setIsDuaOpen}>
         <DialogContent className="sm:max-w-md bg-cream border-emerald-deep/10 text-emerald-deep shadow-2xl">
           <DialogHeader>
@@ -207,41 +247,19 @@ const Index = () => {
         {renderContent()}
       </main>
 
-      {/* Modern Floating Dock Navigation */}
-      <div className="fixed bottom-6 left-4 right-4 z-50 flex justify-center pb-safe">
-        {/* Container for Style (Border, Background, Shadow) */}
-        <div className="glass-panel-dark rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] max-w-full">
-          {/* Scrollable Area - Added padding here to prevent clipping of scaled items */}
-          <nav className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full p-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isQuran = item.id === "quran";
-              const isActive = activeTab === item.id;
-
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    if (isQuran) {
-                      navigate("/quran");
-                    } else {
-                      setActiveTab(item.id);
-                    }
-                  }}
-                  className={cn(
-                    "relative flex flex-col items-center justify-center w-12 h-12 rounded-full transition-all duration-300 group shrink-0 ring-0 select-none disable-nav-outline",
-                    isActive
-                      ? "bg-gold-matte text-white shadow-lg shadow-gold-matte/30 scale-110"
-                      : "text-white/60"
-                  )}
-                >
-                  <Icon className={cn("w-5 h-5", isActive && "fill-current")} strokeWidth={isActive ? 2.5 : 2} />
-                </button>
-              );
-            })}
-          </nav>
-        </div>
-      </div>
+      {/* Modern Floating Dock Navigation with Magnification */}
+      <DockNavigation
+        items={navItems}
+        activeId={activeTab}
+        onItemClick={(id) => {
+          vibrateLight();
+          if (id === "quran") {
+            navigate("/quran");
+          } else {
+            setActiveTab(id);
+          }
+        }}
+      />
     </div>
   );
 };

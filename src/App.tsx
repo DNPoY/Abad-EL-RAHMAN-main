@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProviders } from "@/components/AppProviders";
 import { NotificationManager } from "@/components/NotificationManager";
 import { BackButtonHandler } from "@/components/BackButtonHandler";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { BackgroundMode } from "@anuradev/capacitor-background-mode";
 import { Capacitor } from "@capacitor/core";
 import { App as CapApp } from '@capacitor/app';
@@ -59,21 +60,23 @@ const App = () => {
   }, []);
 
   return (
-    <AppProviders>
-      <NotificationManager />
-      <BrowserRouter>
-        <BackButtonHandler />
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-[#f8f9fa] dark:bg-[#1a1c1e] text-primary">Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/quran" element={<QuranIndex />} />
-            <Route path="/quran/:surahId" element={<SurahView />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </AppProviders>
+    <ErrorBoundary>
+      <AppProviders>
+        <NotificationManager />
+        <BrowserRouter>
+          <BackButtonHandler />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-[#f8f9fa] dark:bg-[#1a1c1e] text-primary">Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/quran" element={<QuranIndex />} />
+              <Route path="/quran/:surahId" element={<SurahView />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </AppProviders>
+    </ErrorBoundary>
   );
 };
 

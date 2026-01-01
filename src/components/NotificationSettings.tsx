@@ -12,12 +12,14 @@ import { toast } from "sonner";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import { cn } from "@/lib/utils";
+import { Slider } from "@/components/ui/slider";
+
 
 import { useRef } from "react";
 
 export const NotificationSettings = () => {
   const { settings, updateSettings, requestPermission, hasPermission } = useNotification();
-  const { preAzanReminder, setPreAzanReminder } = useSettings();
+  const { preAzanReminder, setPreAzanReminder, azanVolume, setAzanVolume, smartDnd, setSmartDnd, azanFadeIn, setAzanFadeIn } = useSettings();
   const { t, language } = useLanguage();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -145,6 +147,7 @@ export const NotificationSettings = () => {
                   egypt: "/sounds/adhan_egypt.mp3",
                 };
                 audio.src = adhanSounds[settings.adhanSound];
+                audio.volume = azanVolume / 100;
 
                 audio.onended = () => {
                   const btn = document.getElementById('adhan-preview-btn');
@@ -170,6 +173,63 @@ export const NotificationSettings = () => {
               <Volume2 className="w-4 h-4 play-icon" />
               <div className="w-3 h-3 bg-primary rounded-sm stop-icon hidden" />
             </Button>
+          </div>
+        </div>
+
+        <div className="space-y-4 pt-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {azanVolume === 0 ? <Volume2 className="w-5 h-5 text-muted-foreground" /> : <Volume2 className="w-5 h-5 text-primary" />}
+              <Label className="font-amiri font-semibold">
+                {language === "ar" ? "مستوى صوت الأذان" : "Adhan Volume"}
+              </Label>
+            </div>
+            <span className="text-sm font-medium text-emerald-deep">{azanVolume}%</span>
+          </div>
+          <Slider
+            defaultValue={[azanVolume]}
+            value={[azanVolume]}
+            max={100}
+            step={1}
+            onValueChange={(val) => setAzanVolume(val[0])}
+            disabled={!settings.enabled}
+            className="w-full"
+          />
+
+          <div className="flex items-center justify-between py-2">
+            <div className="space-y-0.5">
+              <Label htmlFor="smart-dnd" className="font-amiri cursor-pointer">
+                {language === "ar" ? "مراعاة وضع الصامت" : "Respect Silent/DND Mode"}
+              </Label>
+              <p className="text-xs text-muted-foreground">
+                {language === "ar" ? "لا يتم تشغيل الأذان إذا كان الهاتف صامتاً" : "Don't play sound if phone is silent"}
+              </p>
+            </div>
+            <Switch
+              id="smart-dnd"
+              checked={smartDnd}
+              onCheckedChange={setSmartDnd}
+              disabled={!settings.enabled}
+              className={cn(smartDnd ? "data-[state=checked]:bg-[#FFD700]" : "bg-input")}
+            />
+          </div>
+
+          <div className="flex items-center justify-between py-2">
+            <div className="space-y-0.5">
+              <Label htmlFor="azan-fade-in" className="font-amiri cursor-pointer">
+                {language === "ar" ? "تدرج الصوت (تصاعدي)" : "Fade-In Audio"}
+              </Label>
+              <p className="text-xs text-muted-foreground">
+                {language === "ar" ? "بدء الصوت منخفضاً ثم يرتفع تدريجياً" : "Start volume low and gradually increase"}
+              </p>
+            </div>
+            <Switch
+              id="azan-fade-in"
+              checked={azanFadeIn}
+              onCheckedChange={setAzanFadeIn}
+              disabled={!settings.enabled}
+              className={cn(azanFadeIn ? "data-[state=checked]:bg-[#FFD700]" : "bg-input")}
+            />
           </div>
         </div>
 

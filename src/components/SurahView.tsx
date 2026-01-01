@@ -201,7 +201,7 @@ export const SurahView = () => {
     const [playingAyahNumber, setPlayingAyahNumber] = useState<number | null>(null);
     const [jumpToAyah, setJumpToAyah] = useState<number | null>(null);
     const ayahRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
-    const { quranFont } = useSettings();
+    const { quranFont, readingStyle } = useSettings();
     const [showPlayer, setShowPlayer] = useState(false);
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
@@ -307,13 +307,39 @@ export const SurahView = () => {
             setCurrentPage(initialPage);
 
             try {
-                // Import local JSON directly
-                const quranData = await import("@/lib/quran-uthmani.json");
+                // Determine which JSON to load based on readingStyle setting
+                let quranModule;
+
+                // You will need to import useSettings at the top if not already imported
+                // readingStyle is available from useSettings() hook
+
+                // Since this effect depends on readingStyle, we need to access it inside
+                // If standard hook rules apply, useSettings is already called at top level
+                // We just need to use the value here.
+
+                if (readingStyle === 'warsh') {
+                    // We will assume quran-warsh.json is available in src/lib
+                    // If it doesn't exist yet, we must ensure it is created or handle error
+                    try {
+                        quranModule = await import("@/lib/quran-warsh.json");
+                    } catch (e) {
+                        console.warn("Warsh JSON not found, falling back to Uthmani", e);
+                        quranModule = await import("@/lib/quran-uthmani.json");
+                    }
+                } else {
+                    quranModule = await import("@/lib/quran-uthmani.json");
+                }
 
                 // Accessing default export for JSON module
-                const data = (quranData as { default?: { data: { surahs: SurahData[] } }, data?: { surahs: SurahData[] } });
+                const data = (quranModule as { default?: { data: { surahs: SurahData[] } }, data?: { surahs: SurahData[] } });
                 const surahs = data.default?.data?.surahs || data.data?.surahs;
-                const surah = surahs?.find((s: SurahData) => s.number === Number(surahId));
+
+                if (!surahs || !Array.isArray(surahs)) {
+                    console.error("Invalid Quran Data Structure:", data);
+                    throw new Error("Invalid Quran Data Structure");
+                }
+
+                const surah = surahs.find((s: SurahData) => s.number === Number(surahId));
 
                 if (surah) {
                     setSurahData(surah);
@@ -348,7 +374,7 @@ export const SurahView = () => {
                 // To force play, we might need a prop on SurahAudioPlayer like 'autoPlay={true}'
             }, 500);
         }
-    }, [surahId, language, location.search]);
+    }, [surahId, language, location.search, readingStyle]);
 
     // Handle scrolling to target ayah after render
     useEffect(() => {

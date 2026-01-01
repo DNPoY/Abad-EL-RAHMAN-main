@@ -53,6 +53,7 @@ export const DeveloperPanel = () => {
                                     locationMode: settings.locationMode,
                                     notifSettings: notifSettings,
                                     preAzanReminder: settings.preAzanReminder,
+                                    devMode: true,
                                     t: t,
                                     language: language as "ar" | "en"
                                 });
@@ -164,6 +165,24 @@ export const DeveloperPanel = () => {
                     <p>Version: 1.0.0 (Beta)</p>
                     <p>Build: Production</p>
                     <p>Platform: Capacitor / Web</p>
+                </div>
+            </Card>
+
+            <Card className="p-6 bg-white/80 border-emerald-900/10 backdrop-blur-sm shadow-sm">
+                <h3 className="text-lg font-bold mb-6 text-emerald-900 border-b border-emerald-900/10 pb-2 font-tajawal">أدعية خاصة</h3>
+                <div className="space-y-6 text-right" dir="rtl">
+                    {[
+                        "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ أَنْ أَضِلَّ، أَوْ أُضَلَّ، أَوْ أَزِلَّ، أَوْ أُزَلَّ، أَوْ أَظْلِمَ، أَوْ أُظْلَمَ، أَوْ أَجْهَلَ، أَوْ يُجْهَلَ عَلَيَّ",
+                        "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+                        "رَبَّنَا لاَ تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلاَ تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا رَبَّنَا وَلاَ تُحَمِّلْنَا مَا لاَ طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَآ أَنتَ مَوْلاَنَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",
+                        "اللَّهُمَّ ارْزُقْنِي الْحِكْمَةَ وَالْبَصِيرَةَ، وَأَرِنِي الْأَشْيَاءَ عَلَى حَقِيقَتِهَا",
+                        "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ الْوَهَّابُ",
+                        "رَبِّ آتِنِي رَحْمَةً مِنْ عِنْدِكَ، وَعَلِّمْنِي مِنْ لَدُنْكَ عِلْمًا"
+                    ].map((dua, idx) => (
+                        <div key={idx} className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-900/5 text-emerald-900 font-amiri text-xl leading-loose shadow-sm hover:bg-emerald-100/50 transition-colors">
+                            {dua}
+                        </div>
+                    ))}
                 </div>
             </Card>
         </div>
