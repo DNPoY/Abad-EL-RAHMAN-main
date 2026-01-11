@@ -7,6 +7,7 @@ export interface AzkarItem {
   secondaryCount?: number;
   occasion?: string;
   reward?: string;
+  isFavoriteDefault?: boolean;
 }
 
 export const morningAzkar: AzkarItem[] = [
@@ -20,9 +21,11 @@ export const morningAzkar: AzkarItem[] = [
     count: 1,
     occasion: "أذكار الصباح والمساء، وعند النوم، ودبر كل صلاة.",
     reward: "من قالها حين يصبح أجير من الجن حتى يمسي، ومن قالها حين يمسي أجير من الجن حتى يصبح. (رواه الحاكم). ومن قرأها دبر كل صلاة لم يمنعه من دخول الجنة إلا الموت. (رواه النسائي)",
+    isFavoriteDefault: true,
   },
   {
     id: 4,
+    isFavoriteDefault: true,
     arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ ۞ اللَّهُ الصَّمَدُ ۞ لَمْ يَلِدْ وَلَمْ يُولَدْ ۞ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
     transliteration: "Qul Huwallahu Ahad. Allahus-Samad. Lam yalid wa lam yulad. Wa lam yakun lahu kufuwan ahad.",
     translation: "Say, 'He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.'",
@@ -32,6 +35,7 @@ export const morningAzkar: AzkarItem[] = [
   },
   {
     id: 5,
+    isFavoriteDefault: true,
     arabic: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۞ مِنْ شَرِّ مَا خَلَقَ ۞ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۞ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۞ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
     transliteration: "Qul a'udhu bi-rabbil-falaq. Min sharri ma khalaq. Wa min sharri ghasiqin idha waqab. Wa min sharrin-naffathati fil-'uqad. Wa min sharri hasidin idha hasad.",
     translation: "Say, 'I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.'",
@@ -41,6 +45,7 @@ export const morningAzkar: AzkarItem[] = [
   },
   {
     id: 6,
+    isFavoriteDefault: true,
     arabic: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۞ مَلِكِ النَّاسِ ۞ إِلَٰهِ النَّاسِ ۞ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۞ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۞ مِنَ الْجِنَّةِ وَالنَّاسِ",
     transliteration: "Qul a'udhu bi-rabbin-nas. Malikin-nas. Ilahin-nas. Min sharril-waswasil-khannas. Alladhi yuwaswisu fi sudurin-nas. Minal-jinnati wan-nas.",
     translation: "Say, 'I seek refuge in the Lord of mankind, The Sovereign of mankind. The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind.'",
@@ -74,6 +79,7 @@ export const morningAzkar: AzkarItem[] = [
     count: 1,
     occasion: "سيد الاستغفار، يقال في الصباح والمساء.",
     reward: "من قالها موقناً بها حين يمسي ومات من ليلته دخل الجنة، وكذلك إذا أصبح. (رواه البخاري)",
+    isFavoriteDefault: true,
   },
   {
     id: 10,
@@ -137,6 +143,7 @@ export const morningAzkar: AzkarItem[] = [
     count: 3,
     occasion: "الصباح والمساء.",
     reward: "من قالها ثلاثاً لم يضره شيء. (رواه الترمذي وابن ماجه)",
+    isFavoriteDefault: true,
   },
   {
     id: 17,
@@ -192,6 +199,7 @@ export const morningAzkar: AzkarItem[] = [
     count: 3,
     occasion: "الصباح.",
     reward: "لو وزنت بما ذكرت منذ اليوم لوزنتهن. (رواه مسلم)",
+    isFavoriteDefault: true,
   },
   {
     id: 23,
@@ -274,6 +282,15 @@ export const morningAzkar: AzkarItem[] = [
     occasion: "الصباح والمساء.",
     reward: "يقول الله للملائكة: اكتبوها كما قال عبدي حتى يلقاني فأجزيه بها. (رواه ابن ماجه)",
   },
+  {
+    id: 32,
+    arabic: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ: فَتْحَهُ، وَنَصْرَهُ، وَنُورَهُ، وَبَرَكَتَهُ، وَهُدَاهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهِ وَشَرِّ مَا بَعْدَهُ",
+    transliteration: "Asbahna wa asbahal-mulku lillahi Rabbil-'Alamin. Allahumma inni as'aluka khayra hadhal-yawmi: fat-hahu, wa nasrahu, wa nurahu, wa barakatahu, wa hudahu, wa a'udhu bika min sharri ma fihi wa sharri ma ba'dahu.",
+    translation: "We have reached the morning and at this very time all sovereignty belongs to Allah, Lord of the worlds. O Allah, I ask You for the good of this day, its victories, its help, its light, its blessings, and its guidance. I seek refuge in You from the evil of this day and the evil that follows it.",
+    count: 1,
+    occasion: "الصباح.",
+    reward: "دعاء شامل لخير اليوم.",
+  },
 ];
 
 export const eveningAzkar: AzkarItem[] = [
@@ -303,9 +320,11 @@ export const eveningAzkar: AzkarItem[] = [
     count: 1,
     occasion: "المساء.",
     reward: "من قالها حين يمسي أجير من الجن حتى يصبح.",
+    isFavoriteDefault: true,
   },
   {
     id: 4,
+    isFavoriteDefault: true,
     arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ ۞ اللَّهُ الصَّمَدُ ۞ لَمْ يَلِدْ وَلَمْ يُولَدْ ۞ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
     transliteration: "Qul Huwallahu Ahad. Allahus-Samad. Lam yalid wa lam yulad. Wa lam yakun lahu kufuwan ahad.",
     translation: "Say, 'He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.'",
@@ -315,6 +334,7 @@ export const eveningAzkar: AzkarItem[] = [
   },
   {
     id: 5,
+    isFavoriteDefault: true,
     arabic: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۞ مِنْ شَرِّ مَا خَلَقَ ۞ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۞ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۞ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
     transliteration: "Qul a'udhu bi-rabbil-falaq. Min sharri ma khalaq. Wa min sharri ghasiqin idha waqab. Wa min sharrin-naffathati fil-'uqad. Wa min sharri hasidin idha hasad.",
     translation: "Say, 'I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.'",
@@ -324,6 +344,7 @@ export const eveningAzkar: AzkarItem[] = [
   },
   {
     id: 6,
+    isFavoriteDefault: true,
     arabic: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۞ مَلِكِ النَّاسِ ۞ إِلَٰهِ النَّاسِ ۞ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۞ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۞ مِنَ الْجِنَّةِ وَالنَّاسِ",
     transliteration: "Qul a'udhu bi-rabbin-nas. Malikin-nas. Ilahin-nas. Min sharril-waswasil-khannas. Alladhi yuwaswisu fi sudurin-nas. Minal-jinnati wan-nas.",
     translation: "Say, 'I seek refuge in the Lord of mankind, The Sovereign of mankind. The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind.'",
@@ -342,6 +363,7 @@ export const eveningAzkar: AzkarItem[] = [
   },
   {
     id: 8,
+    isFavoriteDefault: true,
     arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
     transliteration: "Allahumma Anta Rabbi la ilaha illa Ant. Khalaqtani wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika mastata't. A'udhu bika min sharri ma sana't. Abu'u laka bini'matika 'alayya wa abu'u bidhanbi faghfir li fa-innahu la yaghfirudh-dhunuba illa Ant.",
     translation: "O Allah, You are my Lord, there is no god but You. You created me and I am Your slave, and I am faithful to my covenant and my promise (to You) as much as I can. I seek refuge in You from all the evil I have done. I acknowledge before You all the blessings You have bestowed upon me, and I confess to You all my sins. So I entreat You to forgive me, for no one can forgive sins except You.",
@@ -420,6 +442,7 @@ export const eveningAzkar: AzkarItem[] = [
     count: 3,
     occasion: "الصباح والمساء.",
     reward: "من قالها ثلاثاً لم يضره شيء.",
+    isFavoriteDefault: true,
   },
   {
     id: 17,

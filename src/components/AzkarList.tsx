@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CheckCircle2, RotateCcw, Info } from "lucide-react";
+import { CheckCircle2, RotateCcw, Info, Heart } from "lucide-react";
 import { useAzkarProgress } from "@/hooks/useAzkarProgress";
 import { toast } from "sonner";
 import { useFontSize } from "@/contexts/FontSizeContext";
@@ -28,6 +28,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+import { triggerHaptic } from "@/lib/haptics";
+
 const AzkarCategory = ({
   data,
   type
@@ -38,8 +40,45 @@ const AzkarCategory = ({
   const { t, language } = useLanguage();
   const { fontSize } = useFontSize();
   const { progress, incrementCount, resetProgress, resetItem } = useAzkarProgress(type);
+  const showPersonalizedTabs = type === "morning" || type === "evening";
+  const [activeTab, setActiveTab] = useState(showPersonalizedTabs ? "your_azkar" : "all");
 
-  const allComplete = data.every(item => (progress[item.id] || 0) >= item.count);
+  // Favorites Logic
+  const [favorites, setFavorites] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (showPersonalizedTabs) {
+      const savedFavorites = localStorage.getItem(`azkar-favorites-${type}`);
+      if (savedFavorites) {
+        setFavorites(JSON.parse(savedFavorites));
+      } else {
+        // Initialize with defaults if no saved data
+        const defaults = data.filter(item => item.isFavoriteDefault).map(item => item.id);
+        setFavorites(defaults);
+        localStorage.setItem(`azkar-favorites-${type}`, JSON.stringify(defaults));
+      }
+    }
+  }, [type, data, showPersonalizedTabs]);
+
+  const toggleFavorite = (id: number) => {
+    let newFavorites;
+    if (favorites.includes(id)) {
+      newFavorites = favorites.filter(favId => favId !== id);
+      toast.info(language === "ar" ? "تم الإزالة من أذكارك" : "Removed from Your Azkar");
+    } else {
+      newFavorites = [...favorites, id];
+      toast.success(language === "ar" ? "تم الإضافة إلى أذكارك" : "Added to Your Azkar");
+    }
+    setFavorites(newFavorites);
+    localStorage.setItem(`azkar-favorites-${type}`, JSON.stringify(newFavorites));
+    triggerHaptic();
+  };
+
+  const filteredData = activeTab === "your_azkar"
+    ? data.filter(item => favorites.includes(item.id))
+    : data;
+
+  const allComplete = filteredData.length > 0 && filteredData.every(item => (progress[item.id] || 0) >= item.count);
 
   const getFontSizeClass = () => {
     switch (fontSize) {
@@ -50,7 +89,7 @@ const AzkarCategory = ({
     }
   };
 
-  return (
+  const renderContent = (items: typeof data) => (
     <div className="space-y-4">
       {allComplete && (
         <div className="bg-emerald-deep/5 p-4 rounded-xl text-center mb-6 animate-fade-in border border-emerald-deep/10">
@@ -60,7 +99,10 @@ const AzkarCategory = ({
           <Button
             variant="ghost"
             size="sm"
-            onClick={resetProgress}
+            onClick={() => {
+              triggerHaptic();
+              resetProgress();
+            }}
             className="mt-2 text-gold-matte hover:text-gold-matte/80 hover:bg-emerald-deep/5"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
@@ -69,11 +111,12 @@ const AzkarCategory = ({
         </div>
       )}
 
-      {data.map((dhikr, index) => {
+      {items.map((dhikr) => {
         const currentCount = progress[dhikr.id] || 0;
         const finalTarget = dhikr.secondaryCount || dhikr.count;
         const isCardComplete = currentCount >= finalTarget;
         const isPrimaryComplete = currentCount >= dhikr.count;
+        const isFavorite = favorites.includes(dhikr.id);
 
         return (
           <Card
@@ -94,50 +137,68 @@ const AzkarCategory = ({
                     variant="ghost"
                     size="icon"
                     className="h-6 w-6 text-emerald-deep/40 hover:text-red-500"
-                    onClick={() => resetItem(dhikr.id)}
+                    onClick={() => {
+                      triggerHaptic();
+                      resetItem(dhikr.id);
+                    }}
                   >
                     <RotateCcw className="w-3 h-3" />
                   </Button>
                 )}
               </div>
 
-              {/* Info Popup Trigger */}
-              {(dhikr.occasion || dhikr.reward) && (
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 text-emerald-deep/60 hover:text-emerald-deep hover:bg-emerald-deep/5">
-                      <Info className="w-5 h-5" />
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-cream border-emerald-deep/10 max-w-[90vw] sm:max-w-md rounded-2xl">
-                    <DialogHeader>
-                      <DialogTitle className="font-amiri text-2xl text-emerald-deep text-center mb-4 border-b border-emerald-deep/10 pb-2">
-                        {language === 'ar' ? 'فضل الذكر ومناسبته' : 'Virtues & Occasion'}
-                      </DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-4 font-amiri text-lg text-emerald-deep/80 text-right max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar" dir="rtl">
-                      {dhikr.occasion && (
-                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-deep/5">
-                          <h4 className="font-bold mb-2 text-gold-matte flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold-matte shrink-0" />
-                            {language === 'ar' ? 'المناسبة:' : 'Occasion:'}
-                          </h4>
-                          <p className="leading-relaxed">{dhikr.occasion}</p>
-                        </div>
-                      )}
-                      {dhikr.reward && (
-                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-deep/5">
-                          <h4 className="font-bold mb-2 text-gold-matte flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold-matte shrink-0" />
-                            {language === 'ar' ? 'الفضل/الأجر:' : 'Reward:'}
-                          </h4>
-                          <p className="leading-relaxed">{dhikr.reward}</p>
-                        </div>
-                      )}
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              )}
+              <div className="flex gap-1">
+                {/* Favorite Toggle (Only show for personalized types) */}
+                {showPersonalizedTabs && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => toggleFavorite(dhikr.id)}
+                    className={`h-8 w-8 hover:bg-emerald-deep/5 ${isFavorite ? "text-red-500 hover:text-red-600" : "text-emerald-deep/30 hover:text-red-400"}`}
+                  >
+                    <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
+                  </Button>
+                )}
+
+                {/* Info Popup Trigger */}
+                {(dhikr.occasion || dhikr.reward) && (
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-emerald-deep/60 hover:text-emerald-deep hover:bg-emerald-deep/5">
+                        <Info className="w-5 h-5" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="bg-cream border-emerald-deep/10 max-w-[90vw] sm:max-w-md rounded-2xl">
+                      <DialogHeader>
+                        <DialogTitle className="font-amiri text-2xl text-emerald-deep text-center mb-4 border-b border-emerald-deep/10 pb-2">
+                          {language === 'ar' ? 'فضل الذكر ومناسبته' : 'Virtues & Occasion'}
+                        </DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-4 font-amiri text-lg text-emerald-deep/80 text-right max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar" dir="rtl">
+                        {dhikr.occasion && (
+                          <div className="bg-white/50 p-3 rounded-lg border border-emerald-deep/5">
+                            <h4 className="font-bold mb-2 text-gold-matte flex items-center gap-2">
+                              {/* replaced dot with dash to avoid glitch reports */}
+                              <span className="text-xl leading-none">-</span>
+                              {language === 'ar' ? 'المناسبة:' : 'Occasion:'}
+                            </h4>
+                            <p className="leading-relaxed">{dhikr.occasion}</p>
+                          </div>
+                        )}
+                        {dhikr.reward && (
+                          <div className="bg-white/50 p-3 rounded-lg border border-emerald-deep/5">
+                            <h4 className="font-bold mb-2 text-gold-matte flex items-center gap-2">
+                              <span className="text-xl leading-none">-</span>
+                              {language === 'ar' ? 'الفضل/الأجر:' : 'Reward:'}
+                            </h4>
+                            <p className="leading-relaxed">{dhikr.reward}</p>
+                          </div>
+                        )}
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                )}
+              </div>
             </div>
 
             <p className={`${getFontSizeClass()} font-amiri mb-4 text-right text-emerald-deep break-words`} lang="ar">
@@ -157,9 +218,12 @@ const AzkarCategory = ({
 
             <div className="flex gap-2 mt-4">
               <Button
-                onClick={() => incrementCount(dhikr.id, dhikr.count)}
+                onClick={() => {
+                  triggerHaptic();
+                  incrementCount(dhikr.id, dhikr.count);
+                }}
                 disabled={isPrimaryComplete}
-                className={`flex-1 active:scale-95 transition-transform border border-emerald-deep/10 ${isPrimaryComplete
+                className={`flex-1 h-auto whitespace-normal py-3 active:scale-95 transition-transform border border-emerald-deep/10 ${isPrimaryComplete
                   ? "bg-transparent text-emerald-deep/40 shadow-none"
                   : "bg-emerald-deep text-white hover:bg-emerald-light shadow-md"
                   }`}
@@ -173,9 +237,12 @@ const AzkarCategory = ({
 
               {dhikr.secondaryCount && (
                 <Button
-                  onClick={() => incrementCount(dhikr.id, dhikr.secondaryCount)}
+                  onClick={() => {
+                    triggerHaptic();
+                    incrementCount(dhikr.id, dhikr.secondaryCount);
+                  }}
                   disabled={currentCount >= dhikr.secondaryCount}
-                  className={`flex-1 active:scale-95 transition-transform border border-emerald-deep/10 ${currentCount >= dhikr.secondaryCount
+                  className={`flex-1 h-auto whitespace-normal py-3 active:scale-95 transition-transform border border-emerald-deep/10 ${currentCount >= dhikr.secondaryCount
                     ? "bg-transparent text-emerald-deep/40 shadow-none"
                     : "bg-gold-matte text-white hover:bg-gold-matte/80 shadow-md"
                     }`}
@@ -193,6 +260,29 @@ const AzkarCategory = ({
       })}
     </div>
   );
+
+  if (showPersonalizedTabs) {
+    return (
+      <Tabs value={activeTab} onValueChange={setActiveTab} dir={language === "ar" ? "rtl" : "ltr"} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-4 bg-muted/30">
+          <TabsTrigger value="your_azkar" className="font-amiri text-lg">
+            {language === "ar" ? "أذكارك" : "Your Azkar"}
+          </TabsTrigger>
+          <TabsTrigger value="all" className="font-amiri text-lg">
+            {language === "ar" ? "الكل" : "All"}
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="your_azkar" className="mt-0">
+          {renderContent(filteredData)}
+        </TabsContent>
+        <TabsContent value="all" className="mt-0">
+          {renderContent(filteredData)}
+        </TabsContent>
+      </Tabs>
+    );
+  }
+
+  return renderContent(data);
 };
 
 export const AzkarList = () => {

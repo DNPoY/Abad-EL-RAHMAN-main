@@ -1,3 +1,24 @@
+## ⚖️ License & Waqf Status | الترخيص والوقف
+
+### 🇸🇦 عربي: وقف لله تعالى
+هذا المشروع هو **وقف إسلامي (صدقة جارية)**.
+يخضع هذا الكود لرخصة **GNU GPL v3** مع الشروط الأخلاقية التالية:
+1. **مجانية كاملة:** لا يجوز بيع التطبيق أو الكود.
+2. **منع الاحتكار:** أي تطوير أو تعديل على الكود يجب أن يظل مفتوح المصدر (Open Source) ليوم الدين.
+3. **الثمن:** الثمن الوحيد هو دعوة صالحة بظهر الغيب لمطور التطبيق ولوالدته بالرحمة والمغفرة.
+> *اللهم تقبل هذا العمل خالصاً لوجهك الكريم.*
+
+---
+
+### 🇺🇸 English: Waqf (Spiritual Endowment)
+This project is a **Waqf (Sadaqah Jariyah/Continuous Charity)**.
+The code is licensed under the **GNU GPL v3** with the following ethical conditions:
+1. **Non-Commercial:** This software and its source code cannot be sold for profit.
+2. **Open Forever:** Any modifications or derivatives must remain Open Source. You cannot close the code.
+3. **The Price:** The only requested payment is a sincere prayer (Dua) for the developer and his mother.
+> *O Allah, accept this deed purely for Your sake.*
+
+---
 
 "عباد الرحمن" – رفيقك اليومي للعبادة والطاعة
 

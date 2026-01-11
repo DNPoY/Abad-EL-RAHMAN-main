@@ -9,6 +9,8 @@ import { Search, BookOpen, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import patternBg from "@/assets/pattern.png";
 import { removeTashkil } from "@/lib/utils";
+import { juzData } from "@/lib/juz-data";
+import { KhatmaPlanner } from "@/components/KhatmaPlanner";
 
 interface QuranIndexProps {
     isEmbedded?: boolean;
@@ -56,6 +58,7 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
     const [isSearching, setIsSearching] = useState(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [lastRead, setLastRead] = useState<any>(null);
+    const [viewMode, setViewMode] = useState<'surah' | 'juz' | 'khatma'>('surah');
 
     useEffect(() => {
         const saved = localStorage.getItem("last_read_position");
@@ -227,9 +230,78 @@ export const QuranIndex = ({ isEmbedded = false }: QuranIndexProps) => {
                     </div>
                 </div>
 
+
+                {/* Navigation Tabs */}
+                {!searchQuery && (
+                    <div className="max-w-xl mx-auto mb-6 flex bg-emerald-deep/5 p-1 rounded-xl">
+                        <button
+                            onClick={() => setViewMode('surah')}
+                            className={`flex-1 py-2 rounded-lg text-sm font-bold font-tajawal transition-all duration-300 ${viewMode === 'surah'
+                                ? 'bg-white text-emerald-deep shadow-sm'
+                                : 'text-emerald-deep/60 hover:text-emerald-deep'
+                                }`}
+                        >
+                            {language === "ar" ? "السور" : "Surahs"}
+                        </button>
+                        <button
+                            onClick={() => setViewMode('juz')}
+                            className={`flex-1 py-2 rounded-lg text-sm font-bold font-tajawal transition-all duration-300 ${viewMode === 'juz'
+                                ? 'bg-white text-emerald-deep shadow-sm'
+                                : 'text-emerald-deep/60 hover:text-emerald-deep'
+                                }`}
+                        >
+                            {language === "ar" ? "الأجزاء" : "Parts (Juz)"}
+                        </button>
+                        <button
+                            onClick={() => setViewMode('khatma')}
+                            className={`flex-1 py-2 rounded-lg text-sm font-bold font-tajawal transition-all duration-300 ${viewMode === 'khatma'
+                                ? 'bg-white text-emerald-deep shadow-sm'
+                                : 'text-emerald-deep/60 hover:text-emerald-deep'
+                                }`}
+                        >
+                            {language === "ar" ? "الختمة" : "Khatma"}
+                        </button>
+                    </div>
+                )}
+
                 <div className="max-w-xl mx-auto space-y-4">
+                    {/* Khatma Planner View */}
+                    {viewMode === 'khatma' && !searchQuery && (
+                        <div className="animate-fade-in-up">
+                            <KhatmaPlanner />
+                        </div>
+                    )}
+
+                    {/* Juz List */}
+                    {viewMode === 'juz' && !searchQuery && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {juzData.map((juz) => (
+                                <Link to={`/quran/${juz.surah}?ayah=${juz.ayah}`} key={juz.id}>
+                                    <div className="group relative bg-white rounded-2xl p-4 border border-emerald-deep/5 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-10 h-10 flex items-center justify-center bg-emerald-50 rounded-lg group-hover:bg-emerald-deep group-hover:text-white transition-colors">
+                                                    <span className="font-tajawal font-bold">{juz.id}</span>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold font-tajawal text-emerald-deep">
+                                                        {language === "ar" ? `الجزء ${juz.id}` : `Juz ${juz.id}`}
+                                                    </h3>
+                                                    <p className="text-xs text-emerald-deep/50">
+                                                        {language === "ar" ? "يبدأ من" : "Starts at"} {surahs.find(s => s.number === juz.surah)?.name}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <ArrowRight className={`w-4 h-4 text-emerald-deep/30 group-hover:text-emerald-deep transition-colors ${language === 'ar' ? 'rotate-180' : ''}`} />
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+
                     {/* Surah Results - Vertical List */}
-                    {filteredSurahs.length > 0 && (
+                    {(viewMode === 'surah' || searchQuery) && filteredSurahs.length > 0 && (
                         <div className="space-y-3">
                             {filteredSurahs.map((surah) => (
                                 <Link to={`/quran/${surah.number}`} key={surah.number}>
