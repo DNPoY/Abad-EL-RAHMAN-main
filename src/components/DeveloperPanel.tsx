@@ -137,6 +137,71 @@ export const DeveloperPanel = () => {
                     </div>
 
                     <div className="border-t border-white/10 my-2"></div>
+                    <h4 className="text-sm font-bold text-white/80">🔥 Firebase Remote Config</h4>
+
+                    <Button
+                        onClick={async () => {
+                            try {
+                                toast.info("Force refreshing Remote Config...");
+                                const { RemoteConfigService } = await import("@/lib/remote-config");
+                                await RemoteConfigService.forceRefresh();
+
+                                // Display current values
+                                const apiUrl = RemoteConfigService.getApiUrl();
+                                const minVersion = RemoteConfigService.getMinVersion();
+                                const seasonal = RemoteConfigService.getSeasonalConfig();
+
+                                const logDiv = document.getElementById('dev-debug-log');
+                                if (logDiv) {
+                                    logDiv.innerHTML = `<b>Remote Config Values:</b><br/>
+API URL: ${apiUrl}<br/>
+Min Version: ${minVersion}<br/>
+Seasonal Enabled: ${seasonal.enabled}<br/>
+Seasonal Event: ${seasonal.event_name || 'None'}`;
+                                }
+                                toast.success("Remote Config refreshed!");
+                            } catch (e) {
+                                console.error(e);
+                                toast.error("Failed to refresh Remote Config");
+                            }
+                        }}
+                        className="w-full justify-start text-white bg-orange-600/50 hover:bg-orange-600/70"
+                    >
+                        🔄 Force Refresh Remote Config (Bypass Cache)
+                    </Button>
+
+                    <Button
+                        variant="outline"
+                        className="w-full justify-start text-white border-white/20 hover:bg-white/10"
+                        onClick={async () => {
+                            try {
+                                const { RemoteConfigService } = await import("@/lib/remote-config");
+                                const apiUrl = RemoteConfigService.getApiUrl();
+                                const minVersion = RemoteConfigService.getMinVersion();
+                                const seasonal = RemoteConfigService.getSeasonalConfig();
+                                const msgAr = RemoteConfigService.getForceUpdateMessage("ar");
+
+                                const logDiv = document.getElementById('dev-debug-log');
+                                if (logDiv) {
+                                    logDiv.innerHTML = `<b>Current Remote Config:</b><br/>
+prayer_api_url: ${apiUrl}<br/>
+min_required_version: ${minVersion}<br/>
+force_update_message_ar: ${msgAr}<br/>
+seasonal_config.enabled: ${seasonal.enabled}<br/>
+seasonal_config.event_name: ${seasonal.event_name || 'None'}<br/>
+seasonal_config.home_banner_text_ar: ${seasonal.home_banner_text_ar || 'None'}`;
+                                }
+                                toast.success("Displayed current Remote Config values");
+                            } catch (e) {
+                                console.error(e);
+                                toast.error("Failed to read Remote Config");
+                            }
+                        }}
+                    >
+                        📋 Show Current Remote Config Values
+                    </Button>
+
+                    <div className="border-t border-white/10 my-2"></div>
 
                     <Button
                         variant="destructive"

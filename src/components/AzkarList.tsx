@@ -29,6 +29,13 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { triggerHaptic } from "@/lib/haptics";
+import {
+  getAccessibleAzkarLabel,
+  getAccessibleCountButtonLabel,
+  getAccessibleFavoriteLabel,
+  announceAzkarComplete,
+  announceAllAzkarComplete,
+} from "@/lib/accessibility";
 
 const AzkarCategory = ({
   data,
@@ -121,6 +128,16 @@ const AzkarCategory = ({
         return (
           <Card
             key={dhikr.id}
+            role="article"
+            aria-label={getAccessibleAzkarLabel(
+              dhikr.arabic,
+              currentCount,
+              dhikr.count,
+              dhikr.secondaryCount,
+              isCardComplete,
+              dhikr.reward,
+              language
+            )}
             className={`p-6 transition-all duration-300 border-emerald-deep/5 ${isCardComplete ? "opacity-70 bg-gold-matte/10 border-gold-matte/20" : "bg-white hover:shadow-lg hover:-translate-y-1"
               }`}
           >
@@ -137,12 +154,13 @@ const AzkarCategory = ({
                     variant="ghost"
                     size="icon"
                     className="h-6 w-6 text-emerald-deep/40 hover:text-red-500"
+                    aria-label={language === "ar" ? "إعادة تعيين هذا الذكر" : "Reset this dhikr"}
                     onClick={() => {
                       triggerHaptic();
                       resetItem(dhikr.id);
                     }}
                   >
-                    <RotateCcw className="w-3 h-3" />
+                    <RotateCcw className="w-3 h-3" aria-hidden="true" />
                   </Button>
                 )}
               </div>
@@ -154,9 +172,11 @@ const AzkarCategory = ({
                     variant="ghost"
                     size="icon"
                     onClick={() => toggleFavorite(dhikr.id)}
+                    aria-label={getAccessibleFavoriteLabel(isFavorite, language)}
+                    aria-pressed={isFavorite}
                     className={`h-8 w-8 hover:bg-emerald-deep/5 ${isFavorite ? "text-red-500 hover:text-red-600" : "text-emerald-deep/30 hover:text-red-400"}`}
                   >
-                    <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
+                    <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} aria-hidden="true" />
                   </Button>
                 )}
 
@@ -216,13 +236,17 @@ const AzkarCategory = ({
               </>
             )}
 
-            <div className="flex gap-2 mt-4">
+            <div className="flex gap-2 mt-4" role="group" aria-label={language === "ar" ? "أزرار العد" : "Count buttons"}>
               <Button
                 onClick={() => {
                   triggerHaptic();
                   incrementCount(dhikr.id, dhikr.count);
+                  if (currentCount + 1 >= dhikr.count) {
+                    announceAzkarComplete(dhikr.arabic, language);
+                  }
                 }}
                 disabled={isPrimaryComplete}
+                aria-label={getAccessibleCountButtonLabel(currentCount, dhikr.count, isPrimaryComplete, language)}
                 className={`flex-1 h-auto whitespace-normal py-3 active:scale-95 transition-transform border border-emerald-deep/10 ${isPrimaryComplete
                   ? "bg-transparent text-emerald-deep/40 shadow-none"
                   : "bg-emerald-deep text-white hover:bg-emerald-light shadow-md"

@@ -3,6 +3,7 @@ import { Capacitor } from '@capacitor/core';
 import WidgetBridge from '@/lib/widget-bridge';
 import { Coordinates, CalculationMethod, PrayerTimes, Madhab } from 'adhan';
 import { toast } from "sonner";
+import { RemoteConfigService } from "@/lib/remote-config";
 
 export interface SchedulerOptions {
     manualLatitude: number;
@@ -32,6 +33,15 @@ export interface SchedulerOptions {
 export const PrayerScheduleService = {
     scheduleAlarms: async (options: SchedulerOptions) => {
         console.log("[PrayerScheduleService] scheduleAlarms called with options:", JSON.stringify(options, null, 2));
+
+        // Remote Config Kill Switch for Adhan
+        if (!RemoteConfigService.isAdhanEnabled()) {
+            console.log("[PrayerScheduleService] Adhan disabled via Remote Config.");
+            if (options.devMode) {
+                toast.warning("Adhan Disabled by Remote Config", { duration: 5000 });
+            }
+            return { success: false, reason: "disabled_by_remote_config" };
+        }
 
         if (!Capacitor.isNativePlatform()) {
             console.log("[PrayerScheduleService] Not native platform, skipping.");

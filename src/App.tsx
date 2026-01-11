@@ -14,9 +14,11 @@ import { AppProviders } from "@/components/AppProviders";
 import { NotificationManager } from "@/components/NotificationManager";
 import { BackButtonHandler } from "@/components/BackButtonHandler";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { ForceUpdateDialog } from "@/components/ForceUpdateDialog";
 import { BackgroundMode } from "@anuradev/capacitor-background-mode";
 import { Capacitor } from "@capacitor/core";
 import { App as CapApp } from '@capacitor/app';
+import { RemoteConfigService } from "@/lib/remote-config";
 
 // Lazy load pages
 const Index = lazy(() => import("./pages/Index"));
@@ -51,6 +53,9 @@ const App = () => {
     };
     initBackgroundMode();
 
+    // Initialize Firebase Remote Config
+    RemoteConfigService.init(false).catch(console.error);
+
     // Re-sync alarms when app comes to foreground
     const setupResumeListener = async () => {
       const resumeListener = await CapApp.addListener('appStateChange', async (state: { isActive: boolean }) => {
@@ -73,6 +78,7 @@ const App = () => {
     <ErrorBoundary>
       <AppProviders>
         <NotificationManager />
+        <ForceUpdateDialog />
         <BrowserRouter>
           <BackButtonHandler />
           <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-[#f8f9fa] dark:bg-[#1a1c1e] text-primary">Loading...</div>}>

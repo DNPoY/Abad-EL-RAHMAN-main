@@ -5,6 +5,11 @@ import { useNotification } from "@/contexts/NotificationContext";
 import { MapPin, Bell, BellOff } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import {
+  getAccessiblePrayerLabel,
+  getAccessibleBellLabel,
+  getAccessibleClockLabel,
+} from "@/lib/accessibility";
 
 // Helper to get just the time part (e.g., "12:34")
 const getTimeOnly = (time24: string): string => {
@@ -72,9 +77,13 @@ export const PrayerTimesCard = () => {
   const bigClock = formatBigClock(currentTime);
 
   return (
-    <div className="space-y-4 animate-fade-in-up">
+    <div className="space-y-4 animate-fade-in-up" role="region" aria-label={language === "ar" ? "مواقيت الصلاة" : "Prayer Times"}>
       {/* Main Widget Card */}
-      <div className="relative overflow-hidden rounded-[2rem] bg-emerald-deep text-white shadow-[0_15px_30px_-10px_rgba(9,66,49,0.5)]">
+      <div
+        className="relative overflow-hidden rounded-[2rem] bg-emerald-deep text-white shadow-[0_15px_30px_-10px_rgba(9,66,49,0.5)]"
+        role="status"
+        aria-label={getAccessibleClockLabel(currentTime, nextPrayer?.name || t.dhuhr, nextPrayer?.timeLeft || "--:--", language)}
+      >
         {/* Internal texture/gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent pointer-events-none" />
 
@@ -114,7 +123,7 @@ export const PrayerTimesCard = () => {
 
       {/* Prayers List - Compact Stack */}
       {/* Prayers List - Compact Stack */}
-      <div className="grid grid-cols-1 gap-2 px-1">
+      <div className="grid grid-cols-1 gap-2 px-1" role="list" aria-label={language === "ar" ? "قائمة مواقيت الصلوات" : "Prayer times list"}>
         {prayersList.map((prayer) => {
           const isNext = nextPrayer && nextPrayer.key === prayer.key;
           const isNotificationEnabled = settings.enabledPrayers[prayer.key as keyof typeof settings.enabledPrayers];
@@ -123,6 +132,16 @@ export const PrayerTimesCard = () => {
           return (
             <div
               key={prayer.key}
+              role="listitem"
+              aria-label={getAccessiblePrayerLabel(
+                prayer.name,
+                prayer.key,
+                prayer.time,
+                isNext,
+                !!isNotificationEnabled,
+                isNext ? nextPrayer?.timeLeft || null : null,
+                language
+              )}
               className={cn(
                 "group relative flex items-center justify-between px-4 py-3 rounded-2xl transition-all duration-300",
                 isNext
@@ -134,6 +153,8 @@ export const PrayerTimesCard = () => {
                 {showBell && (
                   <button
                     onClick={() => toggleNotification(prayer.key)}
+                    aria-label={getAccessibleBellLabel(prayer.name, !!isNotificationEnabled, language)}
+                    aria-pressed={!!isNotificationEnabled}
                     className={cn(
                       "w-8 h-8 rounded-full flex items-center justify-center transition-all",
                       isNext
@@ -141,7 +162,7 @@ export const PrayerTimesCard = () => {
                         : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
                     )}
                   >
-                    {isNotificationEnabled ? <Bell className="w-4 h-4 fill-current" /> : <BellOff className="w-4 h-4 opacity-50" />}
+                    {isNotificationEnabled ? <Bell className="w-4 h-4 fill-current" aria-hidden="true" /> : <BellOff className="w-4 h-4 opacity-50" aria-hidden="true" />}
                   </button>
                 )}
                 {!showBell && <div className="w-8" />}

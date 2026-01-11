@@ -19,7 +19,7 @@ import { getHijriYear } from "@/lib/date-utils";
 import { HijriCalendar } from "@/components/HijriCalendar";
 import { QuranIndex } from "@/components/QuranIndex";
 import { SunnahPrayers } from "@/components/SunnahPrayers";
-import { MissedPrayersTracker } from "@/components/MissedPrayersTracker";
+import { QadaCalculator } from "@/components/QadaCalculator";
 import { MasjidFinder } from "@/components/MasjidFinder";
 import { DeveloperPanel } from "@/components/DeveloperPanel";
 import { DockNavigation } from "@/components/DockNavigation";
@@ -114,7 +114,7 @@ const Index = () => {
       case "dua":
         return <DuaList />;
       case "qada":
-        return <MissedPrayersTracker />;
+        return <QadaCalculator />;
       case "sunnah":
         return <SunnahPrayers />;
       case "settings":
@@ -142,6 +142,8 @@ const Index = () => {
       {/* Modern Header - Deep Emerald */}
       <header
         className="relative z-10 pt-safe pb-4 px-4 bg-emerald-deep text-white rounded-b-[2.5rem] shadow-[0_10px_40px_-10px_rgba(9,66,49,0.4)] mb-4 overflow-hidden"
+        role="banner"
+        aria-label={language === "ar" ? "رأس التطبيق - عباد الرحمن" : "App header - Ibad Al-Rahman"}
       >
         {/* Abstract Pattern Overlay for Header */}
         <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay"
@@ -243,7 +245,11 @@ const Index = () => {
       </Dialog>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto pb-32 px-4 relative z-10 no-scrollbar">
+      <main
+        className="flex-1 overflow-y-auto pb-32 px-4 relative z-10 no-scrollbar"
+        role="main"
+        aria-label={language === "ar" ? "المحتوى الرئيسي" : "Main content"}
+      >
         {renderContent()}
       </main>
 
@@ -259,6 +265,7 @@ const Index = () => {
             setActiveTab(id);
           }
         }}
+        language={language}
       />
     </div>
   );

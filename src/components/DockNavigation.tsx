@@ -1,20 +1,23 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { DOCK_ANIMATION, SPRING_CONFIGS } from '@/lib/animation-constants';
+import { getAccessibleNavLabel } from '@/lib/accessibility';
 
 interface DockIconProps {
     icon: React.ElementType;
     label: string;
+    tabId: string;
     isActive: boolean;
     onClick: () => void;
     mouseX: ReturnType<typeof useMotionValue>;
     isTouchDevice: boolean;
+    language: string;
 }
 
 /**
  * Individual dock icon with magnification effect
  */
-export const DockIcon = ({ icon: Icon, label, isActive, onClick, mouseX, isTouchDevice }: DockIconProps) => {
+export const DockIcon = ({ icon: Icon, label, tabId, isActive, onClick, mouseX, isTouchDevice, language }: DockIconProps) => {
     const ref = useRef<HTMLButtonElement>(null);
 
     const distance = useTransform(mouseX, (val) => {
@@ -46,11 +49,15 @@ export const DockIcon = ({ icon: Icon, label, isActive, onClick, mouseX, isTouch
                 : 'text-white/60 hover:text-white/80'
                 }`}
             whileTap={{ scale: 0.9 }}
-            aria-label={label}
+            aria-label={getAccessibleNavLabel(label, tabId, isActive, language)}
+            aria-current={isActive ? "page" : undefined}
+            role="tab"
+            aria-selected={isActive}
         >
             <Icon
                 className={`w-5 h-5 ${isActive ? 'fill-current' : ''}`}
                 strokeWidth={isActive ? 2.5 : 2}
+                aria-hidden="true"
             />
         </motion.button>
     );
@@ -64,13 +71,14 @@ interface DockNavigationProps {
     }>;
     activeId: string;
     onItemClick: (id: string) => void;
+    language?: string;
 }
 
 /**
  * Dock-style navigation with macOS-like magnification effect
  * Magnification is disabled on touch devices to prevent glitches
  */
-export const DockNavigation = ({ items, activeId, onItemClick }: DockNavigationProps) => {
+export const DockNavigation = ({ items, activeId, onItemClick, language = "ar" }: DockNavigationProps) => {
     const mouseX = useMotionValue(Infinity);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -92,16 +100,20 @@ export const DockNavigation = ({ items, activeId, onItemClick }: DockNavigationP
                     onMouseMove={(e) => !isTouchDevice && mouseX.set(e.pageX)}
                     onMouseLeave={() => !isTouchDevice && mouseX.set(Infinity)}
                     className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full p-3"
+                    role="tablist"
+                    aria-label={language === "ar" ? "التنقل الرئيسي" : "Main navigation"}
                 >
                     {items.map((item) => (
                         <DockIcon
                             key={item.id}
                             icon={item.icon}
                             label={item.label}
+                            tabId={item.id}
                             isActive={activeId === item.id}
                             onClick={() => onItemClick(item.id)}
                             mouseX={mouseX}
                             isTouchDevice={isTouchDevice}
+                            language={language}
                         />
                     ))}
                 </motion.nav>

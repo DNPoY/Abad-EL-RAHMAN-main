@@ -9,18 +9,27 @@ import { useCelebration } from "@/components/Celebration";
 import { TASBIH_TARGETS } from "@/lib/constants";
 import { SPRING_CONFIGS, SCALE_VARIANTS } from "@/lib/animation-constants";
 import { TasbihTarget } from "@/types/tasbih";
+import {
+    getAccessibleTasbihLabel,
+    getAccessibleTargetLabel,
+    getAccessibleResetLabel,
+    announceTasbihCount,
+    announceTasbihComplete,
+} from "@/lib/accessibility";
 
 // Memoized counter button component for performance
 const CounterButton = memo(({
     count,
     target,
     progress,
-    onClick
+    onClick,
+    ariaLabel
 }: {
     count: number;
     target: TasbihTarget;
     progress: number;
     onClick: () => void;
+    ariaLabel: string;
 }) => {
     return (
         <motion.div
@@ -32,6 +41,9 @@ const CounterButton = memo(({
                 variant="outline"
                 className="w-64 h-64 rounded-full border-4 border-primary/20 text-6xl font-bold hover:bg-primary/5 transition-all shadow-xl relative overflow-hidden"
                 onClick={onClick}
+                aria-label={ariaLabel}
+                aria-live="polite"
+                aria-atomic="true"
             >
                 {/* Animated Progress Ring */}
                 <motion.div
@@ -78,11 +90,13 @@ CounterButton.displayName = "CounterButton";
 const TargetButton = memo(({
     target,
     isActive,
-    onClick
+    onClick,
+    ariaLabel
 }: {
     target: TasbihTarget;
     isActive: boolean;
     onClick: () => void;
+    ariaLabel: string;
 }) => {
     return (
         <motion.div
@@ -94,12 +108,14 @@ const TargetButton = memo(({
                 variant={isActive ? "default" : "outline"}
                 size="sm"
                 onClick={onClick}
+                aria-label={ariaLabel}
+                aria-pressed={isActive}
                 className={cn(
                     "min-w-[4rem]",
                     isActive ? "bg-primary text-primary-foreground shadow-md" : ""
                 )}
             >
-                {target === 0 ? "∞" : target}
+                <span aria-hidden="true">{target === 0 ? "∞" : target}</span>
             </Button>
         </motion.div>
     );
@@ -108,7 +124,7 @@ const TargetButton = memo(({
 TargetButton.displayName = "TargetButton";
 
 export const TasbihCounter = memo(() => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const { celebrate } = useCelebration();
     const [showCelebration, setShowCelebration] = useState(false);
 
@@ -118,10 +134,17 @@ export const TasbihCounter = memo(() => {
         onTargetReached: () => {
             setShowCelebration(true);
             celebrate();
+            announceTasbihComplete(target, language);
             // Reset celebration after animation
             setTimeout(() => setShowCelebration(false), 3000);
         },
     });
+
+    // Announce count changes for screen readers
+    const handleIncrement = () => {
+        increment();
+        announceTasbihCount(count + 1, target, language);
+    };
 
     return (
         <motion.div
@@ -130,15 +153,22 @@ export const TasbihCounter = memo(() => {
             initial="hidden"
             animate="visible"
             transition={SPRING_CONFIGS.GENTLE}
+            role="application"
+            aria-label={language === "ar" ? "عداد التسبيح" : "Tasbih Counter"}
         >
             {/* Target Selector */}
-            <div className="flex justify-center space-x-4 space-x-reverse relative z-10">
+            <div
+                className="flex justify-center space-x-4 space-x-reverse relative z-10"
+                role="radiogroup"
+                aria-label={language === "ar" ? "اختر هدف التسبيح" : "Select tasbih target"}
+            >
                 {TASBIH_TARGETS.map((tgt) => (
                     <TargetButton
                         key={tgt}
                         target={tgt}
                         isActive={target === tgt}
                         onClick={() => setTarget(tgt)}
+                        ariaLabel={getAccessibleTargetLabel(tgt, target === tgt, language)}
                     />
                 ))}
             </div>
@@ -148,7 +178,8 @@ export const TasbihCounter = memo(() => {
                 count={count}
                 target={target}
                 progress={progress}
-                onClick={increment}
+                onClick={handleIncrement}
+                ariaLabel={getAccessibleTasbihLabel(count, target, language)}
             />
 
             {/* Celebration Indicator */}
@@ -177,9 +208,9 @@ export const TasbihCounter = memo(() => {
                     size="icon"
                     onClick={reset}
                     className="text-muted-foreground hover:text-destructive transition-colors"
-                    title={t.reset}
+                    aria-label={getAccessibleResetLabel(language)}
                 >
-                    <RotateCcw className="w-6 h-6" />
+                    <RotateCcw className="w-6 h-6" aria-hidden="true" />
                 </Button>
             </motion.div>
         </motion.div>

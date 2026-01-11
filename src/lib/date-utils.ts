@@ -1,10 +1,24 @@
+import { RemoteConfigService } from "./remote-config";
+
+/**
+ * Apply Hijri adjustment from Remote Config (+1 or -1 days for moon sighting)
+ */
+const applyHijriAdjustment = (date: Date): Date => {
+    const adjustment = RemoteConfigService.getHijriAdjustment();
+    if (adjustment === 0) return date;
+    const adjusted = new Date(date);
+    adjusted.setDate(adjusted.getDate() + adjustment);
+    return adjusted;
+};
+
 export const getHijriDate = (date: Date, language: "ar" | "en" = "en") => {
+    const adjustedDate = applyHijriAdjustment(date);
     return new Intl.DateTimeFormat(language === "ar" ? "ar-SA" : "en-u-ca-islamic-umalqura", {
         day: "numeric",
         month: "long",
         year: "numeric",
         calendar: "islamic-umalqura",
-    }).format(date);
+    }).format(adjustedDate);
 };
 
 export const getHijriMonthName = (date: Date, language: "ar" | "en" = "en") => {

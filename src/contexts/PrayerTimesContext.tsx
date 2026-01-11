@@ -4,6 +4,7 @@ import { useSettings } from "@/contexts/SettingsContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useWidgetUpdater } from "@/hooks/useWidgetUpdater";
 import { PrayerVerificationService } from "@/lib/prayer-verification";
+import { RemoteConfigService } from "@/lib/remote-config";
 
 interface PrayerTimesData {
     fajr: string;
@@ -63,14 +64,21 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
 
     const applyCorrections = (times: PrayerTimesData, corrs: CorrectionMap): PrayerTimesData => {
         const newTimes = { ...times };
-        const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+        const keys: ("fajr" | "dhuhr" | "asr" | "maghrib" | "isha")[] = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+
+        // Get Remote Config adjustments
+        const remoteAdjustments = RemoteConfigService.getPrayerAdjustments();
 
         keys.forEach(key => {
-            const offset = corrs[key];
-            if (offset) {
+            // Combine verification corrections + remote adjustments
+            const verificationOffset = corrs[key] || 0;
+            const remoteOffset = remoteAdjustments[key] || 0;
+            const totalOffset = verificationOffset + remoteOffset;
+
+            if (totalOffset !== 0) {
                 const [h, m] = newTimes[key as keyof PrayerTimesData].split(":").map(Number);
                 const date = new Date();
-                date.setHours(h, m + offset);
+                date.setHours(h, m + totalOffset);
                 newTimes[key as keyof PrayerTimesData] = `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
             }
         });

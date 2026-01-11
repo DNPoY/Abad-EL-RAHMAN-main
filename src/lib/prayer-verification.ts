@@ -1,6 +1,5 @@
 import { CorrectionMap } from "@/contexts/PrayerTimesContext";
-
-const API_BASE_URL = "https://api.aladhan.com/v1/timings";
+import { RemoteConfigService } from "@/lib/remote-config";
 
 interface VerificationOptions {
     latitude: number;
@@ -45,6 +44,8 @@ export const PrayerVerificationService = {
             // Let's rely on standard Aladhan params.
             const school = options.madhab === 2 ? 1 : 0; // Assuming 2 is Hanafi in app preferences
 
+            // Dynamically get API URL from Remote Config (Kill Switch)
+            const API_BASE_URL = RemoteConfigService.getApiUrl();
             const url = `${API_BASE_URL}/${date}?latitude=${options.latitude}&longitude=${options.longitude}&method=${options.method}&school=${school}`;
 
             const response = await fetch(url);
