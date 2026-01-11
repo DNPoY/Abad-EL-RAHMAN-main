@@ -3,6 +3,7 @@ import { Coordinates, CalculationMethod, PrayerTimes, Madhab } from 'adhan';
 import { useSettings } from "@/contexts/SettingsContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useWidgetUpdater } from "@/hooks/useWidgetUpdater";
+import { PrayerVerificationService } from "@/lib/prayer-verification";
 
 interface PrayerTimesData {
     fajr: string;
@@ -22,11 +23,15 @@ interface NextPrayer {
     time: string; // The time of the next prayer
 }
 
+export type CorrectionMap = { [key: string]: number };
+
 interface PrayerTimesContextType {
     prayerTimes: PrayerTimesData | null;
     nextPrayer: NextPrayer | null;
     loading: boolean;
     refreshLocation: () => void;
+    checkVerification: () => void;
+    corrections: CorrectionMap;
 }
 
 const PrayerTimesContext = createContext<PrayerTimesContextType | undefined>(undefined);
@@ -47,9 +52,30 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
 
     const [loading, setLoading] = useState<boolean>(() => !localStorage.getItem('cachedPrayerTimes'));
     const [nextPrayer, setNextPrayer] = useState<NextPrayer | null>(null);
+    const [corrections, setCorrections] = useState<CorrectionMap>(() => {
+        try {
+            return JSON.parse(localStorage.getItem("prayerCorrections") || "{}");
+        } catch { return {}; }
+    });
 
     // Sync Widget
     useWidgetUpdater(prayerTimes);
+
+    const applyCorrections = (times: PrayerTimesData, corrs: CorrectionMap): PrayerTimesData => {
+        const newTimes = { ...times };
+        const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+
+        keys.forEach(key => {
+            const offset = corrs[key];
+            if (offset) {
+                const [h, m] = newTimes[key as keyof PrayerTimesData].split(":").map(Number);
+                const date = new Date();
+                date.setHours(h, m + offset);
+                newTimes[key as keyof PrayerTimesData] = `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+            }
+        });
+        return newTimes;
+    };
 
     const calculatePrayerTimes = useCallback((latitude: number, longitude: number) => {
         try {
@@ -76,7 +102,7 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
             const prayerTimesCalc = new PrayerTimes(coordinates, date, params);
             const formatTime = (date: Date) => `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
 
-            const calculatedTimes = {
+            let calculatedTimes = {
                 fajr: formatTime(prayerTimesCalc.fajr),
                 sunrise: formatTime(prayerTimesCalc.sunrise),
                 dhuhr: formatTime(prayerTimesCalc.dhuhr),
@@ -86,6 +112,9 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
                 city: locationMode === "manual" ? "Manual Location" : "Local Location",
                 country: "",
             };
+
+            // Apply Corrections
+            calculatedTimes = applyCorrections(calculatedTimes, corrections);
 
             setPrayerTimes(calculatedTimes);
             localStorage.setItem('cachedPrayerTimes', JSON.stringify({
@@ -97,7 +126,46 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
             console.error("Error calculating prayer times:", error);
             setLoading(false);
         }
-    }, [calculationMethod, locationMode, madhab]);
+    }, [calculationMethod, locationMode, madhab, corrections]);
+
+    const checkVerification = useCallback(async () => {
+        if (!prayerTimes) return;
+
+        let lat = manualLatitude;
+        let lng = manualLongitude;
+
+        if (locationMode === "auto") {
+            const cached = JSON.parse(localStorage.getItem('lastKnownLocation') || '{}');
+            if (cached.latitude) {
+                lat = cached.latitude;
+                lng = cached.longitude;
+            }
+        }
+
+        if (!lat || !lng) return;
+
+        // Use Madhab enum to number
+        const madhabNum = madhab === "hanafi" ? 2 : 1;
+
+        if (PrayerVerificationService.shouldVerify()) {
+            const newCorrections = await PrayerVerificationService.verify({
+                latitude: lat,
+                longitude: lng,
+                method: calculationMethod,
+                madhab: madhabNum
+            }, prayerTimes as unknown as { [key: string]: string });
+
+            if (newCorrections) {
+                setCorrections(newCorrections);
+                // Re-calculate checks implicitly via dependency on `corrections` in `calculatePrayerTimes`? 
+                // No, calculatePrayerTimes depends on corrections state, but we need to trigger it.
+                // Actually, we should just update state and let useEffect re-trigger if dependent.
+                // But calculatePrayerTimes dependency IS the callback itself.
+                calculatePrayerTimes(lat, lng);
+            }
+        }
+    }, [prayerTimes, calculationMethod, madhab, manualLatitude, manualLongitude, locationMode, calculatePrayerTimes]);
+
 
     const refreshLocation = useCallback(() => {
         // Only show loading if we have absolutely no data
@@ -150,6 +218,11 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
         const timer = setTimeout(() => {
             refreshLocation();
         }, 100);
+
+        // 3. Trigger Verification Check (Tahqiq)
+        setTimeout(() => {
+            checkVerification();
+        }, 5000); // Wait 5s to ensure everything is settled
 
         return () => clearTimeout(timer);
     }, [calculationMethod, madhab, locationMode, manualLatitude, manualLongitude]);
@@ -225,7 +298,7 @@ export const PrayerTimesProvider = ({ children }: { children: ReactNode }) => {
     }, [prayerTimes, t]);
 
     return (
-        <PrayerTimesContext.Provider value={{ prayerTimes, nextPrayer, loading, refreshLocation }}>
+        <PrayerTimesContext.Provider value={{ prayerTimes, nextPrayer, loading, refreshLocation, checkVerification, corrections }}>
             {children}
         </PrayerTimesContext.Provider>
     );

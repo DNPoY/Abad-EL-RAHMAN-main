@@ -10,7 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, MapPin, Globe, Type, BookOpen } from "lucide-react";
+import { Settings, MapPin, Globe, Type, BookOpen, RefreshCw } from "lucide-react";
+import { usePrayerTimes } from "@/contexts/PrayerTimesContext";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface SettingsPageProps {
     isEmbedded?: boolean;
@@ -35,6 +38,9 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
         readingStyle,
         setReadingStyle
     } = useSettings();
+
+    // Tahqiq System
+    const { checkVerification, corrections } = usePrayerTimes();
 
     const [activeTab, setActiveTab] = useState("general");
 
@@ -185,6 +191,52 @@ export const SettingsPage = ({ isEmbedded = false }: SettingsPageProps) => {
                                         </SelectItem>
                                     </SelectContent>
                                 </Select>
+                            </div>
+                        </div>
+                    </Card>
+
+                    {/* Prayer Time Verification (Tahqiq) */}
+                    <Card className="p-6 border-emerald-deep/5 bg-white/60 backdrop-blur-sm shadow-sm">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="p-2 bg-emerald-deep/10 rounded-full">
+                                <Settings className="w-4 h-4 text-emerald-deep" />
+                            </div>
+                            <h3 className="text-lg font-bold font-amiri text-emerald-deep">
+                                {language === "ar" ? "التحقق الذكي (تحقيق)" : "Smart Verification"}
+                            </h3>
+                        </div>
+
+                        <div className="space-y-4">
+                            <p className="text-sm text-emerald-deep/70">
+                                {language === "ar"
+                                    ? "يقوم التطبيق أسبوعياً بمطابقة الحسابات المحلية مع المصادر العالمية الموثوقة لضمان الدقة."
+                                    : "The app weekly cross-checks local calculations with trusted global sources to ensure accuracy."}
+                            </p>
+
+                            <div className="flex items-center justify-between p-3 bg-emerald-deep/5 rounded-lg border border-emerald-deep/10">
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-bold text-emerald-deep">
+                                        {language === "ar" ? "حالة المطابقة" : "Sync Status"}
+                                    </span>
+                                    <span className="text-xs text-emerald-deep/60">
+                                        {Object.keys(corrections || {}).length > 0
+                                            ? (language === "ar" ? "تم تصحيح بعض الأوقات تلقائياً" : "Corrections applied automatically")
+                                            : (language === "ar" ? "الأوقات متطابقة تماماً" : "Times are perfectly synced")
+                                        }
+                                    </span>
+                                </div>
+                                <Button
+                                    onClick={() => {
+                                        checkVerification();
+                                        toast.success(language === "ar" ? "تم بدء التحقق..." : "Verification started...");
+                                    }}
+                                    variant="outline"
+                                    size="sm"
+                                    className="gap-2 border-emerald-deep/20 text-emerald-deep hover:bg-emerald-deep/10"
+                                >
+                                    <RefreshCw className="w-4 h-4" />
+                                    {language === "ar" ? "تحقق الآن" : "Check Now"}
+                                </Button>
                             </div>
                         </div>
                     </Card>
